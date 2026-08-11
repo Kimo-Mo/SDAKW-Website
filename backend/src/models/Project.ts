@@ -1,27 +1,31 @@
-import mongoose, { Document, Schema, Types } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
 export type ProjectStatus = 'ongoing' | 'completed';
+export type ProjectType = 'government' | 'private';
+
+export interface ILocalizedText {
+  ar: string;
+  en: string;
+}
 
 export interface IImageMeta {
   url: string;
   publicId: string;
 }
 
+export interface IContractor {
+  name: ILocalizedText;
+  description: ILocalizedText;
+}
+
 export interface IProject extends Document {
-  title: {
-    ar: string;
-    en: string;
-  };
-  description: {
-    ar: string;
-    en: string;
-  };
+  title: ILocalizedText;
+  description: ILocalizedText;
   slug: string;
-  category: Types.ObjectId;
-  location: {
-    ar: string;
-    en: string;
-  };
+  projectType: ProjectType;
+  governmentEntity: ILocalizedText | null;
+  contractors: IContractor[];
+  location: ILocalizedText;
   completionDate: Date | null;
   status: ProjectStatus;
   coverImage: IImageMeta | null;
@@ -36,6 +40,28 @@ const imagemetaSchema = new Schema<IImageMeta>(
   {
     url: { type: String, required: true },
     publicId: { type: String, required: true },
+  },
+  { _id: false },
+);
+
+const localizedTextSchema = new Schema<ILocalizedText>(
+  {
+    ar: { type: String, trim: true },
+    en: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
+const contractorSchema = new Schema<IContractor>(
+  {
+    name: {
+      ar: { type: String, trim: true },
+      en: { type: String, trim: true },
+    },
+    description: {
+      ar: { type: String, trim: true },
+      en: { type: String, trim: true },
+    },
   },
   { _id: false },
 );
@@ -57,10 +83,18 @@ const projectSchema = new Schema<IProject>(
       trim: true,
       lowercase: true,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: 'Category',
-      required: [true, 'Category is required'],
+    projectType: {
+      type: String,
+      enum: ['government', 'private'],
+      required: [true, 'Project type is required'],
+    },
+    governmentEntity: {
+      type: localizedTextSchema,
+      default: null,
+    },
+    contractors: {
+      type: [contractorSchema],
+      default: [],
     },
     location: {
       ar: { type: String, required: [true, 'Arabic location is required'], trim: true },
@@ -98,8 +132,59 @@ const projectSchema = new Schema<IProject>(
   { timestamps: true },
 );
 
+const hasRequiredText = (fieldValue: unknown): boolean =>
+  typeof fieldValue === 'string' && fieldValue.trim().length > 0;
+
+const validateGovernmentFields = (project: IProject): void => {
+  if (!hasRequiredText(project.governmentEntity?.ar)) {
+    project.invalidate('governmentEntity.ar', 'Arabic government entity is required');
+  }
+  if (!hasRequiredText(project.governmentEntity?.en)) {
+    project.invalidate('governmentEntity.en', 'English government entity is required');
+  }
+  if (!Array.isArray(project.contractors) || project.contractors.length === 0) {
+    project.invalidate('contractors', 'At least one contractor is required');
+  }
+
+  project.contractors?.forEach((contractor, index) => {
+    if (!hasRequiredText(contractor.name?.ar)) {
+      project.invalidate(`contractors.${index}.name.ar`, 'Arabic contractor name is required');
+    }
+    if (!hasRequiredText(contractor.name?.en)) {
+      project.invalidate(`contractors.${index}.name.en`, 'English contractor name is required');
+    }
+    if (!hasRequiredText(contractor.description?.ar)) {
+      project.invalidate(
+        `contractors.${index}.description.ar`,
+        'Arabic contractor description is required',
+      );
+    }
+    if (!hasRequiredText(contractor.description?.en)) {
+      project.invalidate(
+        `contractors.${index}.description.en`,
+        'English contractor description is required',
+      );
+    }
+  });
+};
+
+const validatePrivateFields = (project: IProject): void => {
+  if (project.governmentEntity != null) {
+    project.invalidate('governmentEntity', 'Private projects must not have a government entity');
+  }
+  if (Array.isArray(project.contractors) && project.contractors.length > 0) {
+    project.invalidate('contractors', 'Private projects must not have contractors');
+  }
+};
+
+projectSchema.pre('validate', function validateProjectTypeFields(next) {
+  if (this.projectType === 'government') validateGovernmentFields(this);
+  if (this.projectType === 'private') validatePrivateFields(this);
+
+  next();
+});
+
 // Indexes for common query patterns (slug index is implicit from unique:true above)
-projectSchema.index({ category: 1 }); // filter by category
 projectSchema.index({ status: 1 }); // filter by status
 projectSchema.index({ published: 1 }); // public/admin published filter
 projectSchema.index({ featured: 1 }); // featured projects query

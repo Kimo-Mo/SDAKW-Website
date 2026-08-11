@@ -1,19 +1,39 @@
 import { z } from 'zod';
-import mongoose from 'mongoose';
-
-// Reusable ObjectId validator
-const objectId = z.string().refine((val) => mongoose.Types.ObjectId.isValid(val), {
-  message: 'Invalid category ID',
-});
-
 const localizedTextSchema = z.object({
   ar: z.string().min(1).trim(),
   en: z.string().min(1).trim(),
 });
 
+const optionalLocalizedTextSchema = z
+  .object({
+    ar: z.string().trim().optional(),
+    en: z.string().trim().optional(),
+  })
+  .nullable()
+  .optional();
+
 const localizedLocationSchema = z.object({
   ar: z.string().min(1, 'Arabic location is required').trim(),
   en: z.string().min(1, 'English location is required').trim(),
+});
+
+const governmentEntitySchema = z
+  .object({
+    ar: z.string().min(1, 'Arabic government entity is required').trim(),
+    en: z.string().min(1, 'English government entity is required').trim(),
+  })
+  .nullable()
+  .optional();
+
+const contractorSchema = z.object({
+  name: z.object({
+    ar: z.string().min(1, 'Arabic contractor name is required').trim(),
+    en: z.string().min(1, 'English contractor name is required').trim(),
+  }),
+  description: z.object({
+    ar: z.string().min(1, 'Arabic contractor description is required').trim(),
+    en: z.string().min(1, 'English contractor description is required').trim(),
+  }),
 });
 
 /**
@@ -36,7 +56,12 @@ export const createProjectSchema = z
       ar: z.string().min(1, 'Arabic description is required').trim(),
       en: z.string().min(1, 'English description is required').trim(),
     }),
-    category: objectId,
+    projectType: z.enum(['government', 'private'], {
+      required_error: 'Project type is required',
+      invalid_type_error: 'Project type must be "government" or "private"',
+    }),
+    governmentEntity: governmentEntitySchema,
+    contractors: z.array(contractorSchema).optional().default([]),
     location: localizedLocationSchema,
     completionDate: completionDateField,
     status: z.enum(['ongoing', 'completed'], {
@@ -61,6 +86,38 @@ export const createProjectSchema = z
         message: 'Completed projects require a completion date',
       });
     }
+    if (data.projectType === 'government') {
+      if (!data.governmentEntity) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['governmentEntity'],
+          message: 'Government entity is required for government projects',
+        });
+      }
+      if (data.contractors.length === 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['contractors'],
+          message: 'At least one contractor is required for government projects',
+        });
+      }
+    }
+    if (data.projectType === 'private') {
+      if (data.governmentEntity != null) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['governmentEntity'],
+          message: 'Private projects must not include a government entity',
+        });
+      }
+      if (data.contractors.length > 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['contractors'],
+          message: 'Private projects must not include contractors',
+        });
+      }
+    }
   });
 
 // For PATCH — all fields optional, but cross-field rule still enforced when both are present
@@ -68,7 +125,9 @@ export const updateProjectSchema = z
   .object({
     title: localizedTextSchema.partial().optional(),
     description: localizedTextSchema.partial().optional(),
-    category: objectId.optional(),
+    projectType: z.enum(['government', 'private']).optional(),
+    governmentEntity: optionalLocalizedTextSchema,
+    contractors: z.array(contractorSchema).optional(),
     location: localizedLocationSchema.partial().optional(),
     completionDate: completionDateField,
     status: z.enum(['ongoing', 'completed']).optional(),
@@ -91,6 +150,22 @@ export const updateProjectSchema = z
         message: 'Completed projects require a completion date',
       });
     }
+    if (data.projectType === 'private') {
+      if (data.governmentEntity != null) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['governmentEntity'],
+          message: 'Private projects must not include a government entity',
+        });
+      }
+      if (data.contractors !== undefined && data.contractors.length > 0) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['contractors'],
+          message: 'Private projects must not include contractors',
+        });
+      }
+    }
   });
 
 // Admin list query params
@@ -98,7 +173,6 @@ export const adminProjectQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(100).optional().default(10),
   search: z.string().trim().optional(),
-  category: z.string().optional(),
   status: z.enum(['ongoing', 'completed']).optional(),
   published: z
     .string()
@@ -114,7 +188,6 @@ export const adminProjectQuerySchema = z.object({
 export const publicProjectQuerySchema = z.object({
   page: z.coerce.number().int().min(1).optional().default(1),
   limit: z.coerce.number().int().min(1).max(50).optional().default(9),
-  category: z.string().optional(),
   status: z.enum(['ongoing', 'completed']).optional(),
   featured: z
     .string()

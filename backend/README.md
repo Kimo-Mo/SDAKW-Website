@@ -11,20 +11,17 @@ Production-ready Node.js / Express / TypeScript REST API for a bilingual (Arabic
   - Password hashing using `bcryptjs`.
   - Initial admin account seeding via an idempotent CLI script.
   - Profile retrieval (`GET /auth/me`) and password updating with automatic token rotation (`PATCH /auth/change-password`).
-- **Category Management**
-  - Full CRUD for project categories with bilingual names (`ar`, `en`).
-  - Automatic, unique English-based slug generation.
-  - Protected deletion logic (returns `409 Conflict` if projects reference the category).
 - **Project Management**
   - Full CRUD for corporate construction projects.
   - Bilingual titles, descriptions, and locations (`ar`, `en`).
+  - Project classification via `projectType` (`government` or `private`).
   - Status-based rules:
     - `status = "ongoing"` → `completionDate = null`
     - `status = "completed"` → `completionDate` is required (`YYYY-MM-DD`).
   - Unique English-based slug generation with collision handling.
   - Published and featured flags for granular visibility control.
 - **Filtering, Search & Pagination**
-  - Combinable admin filters: `category`, `status`, `published`, `featured`, and keyword `search` (across title and location).
+  - Combinable admin filters: `status`, `published`, `featured`, and keyword `search` (across title and location).
   - Public project list (strictly enforces `published = true`).
   - Reusable pagination metadata output across all list endpoints.
 - **Cloudinary Image Management**
@@ -65,7 +62,6 @@ backend/
 │   │   └── env.ts            # Zod environment variable validation
 │   ├── controllers/
 │   │   ├── auth.controller.ts
-│   │   ├── category.controller.ts
 │   │   ├── image.controller.ts
 │   │   └── project.controller.ts
 │   ├── middleware/
@@ -74,16 +70,13 @@ backend/
 │   │   ├── notFound.ts         # 404 handler
 │   │   └── upload.middleware.ts# Multer memory storage & image filters
 │   ├── models/
-│   │   ├── Category.ts
 │   │   ├── Project.ts
 │   │   └── User.ts
 │   ├── routes/
 │   │   ├── admin/
-│   │   │   ├── categories.routes.ts
 │   │   │   ├── images.routes.ts
 │   │   │   └── projects.routes.ts
 │   │   ├── public/
-│   │   │   ├── categories.routes.ts
 │   │   │   └── projects.routes.ts
 │   │   ├── auth.routes.ts
 │   │   └── index.ts          # Central API v1 router
@@ -91,7 +84,6 @@ backend/
 │   │   └── seedAdmin.ts      # CLI admin seed script
 │   ├── services/
 │   │   ├── auth.service.ts
-│   │   ├── category.service.ts
 │   │   ├── cloudinary.service.ts
 │   │   └── project.service.ts
 │   ├── utils/
@@ -102,7 +94,6 @@ backend/
 │   │   └── slug.ts           # Reusable unique slug generator
 │   ├── validators/
 │   │   ├── auth.validator.ts
-│   │   ├── category.validator.ts
 │   │   └── project.validator.ts
 │   ├── app.ts                # Express app factory
 │   └── server.ts             # Application entry point
@@ -249,38 +240,7 @@ All routes are prefixed with `/api/v1`.
 
 ---
 
-### 2. Admin Categories (`/api/v1/admin/categories`)
-
-| Method   | Endpoint                | Auth      | Purpose                                                     |
-| -------- | ----------------------- | --------- | ----------------------------------------------------------- |
-| `GET`    | `/admin/categories`     | Protected | List all categories sorted by English name                  |
-| `GET`    | `/admin/categories/:id` | Protected | Get a single category by ID                                 |
-| `POST`   | `/admin/categories`     | Protected | Create a new category                                       |
-| `PATCH`  | `/admin/categories/:id` | Protected | Update a category's Arabic/English name                     |
-| `DELETE` | `/admin/categories/:id` | Protected | Delete a category (fails with 409 if projects reference it) |
-
-#### Example Request (`POST /admin/categories`)
-
-```json
-{
-  "name": {
-    "ar": "تجاري",
-    "en": "Commercial"
-  }
-}
-```
-
----
-
-### 3. Public Categories (`/api/v1/categories`)
-
-| Method | Endpoint      | Auth   | Purpose                                         |
-| ------ | ------------- | ------ | ----------------------------------------------- |
-| `GET`  | `/categories` | Public | List categories for public navigation/filtering |
-
----
-
-### 4. Admin Projects (`/api/v1/admin/projects`)
+### 2. Admin Projects (`/api/v1/admin/projects`)
 
 | Method   | Endpoint              | Auth      | Purpose                                            |
 | -------- | --------------------- | --------- | -------------------------------------------------- |
@@ -295,12 +255,11 @@ All routes are prefixed with `/api/v1`.
 - `page` (default: `1`)
 - `limit` (default: `10`, max: `100`)
 - `search` (searches English/Arabic title and location)
-- `category` (Category ID)
 - `status` (`ongoing` \| `completed`)
 - `published` (`true` \| `false`)
 - `featured` (`true` \| `false`)
 
-#### Example Request (`POST /admin/projects`) — Ongoing Project
+#### Example Request (`POST /admin/projects`) — Ongoing Government Project
 
 ```json
 {
@@ -312,7 +271,23 @@ All routes are prefixed with `/api/v1`.
     "ar": "وصف تفصيلي للمشروع السكني والتجاري",
     "en": "Detailed description of the commercial tower project"
   },
-  "category": "66b123abc456def789012345",
+  "projectType": "government",
+  "governmentEntity": {
+    "ar": "جهة حكومية",
+    "en": "Government Entity"
+  },
+  "contractors": [
+    {
+      "name": {
+        "ar": "مقاول",
+        "en": "Contractor"
+      },
+      "description": {
+        "ar": "وصف المقاول",
+        "en": "Contractor description"
+      }
+    }
+  ],
   "location": {
     "ar": "مدينة الكويت",
     "en": "Kuwait City"
@@ -323,7 +298,7 @@ All routes are prefixed with `/api/v1`.
 }
 ```
 
-#### Example Request (`POST /admin/projects`) — Completed Project
+#### Example Request (`POST /admin/projects`) — Completed Private Project
 
 ```json
 {
@@ -335,7 +310,7 @@ All routes are prefixed with `/api/v1`.
     "ar": "وصف تفصيلي للمجمع",
     "en": "Detailed description of the complex"
   },
-  "category": "66b123abc456def789012345",
+  "projectType": "private",
   "location": {
     "ar": "حولي",
     "en": "Hawalli"
@@ -349,7 +324,7 @@ All routes are prefixed with `/api/v1`.
 
 ---
 
-### 5. Public Projects (`/api/v1/projects`)
+### 3. Public Projects (`/api/v1/projects`)
 
 | Method | Endpoint          | Auth   | Purpose                                             |
 | ------ | ----------------- | ------ | --------------------------------------------------- |
@@ -360,13 +335,12 @@ All routes are prefixed with `/api/v1`.
 
 - `page` (default: `1`)
 - `limit` (default: `9`, max: `50`)
-- `category` (Category ID)
 - `status` (`ongoing` \| `completed`)
 - `featured` (`true` \| `false`)
 
 ---
 
-### 6. Project Images (`/api/v1/admin/projects/:id`)
+### 4. Project Images (`/api/v1/admin/projects/:id`)
 
 | Method   | Endpoint                                | Auth      | Body / Params                 | Purpose                              |
 | -------- | --------------------------------------- | --------- | ----------------------------- | ------------------------------------ |
@@ -390,7 +364,21 @@ All routes are prefixed with `/api/v1`.
     en: string;
   };
   slug: string; // Unique, English-derived
-  category: ObjectId; // References Category model
+  projectType: "government" | "private";
+  governmentEntity: {
+    ar: string;
+    en: string;
+  } | null;
+  contractors: Array<{
+    name: {
+      ar: string;
+      en: string;
+    };
+    description: {
+      ar: string;
+      en: string;
+    };
+  }>;
   location: {
     ar: string;
     en: string;
