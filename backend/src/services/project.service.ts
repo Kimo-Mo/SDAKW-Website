@@ -58,7 +58,7 @@ const slugExists = async (slug: string): Promise<boolean> => {
 export const getAdminProjects = async (
   query: AdminProjectQuery,
 ): Promise<PaginatedResult<IProject>> => {
-  const { page, limit, search, status, published, featured } = query;
+  const { page, limit, search, status, published, featured, projectType } = query;
 
   const filter: FilterQuery<IProject> = {};
 
@@ -74,6 +74,7 @@ export const getAdminProjects = async (
   if (status) filter.status = status;
   if (published !== undefined) filter.published = published;
   if (featured !== undefined) filter.featured = featured;
+  if (projectType) filter.projectType = projectType;
 
   return paginate<IProject>(Project, filter, page, limit, { createdAt: -1 });
 };
@@ -201,13 +202,14 @@ export const deleteProject = async (id: string): Promise<void> => {
 export const getPublicProjects = async (
   query: PublicProjectQuery,
 ): Promise<PaginatedResult<IProject>> => {
-  const { page, limit, status, featured } = query;
+  const { page, limit, status, featured, projectType } = query;
 
   // Public API always filters by published=true
   const filter: FilterQuery<IProject> = { published: true };
 
   if (status) filter.status = status;
   if (featured !== undefined) filter.featured = featured;
+  if (projectType) filter.projectType = projectType;
 
   return paginate<IProject>(Project, filter, page, limit, { createdAt: -1 });
 };

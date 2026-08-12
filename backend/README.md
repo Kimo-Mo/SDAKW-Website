@@ -21,7 +21,7 @@ Production-ready Node.js / Express / TypeScript REST API for a bilingual (Arabic
   - Unique English-based slug generation with collision handling.
   - Published and featured flags for granular visibility control.
 - **Filtering, Search & Pagination**
-  - Combinable admin filters: `status`, `published`, `featured`, and keyword `search` (across title and location).
+  - Combinable admin filters: `status`, `published`, `featured`, `projectType`, and keyword `search` (across title and location).
   - Public project list (strictly enforces `published = true`).
   - Reusable pagination metadata output across all list endpoints.
 - **Cloudinary Image Management**
@@ -256,6 +256,7 @@ All routes are prefixed with `/api/v1`.
 - `limit` (default: `10`, max: `100`)
 - `search` (searches English/Arabic title and location)
 - `status` (`ongoing` \| `completed`)
+- `projectType` (`government` \| `private`)
 - `published` (`true` \| `false`)
 - `featured` (`true` \| `false`)
 
@@ -336,6 +337,7 @@ All routes are prefixed with `/api/v1`.
 - `page` (default: `1`)
 - `limit` (default: `9`, max: `50`)
 - `status` (`ongoing` \| `completed`)
+- `projectType` (`government` \| `private`)
 - `featured` (`true` \| `false`)
 
 ---

@@ -182,6 +182,7 @@ export const adminProjectQuerySchema = z.object({
     .string()
     .optional()
     .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
+  projectType: z.enum(['government', 'private']).optional(),
 });
 
 // Public list query params
@@ -193,6 +194,7 @@ export const publicProjectQuerySchema = z.object({
     .string()
     .optional()
     .transform((v) => (v === 'true' ? true : v === 'false' ? false : undefined)),
+  projectType: z.enum(['government', 'private']).optional(),
 });
 
 export type CreateProjectInput = z.infer<typeof createProjectSchema>;
