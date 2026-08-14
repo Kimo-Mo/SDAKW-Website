@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "title": "SDAKW",
+    "description": "شركة مساهمة كويتية تعمل في مجالات المقاولات والمشاريع"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "عذرًا، لم نتمكن من العثور على الصفحة التي تبحث عنها.",
+    "backHome": "العودة إلى الرئيسية"
+  },
+  "shared": {
+    "close": "إغلاق",
+    "closeToast": "إغلاق الإشعار"
+  },
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول إلى منطقة الإدارة",
+      "intro": "استخدم بيانات مسؤول الدخول للمتابعة.",
+      "emailLabel": "البريد الإلكتروني",
+      "emailPlaceholder": "admin@example.com",
+      "passwordLabel": "كلمة المرور",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "submit": "تسجيل الدخول",
+      "submitting": "جارٍ تسجيل الدخول...",
+      "emailRequired": "البريد الإلكتروني مطلوب.",
+      "emailInvalid": "أدخل بريدًا إلكترونيًا صحيحًا.",
+      "passwordRequired": "كلمة المرور مطلوبة.",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "serviceUnavailable": "خدمة تسجيل الدخول غير متاحة حاليًا. يرجى المحاولة لاحقًا.",
+      "sessionCheckNotice": "تعذّر التحقق من جلستك الحالية، لكن يمكنك تسجيل الدخول."
+    },
+    "session": {
+      "checking": "جارٍ التحقق من جلستك...",
+      "checkingDescription": "يرجى الانتظار لحظة.",
+      "unavailable": "تعذّر التحقق من جلستك.",
+      "unavailableDescription": "خدمة المصادقة غير متاحة حاليًا. يرجى المحاولة مجددًا.",
+      "retry": "إعادة المحاولة"
+    },
+    "signOut": {
+      "label": "تسجيل الخروج",
+      "pending": "جارٍ تسجيل الخروج...",
+      "success": "تم تسجيل خروجك بنجاح.",
+      "failure": "تعذّر إكمال تسجيل الخروج.",
+      "failureDescription": "قد تكون جلستك ما تزال نشطة. يرجى المحاولة مجددًا."
+    },
+    "protected": {
+      "title": "تم تأكيد الوصول إلى الإدارة",
+      "description": "تم التحقق من جلستك بنجاح. ستُضاف ميزات الإدارة في المراحل اللاحقة."
+    }
+  },
+  "foundation": {
+    "badge": "نموذج الأساس",
+    "title": "أساس تطبيق SDAKW",
+    "subtitle": "هذه صفحة مؤقتة للتحقق من إعدادات الأساس (مرحلة 0 ومرحلة 1).",
+    "localeLabel": "اللغة",
+    "directionLabel": "الاتجاه",
+    "directionRtl": "من اليمين إلى اليسار",
+    "directionLtr": "من اليسار إلى اليمين",
+    "queryLabel": "حالة الخادم",
+    "queryChecking": "جارٍ التحقق من موفّر الاستعلامات...",
+    "queryReady": "موفّر TanStack Query نشط — اكتمل استعلام التحقق بدون أخطاء",
+    "switchLocale": "التبديل إلى الإنجليزية"
+  },
+  "showcase": {
+    "title": "مكوّنات الواجهة المشتركة",
+    "components": {
+      "buttons": "الأزرار",
+      "forms": "الحقول",
+      "selection": "الاختيار",
+      "overlay": "النوافذ",
+      "surface": "السطوح",
+      "states": "الحالات",
+      "feedback": "التغذية الراجعة"
+    },
+    "buttonDefault": "زر أساسي",
+    "variantOutline": "عرضي",
+    "variantDestructive": "تدميري",
+    "variantGhost": "شفاف",
+    "loadingButton": "جارٍ التحميل",
+    "inputLabel": "حقل إدخال",
+    "inputPlaceholder": "اكتب هنا...",
+    "textareaLabel": "حقل نصي",
+    "textareaPlaceholder": "نص طويل هنا...",
+    "selectLabel": "قائمة منسدلة",
+    "selectOptionOne": "الخيار الأول",
+    "selectOptionTwo": "الخيار الثاني",
+    "checkboxLabel": "مربع اختيار",
+    "switchLabel": "مفتاح تبديل",
+    "dialogTrigger": "فتح حوار",
+    "dialogTitle": "حوار تجريبي",
+    "dialogDescription": "هذا حوار عام قابل لإعادة الاستخدام.",
+    "dialogClose": "إغلاق",
+    "alertDialogTrigger": "فتح حوار تأكيد",
+    "alertDialogTitle": "تأكيد الإجراء",
+    "alertDialogDescription": "هذا حوار تأكيد للأعمال الحساسة.",
+    "alertDialogCancel": "إلغاء",
+    "alertDialogConfirm": "تأكيد",
+    "cardTitle": "بطاقة عامة",
+    "cardDescription": "سطح عام للعرض والمحتوى.",
+    "cardFooter": "تذييل البطاقة",
+    "badgeDefault": "شارة",
+    "badgeSecondary": "ثانوية",
+    "badgeOutline": "حدودية",
+    "skeletonLabel": "هيكل تحميل",
+    "emptyTitle": "لا توجد عناصر بعد",
+    "emptyDescription": "يظهر هذا عندما تكون القائمة فارغة.",
+    "emptyAction": "إجراء اختياري",
+    "errorTitle": "حدث خطأ",
+    "errorDescription": "لم نتمكن من تحميل البيانات.",
+    "retry": "إعادة المحاولة",
+    "loadingLabel": "جارٍ التحميل...",
+    "toastTrigger": "إظهار إشعار",
+    "toastTitle": "تم الإجراء بنجاح",
+    "toastDescription": "هذا إشعار عام من موفّر التنبيهات.",
+    "paginationLabel": "ترقيم صفحات تجريبي",
+    "previous": "السابق",
+    "next": "التالي"
+  }
+}
