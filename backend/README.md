@@ -242,13 +242,14 @@ All routes are prefixed with `/api/v1`.
 
 ### 2. Admin Projects (`/api/v1/admin/projects`)
 
-| Method   | Endpoint              | Auth      | Purpose                                            |
-| -------- | --------------------- | --------- | -------------------------------------------------- |
-| `GET`    | `/admin/projects`     | Protected | List projects with filters, search, and pagination |
-| `GET`    | `/admin/projects/:id` | Protected | Get complete project details by ID                 |
-| `POST`   | `/admin/projects`     | Protected | Create a new project                               |
-| `PATCH`  | `/admin/projects/:id` | Protected | Update an existing project                         |
-| `DELETE` | `/admin/projects/:id` | Protected | Delete a project & clean up Cloudinary images      |
+| Method   | Endpoint                  | Auth      | Purpose                                                       |
+| -------- | ------------------------- | --------- | ------------------------------------------------------------- |
+| `GET`    | `/admin/projects/summary` | Protected | Get aggregate project summary metrics (counts & last updated) |
+| `GET`    | `/admin/projects`         | Protected | List projects with filters, search, and pagination            |
+| `GET`    | `/admin/projects/:id`     | Protected | Get complete project details by ID                            |
+| `POST`   | `/admin/projects`         | Protected | Create a new project                                          |
+| `PATCH`  | `/admin/projects/:id`     | Protected | Update an existing project                                    |
+| `DELETE` | `/admin/projects/:id`     | Protected | Delete a project & clean up Cloudinary images                 |
 
 #### Admin List Query Parameters:
 

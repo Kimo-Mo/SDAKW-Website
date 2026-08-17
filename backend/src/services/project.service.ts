@@ -55,6 +55,35 @@ const slugExists = async (slug: string): Promise<boolean> => {
 
 // ── Admin project queries ─────────────────────────────────────────────────────
 
+export interface ProjectSummary {
+  total: number;
+  published: number;
+  ongoing: number;
+  completed: number;
+  lastUpdated: string;
+}
+
+/**
+ * Computes aggregate project counts server-side across the full collection.
+ */
+export const getProjectSummary = async (): Promise<ProjectSummary> => {
+  const [total, published, ongoing, completed] = await Promise.all([
+    Project.countDocuments({}),
+    Project.countDocuments({ published: true }),
+    Project.countDocuments({ status: 'ongoing' }),
+    Project.countDocuments({ status: 'completed' }),
+  ]);
+
+  return {
+    total,
+    published,
+    ongoing,
+    completed,
+    // Timestamp when this summary was computed at request time
+    lastUpdated: new Date().toISOString(),
+  };
+};
+
 export const getAdminProjects = async (
   query: AdminProjectQuery,
 ): Promise<PaginatedResult<IProject>> => {
@@ -164,6 +193,11 @@ export const updateProject = async (id: string, input: UpdateProjectInput): Prom
   // Scalar updates — only assign if the field was provided
   if (input.completionDate !== undefined) project.completionDate = input.completionDate ?? null;
   if (input.status !== undefined) project.status = input.status;
+
+  if (project.status === 'ongoing') {
+    project.completionDate = null;
+  }
+
   if (input.featured !== undefined) project.featured = input.featured;
   if (input.published !== undefined) project.published = input.published;
 

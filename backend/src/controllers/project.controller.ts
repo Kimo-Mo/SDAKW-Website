@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import {
   getAdminProjects,
   getAdminProjectById,
+  getProjectSummary,
   createProject,
   updateProject,
   deleteProject,
@@ -24,6 +25,19 @@ import {
  */
 
 // ── Admin handlers ─────────────────────────────────────────────────────────────
+
+export const getAdminProjectSummary = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction,
+): Promise<void> => {
+  try {
+    const summary = await getProjectSummary();
+    res.status(200).json({ success: true, data: summary });
+  } catch (err) {
+    next(err);
+  }
+};
 
 export const listAdminProjects = async (
   req: Request,

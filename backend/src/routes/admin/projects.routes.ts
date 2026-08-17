@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   listAdminProjects,
+  getAdminProjectSummary,
   getAdminProject,
   addProject,
   editProject,
@@ -13,6 +14,9 @@ const router = Router();
 
 // All admin project routes require authentication
 router.use(authenticate);
+
+// GET /api/v1/admin/projects/summary (get aggregate project summary metrics)
+router.get('/summary', wrap(getAdminProjectSummary));
 
 // GET /api/v1/admin/projects (list all projects for admin)
 router.get('/', wrap(listAdminProjects));

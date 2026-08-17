@@ -44,7 +44,7 @@ const contractorSchema = z.object({
  * The coerce step accepts ISO date strings from JSON bodies.
  * null is explicitly allowed and passes through as-is.
  */
-const completionDateField = z.union([z.coerce.date(), z.null()]).optional();
+const completionDateField = z.union([z.null(), z.coerce.date()]).optional();
 
 export const createProjectSchema = z
   .object({
