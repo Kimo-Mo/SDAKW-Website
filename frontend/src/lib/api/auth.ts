@@ -57,3 +57,27 @@ export async function logout(): Promise<LogoutResult> {
   const { data } = await apiClient.post<LogoutResult>("/auth/logout")
   return data
 }
+
+export interface ChangePasswordPayload {
+  currentPassword: string
+  newPassword: string
+}
+
+export interface ChangePasswordResult {
+  success: true
+  message: string
+}
+
+/**
+ * PATCH /auth/change-password — changes the admin's password and rotates the
+ * session cookie automatically on the backend.
+ */
+export async function changePassword(
+  payload: ChangePasswordPayload
+): Promise<ChangePasswordResult> {
+  const { data } = await apiClient.patch<ChangePasswordResult>(
+    "/auth/change-password",
+    payload
+  )
+  return data
+}

@@ -13,7 +13,7 @@ apiClient.interceptors.response.use(
   (error) => {
     if (axios.isAxiosError(error) && error.response?.status === 401) {
       const requestUrl = error.config?.url || '';
-      if (!requestUrl.endsWith('/auth/login')) {
+      if (!requestUrl.endsWith('/auth/login') && !requestUrl.endsWith('/auth/change-password')) {
         redirectToLoginBrowser();
       }
     }

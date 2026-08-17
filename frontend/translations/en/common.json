@@ -8,45 +8,17 @@
     "description": "Sorry, we couldn't find the page you were looking for.",
     "backHome": "Back to home"
   },
+  "placeholder": {
+    "title": "Salem Duwaih Al-Ajmi Co. For Contracting",
+    "subtitle": "General Contracting & Construction",
+    "adminLogin": "Admin Portal",
+    "switchLocale": "العربية"
+  },
   "shared": {
     "close": "Close",
-    "closeToast": "Close notification"
-  },
-  "auth": {
-    "login": {
-      "title": "Sign in to the admin area",
-      "intro": "Use your administrator credentials to continue.",
-      "emailLabel": "Email",
-      "emailPlaceholder": "admin@example.com",
-      "passwordLabel": "Password",
-      "passwordPlaceholder": "Enter your password",
-      "submit": "Sign in",
-      "submitting": "Signing in...",
-      "emailRequired": "Email is required.",
-      "emailInvalid": "Enter a valid email address.",
-      "passwordRequired": "Password is required.",
-      "invalidCredentials": "Invalid email or password.",
-      "serviceUnavailable": "The sign-in service is unavailable right now. Please try again later.",
-      "sessionCheckNotice": "Your current session could not be checked, but you can still sign in."
-    },
-    "session": {
-      "checking": "Checking your session...",
-      "checkingDescription": "Please wait a moment.",
-      "unavailable": "We couldn't verify your session.",
-      "unavailableDescription": "The authentication service is unavailable right now. Please try again.",
-      "retry": "Retry"
-    },
-    "signOut": {
-      "label": "Sign out",
-      "pending": "Signing out...",
-      "success": "You have been signed out.",
-      "failure": "Sign-out could not be completed.",
-      "failureDescription": "Your session may still be active. Please try again."
-    },
-    "protected": {
-      "title": "Admin access confirmed",
-      "description": "Your session was verified successfully. Admin features will be added in later phases."
-    }
+    "closeToast": "Close notification",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password"
   },
   "foundation": {
     "badge": "Foundation Sandbox",

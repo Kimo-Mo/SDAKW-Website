@@ -1,0 +1,197 @@
+{
+  "admin": {
+    "projects": {
+      "title": "إدارة المشاريع",
+      "subtitle": "عرض وتصفية وتعديل وإدارة جميع مشاريع الشركة الحكومية والخاصة",
+      "addNewProject": "إضافة مشروع جديد",
+      "searchPlaceholder": "البحث بالعنوان أو الموقع...",
+      "filters": {
+        "type": "نوع المشروع",
+        "allTypes": "جميع الأنواع",
+        "government": "حكومي",
+        "private": "خاص",
+        "status": "الحالة",
+        "allStatuses": "جميع الحالات",
+        "ongoing": "قيد التنفيذ",
+        "completed": "مكتمل",
+        "published": "حالة النشر",
+        "allPublished": "الكل",
+        "isPublished": "منشور",
+        "isDraft": "مسودة",
+        "featured": "المميزة",
+        "allFeatured": "الكل",
+        "isFeatured": "المميزة فقط",
+        "isStandard": "العادية فقط",
+        "clear": "مسح الفلاتر"
+      },
+      "table": {
+        "cover": "الغلاف",
+        "project": "المشروع",
+        "type": "النوع",
+        "status": "الحالة",
+        "visibility": "الظهور",
+        "actions": "الإجراءات",
+        "edit": "تعديل",
+        "delete": "حذف",
+        "noLocation": "الموقع غير محدد",
+        "governmentEntity": "الجهة"
+      },
+      "badges": {
+        "government": "حكومي",
+        "private": "خاص",
+        "ongoing": "قيد التنفيذ",
+        "completed": "مكتمل",
+        "published": "منشور",
+        "draft": "مسودة",
+        "featured": "مميز"
+      },
+      "pagination": {
+        "page": "صفحة {current} من {total}",
+        "showing": "عرض {start} إلى {end} من أصل {total} مشروع",
+        "prev": "السابق",
+        "next": "التالي",
+        "pageSize": "لكل صفحة:"
+      },
+      "deleteDialog": {
+        "title": "حذف المشروع",
+        "description": "هل أنت متأكد من رغبتك في حذف مشروع \"{title}\"؟ سيؤدي هذا الإجراء إلى حذف المشروع وجميع الصور المرتبطة به نهائياً. لا يمكن التراجع عن هذا الإجراء.",
+        "confirm": "تأكيد الحذف",
+        "deleting": "جارٍ الحذف...",
+        "cancel": "إلغاء"
+      },
+      "toasts": {
+        "deleteSuccess": "تم حذف المشروع بنجاح.",
+        "deleteError": "تعذّر حذف المشروع. يرجى المحاولة مرة أخرى."
+      },
+      "empty": {
+        "noFilterResultsTitle": "لا توجد مشاريع مطابقة",
+        "noFilterResultsDesc": "لم يتم العثور على مشاريع تطابق معايير البحث والتصفية المحددة.",
+        "noProjectsTitle": "لا توجد مشاريع مضافة حتى الآن",
+        "noProjectsDesc": "ابدأ بإضافة أول مشروع حكومي أو خاص إلى محفظة الأعمال.",
+        "createFirst": "إضافة أول مشروع"
+      },
+      "error": {
+        "title": "تعذّر تحميل المشاريع",
+        "description": "حدث خطأ أثناء جلب بيانات المشاريع من الخادم.",
+        "retry": "إعادة المحاولة"
+      },
+      "form": {
+        "createTitle": "إضافة مشروع جديد",
+        "createSubtitle": "إضافة مشروع مقاولات حكومي أو خاص جديد إلى محفظة أعمال الشركة.",
+        "editTitle": "تعديل المشروع",
+        "editSubtitle": "تحديث بيانات المشروع، التصنيف، الشركاء والمقاولين، الحالة، والصور.",
+        "backToProjects": "العودة إلى المشاريع",
+        "sections": {
+          "basicInfo": "البيانات الأساسية",
+          "basicInfoDesc": "إدخال عناوين ووصف وموقع المشروع باللغتين العربية والإنجليزية.",
+          "classification": "التصنيف وشركاء التنفيذ",
+          "classificationDesc": "تحديد نوع المشروع (حكومي أو خاص) والإفصاح عن الجهة والمقاولين المشاركين.",
+          "statusAndVisibility": "الحالة والظهور",
+          "statusAndVisibilityDesc": "تحديد حالة تقدم المشروع، تاريخ الإنجاز، وخيارات النشر بالموقع.",
+          "media": "صور المشروع",
+          "mediaDesc": "رفع صورة الغلاف الرئيسية وما يصل إلى 10 صور للمعرض."
+        },
+        "fields": {
+          "titleAr": "عنوان المشروع (بالعربية)",
+          "titleArPlaceholder": "مثال: مجمع الأفنيوز التجاري",
+          "titleEn": "عنوان المشروع (بالإنجليزية)",
+          "titleEnPlaceholder": "مثال: The Avenues Commercial Complex",
+          "descAr": "وصف المشروع (بالعربية)",
+          "descArPlaceholder": "وصف تفصيلي لنطاق أعمال المشروع والتنفيذ...",
+          "descEn": "وصف المشروع (بالإنجليزية)",
+          "descEnPlaceholder": "Detailed description of project scope and execution...",
+          "locAr": "الموقع (بالعربية)",
+          "locArPlaceholder": "مثال: مدينة الكويت، الري",
+          "locEn": "الموقع (بالإنجليزية)",
+          "locEnPlaceholder": "مثال: Kuwait City, Al Rai",
+          "projectType": "نوع المشروع",
+          "government": "حكومي",
+          "private": "خاص",
+          "governmentEntityAr": "الجهة الحكومية (بالعربية)",
+          "governmentEntityArPlaceholder": "مثال: وزارة الأشغال العامة",
+          "governmentEntityEn": "الجهة الحكومية (بالإنجليزية)",
+          "governmentEntityEnPlaceholder": "مثال: Ministry of Public Works",
+          "status": "حالة المشروع",
+          "ongoing": "قيد التنفيذ",
+          "completed": "مكتمل",
+          "completionDate": "تاريخ الإنجاز",
+          "published": "منشور (ظاهر في الموقع العام)",
+          "featured": "مشروع مميز (يظهر في الصفحة الرئيسية)"
+        },
+        "contractors": {
+          "title": "المقاولون المشاركون",
+          "add": "إضافة مقاول",
+          "remove": "حذف",
+          "empty": "لم يتم إضافة مقاولين بعد. انقر على 'إضافة مقاول' للإفصاح عن الشركاء والمقاولين.",
+          "nameAr": "اسم المقاول (بالعربية)",
+          "nameArPlaceholder": "اسم المقاول أو الشركة بالعربية",
+          "nameEn": "اسم المقاول (بالإنجليزية)",
+          "nameEnPlaceholder": "Contractor or company name in English",
+          "descAr": "دور المقاول / الأعمال (بالعربية)",
+          "descArPlaceholder": "نطاق الأعمال المنفذة بالعربية...",
+          "descEn": "دور المقاول / الأعمال (بالإنجليزية)",
+          "descEnPlaceholder": "Scope of work in English..."
+        },
+        "media": {
+          "coverTitle": "صورة الغلاف",
+          "coverDesc": "الصورة الرئيسية المميزة للمشروع (المقاس الموصى به: 1920×1080).",
+          "galleryTitle": "صور المعرض",
+          "galleryDesc": "رفع حتى 10 صور لمعرض المشروع. (مستخدم {count}/10)",
+          "dropCover": "انقر أو اسحب صورة هنا لتعيين غلاف المشروع",
+          "dropGallery": "انقر أو اسحب الصور هنا لإضافتها إلى المعرض",
+          "replaceCover": "تغيير الغلاف",
+          "removeCover": "حذف الغلاف",
+          "removeImage": "حذف الصورة",
+          "capWarning": "تم الوصول للحد الأقصى لصور المعرض (10 صور كحد أقصى)."
+        },
+        "buttons": {
+          "create": "إضافة المشروع",
+          "saving": "جارٍ حفظ المشروع...",
+          "update": "حفظ التعديلات",
+          "cancel": "إلغاء"
+        },
+        "steps": {
+          "creating": "جارٍ إنشاء سجل المشروع...",
+          "uploadingCover": "جارٍ رفع صورة الغلاف إلى Cloudinary...",
+          "uploadingGallery": "جارٍ رفع {count} صورة إلى المعرض...",
+          "complete": "اكتمل بنجاح!"
+        },
+        "toasts": {
+          "createSuccess": "تم إنشاء المشروع بنجاح.",
+          "updateSuccess": "تم تحديث بيانات المشروع بنجاح.",
+          "partialUploadError": "تم إنشاء المشروع بنجاح، ولكن تعذّر رفع بعض الصور. يمكنك إعادة المحاولة هنا.",
+          "partialUploadCoverFailed": "تم حفظ المشروع، لكن تعذّر رفع صورة الغلاف. يمكنك إعادة رفعها.",
+          "partialUploadGalleryFailed": "تم حفظ المشروع، لكن تعذّر رفع صور المعرض. يمكنك إعادة رفعها.",
+          "partialUploadBothFailed": "تم حفظ المشروع، لكن تعذّر رفع صور الغلاف والمعرض.",
+          "deleteCoverSuccess": "تم حذف صورة الغلاف بنجاح.",
+          "deleteGallerySuccess": "تم حذف صورة المعرض بنجاح.",
+          "deleteCoverError": "تعذّر حذف صورة الغلاف. يرجى المحاولة مرة أخرى.",
+          "deleteGalleryError": "تعذّر حذف صورة المعرض. يرجى المحاولة مرة أخرى.",
+          "createError": "تعذّر إنشاء المشروع. يرجى التحقق من المدخلات والمحاولة مرة أخرى.",
+          "updateError": "تعذّر تحديث المشروع. يرجى التحقق من المدخلات والمحاولة مرة أخرى.",
+          "missingIdError": "تم إنشاء المشروع، ولكن لم يتم استلام معرّف المشروع من الخادم."
+        },
+        "errors": {
+          "loadTitle": "تعذّر تحميل بيانات المشروع",
+          "loadDesc": "لم نتمكن من جلب بيانات المشروع. قد يكون المشروع محذوفاً أو حدث خطأ في الخادم.",
+          "retry": "إعادة المحاولة"
+        },
+        "validation": {
+          "titleArRequired": "عنوان المشروع بالعربية مطلوب (حرفان على الأقل).",
+          "titleEnRequired": "عنوان المشروع بالإنجليزية مطلوب (حرفان على الأقل).",
+          "descArRequired": "وصف المشروع بالعربية مطلوب (5 أحرف على الأقل).",
+          "descEnRequired": "وصف المشروع بالإنجليزية مطلوب (5 أحرف على الأقل).",
+          "govEntityArRequired": "اسم الجهة الحكومية بالعربية مطلوب للمشاريع الحكومية.",
+          "govEntityEnRequired": "اسم الجهة الحكومية بالإنجليزية مطلوب للمشاريع الحكومية.",
+          "contractorsRequired": "يجب إضافة مقاول شريك واحد على الأقل للمشاريع الحكومية.",
+          "contractorNameArRequired": "اسم المقاول بالعربية مطلوب.",
+          "contractorNameEnRequired": "اسم المقاول بالإنجليزية مطلوب.",
+          "contractorDescArRequired": "وصف أعمال المقاول بالعربية مطلوب.",
+          "contractorDescEnRequired": "وصف أعمال المقاول بالإنجليزية مطلوب.",
+          "completionDateRequired": "تاريخ الإنجاز مطلوب للمشاريع المكتملة.",
+          "invalidDate": "يرجى إدخال تاريخ إنجاز صالح."
+        }
+      }
+    }
+  }
+}

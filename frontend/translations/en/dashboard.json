@@ -1,0 +1,53 @@
+{
+  "admin": {
+    "brand": "SDAKW Admin",
+    "nav": {
+      "overview": "Overview",
+      "projects": "Projects",
+      "newProject": "New Project",
+      "settings": "Settings",
+      "viewWebsite": "View Website",
+      "logout": "Sign Out"
+    },
+    "header": {
+      "title": "Admin Dashboard",
+      "userRole": "Administrator",
+      "switchLanguage": "العربية",
+      "openMenu": "Open navigation menu",
+      "closeMenu": "Close navigation menu"
+    },
+    "settings": {
+      "title": "Account Settings",
+      "subtitle": "Manage your administrator credentials and security preferences.",
+      "securityCardTitle": "Security & Authentication",
+      "securityCardDesc": "Update your account password to maintain administrative access security."
+    },
+    "overview": {
+      "title": "Dashboard Overview",
+      "subtitle": "High-level summary of your project portfolio and quick actions.",
+      "emptyTitle": "No projects yet",
+      "emptyDescription": "Start building your portfolio by creating your first construction or development project.",
+      "createFirstProject": "Create First Project",
+      "errorTitle": "Unable to load overview data",
+      "errorDescription": "A network or server error occurred while retrieving project statistics.",
+      "retry": "Retry"
+    },
+    "metrics": {
+      "total": "Total Projects",
+      "published": "Published",
+      "ongoing": "Ongoing",
+      "completed": "Completed",
+      "viewDetails": "View in projects list"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "subtitle": "Frequently used workspace shortcuts",
+      "addProjectTitle": "Add New Project",
+      "addProjectDesc": "Create and publish a government or private project",
+      "manageProjectsTitle": "Manage Projects",
+      "manageProjectsDesc": "Filter, edit, update, or remove existing projects",
+      "previewSiteTitle": "Public Website",
+      "previewSiteDesc": "Open live corporate website in a new window"
+    }
+  }
+}

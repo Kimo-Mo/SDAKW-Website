@@ -11,7 +11,17 @@ import { useRouter } from '@/i18n/navigation';
 import { logout } from '@/lib/api/auth';
 import { resetBrowserRedirectState } from '@/lib/auth/navigation';
 
-export function LogoutButton() {
+interface LogoutButtonProps {
+  className?: string;
+  variant?: 'default' | 'outline' | 'ghost' | 'destructive';
+  size?: 'default' | 'sm' | 'lg' | 'icon';
+}
+
+export function LogoutButton({
+  className,
+  variant = 'outline',
+  size = 'default',
+}: LogoutButtonProps = {}) {
   const t = useTranslations('auth');
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -32,23 +42,27 @@ export function LogoutButton() {
   });
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className={`flex flex-col gap-2 ${className || ''}`}>
       {error ? (
         <div role="alert" className="flex flex-col items-center gap-1 text-center">
-          <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+          <p className="rounded-lg border border-destructive/30 bg-destructive/10 p-2 text-xs text-destructive">
             {t('signOut.failure')}
           </p>
-          <p className="text-sm text-muted-foreground">{t('signOut.failureDescription')}</p>
         </div>
       ) : null}
-      <Button variant="outline" disabled={mutation.isPending} onClick={() => mutation.mutate()}>
+      <Button
+        variant={variant}
+        size={size}
+        disabled={mutation.isPending}
+        onClick={() => mutation.mutate()}
+        className={className}>
         {mutation.isPending ? (
           <>
             <Spinner />
-            {t('signOut.pending')}
+            <span>{t('signOut.pending')}</span>
           </>
         ) : (
-          t('signOut.label')
+          <span>{t('signOut.label')}</span>
         )}
       </Button>
     </div>

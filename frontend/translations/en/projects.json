@@ -1,0 +1,197 @@
+{
+  "admin": {
+    "projects": {
+      "title": "Projects Management",
+      "subtitle": "View, search, filter, edit, and manage all corporate projects",
+      "addNewProject": "Add New Project",
+      "searchPlaceholder": "Search by title or location...",
+      "filters": {
+        "type": "Project Type",
+        "allTypes": "All Types",
+        "government": "Government",
+        "private": "Private",
+        "status": "Status",
+        "allStatuses": "All Statuses",
+        "ongoing": "Ongoing",
+        "completed": "Completed",
+        "published": "Published State",
+        "allPublished": "All Visibility",
+        "isPublished": "Published",
+        "isDraft": "Draft",
+        "featured": "Featured",
+        "allFeatured": "All Projects",
+        "isFeatured": "Featured Only",
+        "isStandard": "Standard Only",
+        "clear": "Clear Filters"
+      },
+      "table": {
+        "cover": "Cover",
+        "project": "Project",
+        "type": "Type",
+        "status": "Status",
+        "visibility": "Visibility",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete",
+        "noLocation": "Location not specified",
+        "governmentEntity": "Entity"
+      },
+      "badges": {
+        "government": "Government",
+        "private": "Private",
+        "ongoing": "Ongoing",
+        "completed": "Completed",
+        "published": "Published",
+        "draft": "Draft",
+        "featured": "Featured"
+      },
+      "pagination": {
+        "page": "Page {current} of {total}",
+        "showing": "Showing {start} to {end} of {total} projects",
+        "prev": "Previous",
+        "next": "Next",
+        "pageSize": "Per page:"
+      },
+      "deleteDialog": {
+        "title": "Delete Project",
+        "description": "Are you sure you want to delete \"{title}\"? This will permanently remove the project and its associated gallery images. This action cannot be undone.",
+        "confirm": "Delete Project",
+        "deleting": "Deleting...",
+        "cancel": "Cancel"
+      },
+      "toasts": {
+        "deleteSuccess": "Project deleted successfully.",
+        "deleteError": "Failed to delete project. Please try again."
+      },
+      "empty": {
+        "noFilterResultsTitle": "No matching projects",
+        "noFilterResultsDesc": "No projects match the selected search and filter criteria.",
+        "noProjectsTitle": "No projects created yet",
+        "noProjectsDesc": "Get started by adding your first construction or development project.",
+        "createFirst": "Add First Project"
+      },
+      "error": {
+        "title": "Unable to load projects",
+        "description": "A network or server error occurred while retrieving projects.",
+        "retry": "Retry"
+      },
+      "form": {
+        "createTitle": "Create New Project",
+        "createSubtitle": "Add a new government or private contracting project to the corporate portfolio.",
+        "editTitle": "Edit Project",
+        "editSubtitle": "Update project details, classification, contractors, status, and media assets.",
+        "backToProjects": "Back to Projects",
+        "sections": {
+          "basicInfo": "Basic Information",
+          "basicInfoDesc": "Provide bilingual project titles, descriptions, and optional locations.",
+          "classification": "Classification & Partners",
+          "classificationDesc": "Specify whether the project is government or private and disclose contracting partners.",
+          "statusAndVisibility": "Status & Visibility",
+          "statusAndVisibilityDesc": "Set project progress, completion date, and live publishing options.",
+          "media": "Project Images",
+          "mediaDesc": "Upload high-resolution cover photo and up to 10 gallery images."
+        },
+        "fields": {
+          "titleAr": "Project Title (Arabic)",
+          "titleArPlaceholder": "e.g. مجمع الأفنيوز التجاري",
+          "titleEn": "Project Title (English)",
+          "titleEnPlaceholder": "e.g. The Avenues Commercial Complex",
+          "descAr": "Description (Arabic)",
+          "descArPlaceholder": "وصف تفصيلي لأعمال المشروع ونطاق التنفيذ...",
+          "descEn": "Description (English)",
+          "descEnPlaceholder": "Detailed description of project scope and execution...",
+          "locAr": "Location (Arabic)",
+          "locArPlaceholder": "e.g. مدينة الكويت، الري",
+          "locEn": "Location (English)",
+          "locEnPlaceholder": "e.g. Kuwait City, Al Rai",
+          "projectType": "Project Type",
+          "government": "Government",
+          "private": "Private",
+          "governmentEntityAr": "Government Entity (Arabic)",
+          "governmentEntityArPlaceholder": "e.g. وزارة الأشغال العامة",
+          "governmentEntityEn": "Government Entity (English)",
+          "governmentEntityEnPlaceholder": "e.g. Ministry of Public Works",
+          "status": "Project Status",
+          "ongoing": "Ongoing",
+          "completed": "Completed",
+          "completionDate": "Completion Date",
+          "published": "Published (Visible on public website)",
+          "featured": "Featured Project (Highlighted on homepage)"
+        },
+        "contractors": {
+          "title": "Contractors",
+          "add": "Add Contractor",
+          "remove": "Remove",
+          "empty": "No contractors added yet. Click 'Add Contractor' to disclose partner contractors.",
+          "nameAr": "Contractor Name (Arabic)",
+          "nameArPlaceholder": "اسم المقاول بالعربية",
+          "nameEn": "Contractor Name (English)",
+          "nameEnPlaceholder": "Contractor name in English",
+          "descAr": "Contractor Role (Arabic)",
+          "descArPlaceholder": "الأعمال المنفذة بالعربية...",
+          "descEn": "Contractor Role (English)",
+          "descEnPlaceholder": "Scope of work in English..."
+        },
+        "media": {
+          "coverTitle": "Cover Image",
+          "coverDesc": "Primary featured banner image for the project (Recommended: 1920x1080).",
+          "galleryTitle": "Gallery Images",
+          "galleryDesc": "Upload up to 10 showcase images. ({count}/10 used)",
+          "dropCover": "Click or drag an image here to set cover photo",
+          "dropGallery": "Click or drag images here to add to gallery",
+          "replaceCover": "Replace Cover",
+          "removeCover": "Remove Cover",
+          "removeImage": "Remove Image",
+          "capWarning": "Gallery limit reached (10 images maximum)."
+        },
+        "buttons": {
+          "create": "Create Project",
+          "saving": "Saving Project...",
+          "update": "Save Changes",
+          "cancel": "Cancel"
+        },
+        "steps": {
+          "creating": "Creating base project record...",
+          "uploadingCover": "Uploading cover image to Cloudinary...",
+          "uploadingGallery": "Uploading {count} gallery images...",
+          "complete": "Complete!"
+        },
+        "toasts": {
+          "createSuccess": "Project created successfully.",
+          "updateSuccess": "Project updated successfully.",
+          "partialUploadError": "Project was created, but some image uploads failed. You can retry them here.",
+          "partialUploadCoverFailed": "Project saved, but cover image upload failed. You can retry uploading it.",
+          "partialUploadGalleryFailed": "Project saved, but gallery images upload failed. You can retry uploading them.",
+          "partialUploadBothFailed": "Project saved, but cover and gallery image uploads failed.",
+          "deleteCoverSuccess": "Cover image removed successfully.",
+          "deleteGallerySuccess": "Gallery image removed successfully.",
+          "deleteCoverError": "Failed to remove cover image. Please try again.",
+          "deleteGalleryError": "Failed to remove gallery image. Please try again.",
+          "createError": "Failed to create project. Please verify inputs and try again.",
+          "updateError": "Failed to update project. Please verify inputs and try again.",
+          "missingIdError": "Project was created, but project ID was missing from server response."
+        },
+        "errors": {
+          "loadTitle": "Unable to load project details",
+          "loadDesc": "The project could not be retrieved. It may have been deleted or a server error occurred.",
+          "retry": "Retry"
+        },
+        "validation": {
+          "titleArRequired": "Arabic title is required (at least 2 characters).",
+          "titleEnRequired": "English title is required (at least 2 characters).",
+          "descArRequired": "Arabic description is required (at least 5 characters).",
+          "descEnRequired": "English description is required (at least 5 characters).",
+          "govEntityArRequired": "Government entity in Arabic is required for government projects.",
+          "govEntityEnRequired": "Government entity in English is required for government projects.",
+          "contractorsRequired": "At least one partner contractor is required for government projects.",
+          "contractorNameArRequired": "Contractor name in Arabic is required.",
+          "contractorNameEnRequired": "Contractor name in English is required.",
+          "contractorDescArRequired": "Contractor description in Arabic is required.",
+          "contractorDescEnRequired": "Contractor description in English is required.",
+          "completionDateRequired": "Completion date is required for completed projects.",
+          "invalidDate": "Please provide a valid completion date."
+        }
+      }
+    }
+  }
+}

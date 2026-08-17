@@ -71,6 +71,7 @@ Required functionality:
 - Admin login.
 - Cookie-based authentication with server-verified session persistence.
 - Protected routes.
+- Change password and admin settings.
 - Logout.
 - Dashboard layout.
 - Projects listing.
@@ -304,6 +305,7 @@ Create reusable UI needed across both applications.
 
 - Button.
 - Input.
+- PasswordInput (RTL-aware with show/hide toggle).
 - Textarea.
 - Select.
 - Checkbox/switch where needed.
@@ -334,23 +336,53 @@ Prefer shadcn/ui when suitable.
 
 - Login page.
 - Login form.
+- Reusable RTL-aware `PasswordInput` component with show/hide toggle.
 - Validation.
 - Authentication API integration.
 - HTTP-only, SameSite, Secure cookie authentication; the frontend never reads
   the JWT.
 - Verify every protected route with `GET /auth/me` before rendering protected
   content, with a loading state during verification.
-- Redirect every API `401` through one shared Axios response interceptor; no
-  refresh-token flow.
+- Redirect every unauthenticated API `401` through one shared Axios response
+  interceptor (except password mutation errors); no refresh-token flow.
 - Protected routes.
 - Redirect handling.
+- Change password feature (`PATCH /auth/change-password`) with automatic cookie rotation.
+- Settings page (`/admin/settings`) with change password form.
 - Logout.
-- Error handling.
+- Error handling with specific observable states.
+
+### Password Input Component
+
+- Composed over `Input` primitive.
+- Internal show/hide state with `Eye` / `EyeOff` icons (`lucide-react`).
+- RTL-aware trailing-edge positioning using CSS logical properties (`end-0`, `pe-10`, `pe-3`).
+- Accessible `aria-label` (localized) and `aria-pressed` states.
+- Seamless integration with React Hook Form and standard input refs.
+
+### Change Password Rules & Flow
+
+Endpoint: `PATCH /auth/change-password`
+
+Form fields:
+- Current password (required).
+- New password (required, min 8 chars, uppercase, lowercase, digit).
+- Confirm new password (required, must match new password).
+
+Rules:
+- New password must be different from current password.
+- New password must match confirmation.
+- 401 response (incorrect current password) must display inline error without triggering session redirect.
+- Automatic backend cookie rotation upon success preserves active admin session.
+- Clear form fields upon successful submission.
 
 ### Done When
 
 - Valid credentials allow access.
 - Unauthorized users cannot access protected pages.
+- Password inputs provide accessible, RTL-aware visibility toggles.
+- Admin can change password via `/admin/settings` with instant cookie rotation and session preservation.
+- Invalid current password and validation errors provide distinct, localized feedback.
 - Logout clears authentication state.
 - Authentication errors are handled.
 
@@ -361,10 +393,10 @@ Prefer shadcn/ui when suitable.
 ### Features
 
 - Dashboard shell.
-- Sidebar/navigation.
+- Sidebar/navigation (Overview, Projects, New Project, Settings, View Website, Sign Out).
 - Header.
 - Responsive behavior.
-- Mobile navigation.
+- Mobile navigation drawer.
 - Basic dashboard overview.
 
 Possible project metrics:
@@ -790,6 +822,7 @@ The frontend is complete when:
 - Admin Dashboard is implemented.
 - Authentication works.
 - Protected routes work.
+- Password change and settings management work with automatic session cookie rotation.
 - Projects can be created, edited, and deleted.
 - Publish/unpublish works.
 - Featured projects work.

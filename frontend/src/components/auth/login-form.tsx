@@ -9,6 +9,8 @@ import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { PasswordInput } from '@/components/shared/password-input';
 import { Spinner } from '@/components/ui/spinner';
 import { AUTH_SESSION_QUERY_KEY, isUnauthorizedError } from '@/components/auth/session';
 import { useRouter } from '@/i18n/navigation';
@@ -74,9 +76,9 @@ export function LoginForm({ returnTo }: LoginFormProps) {
       ) : null}
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="login-email" className="text-sm font-medium">
+        <Label htmlFor="login-email" className="text-sm font-medium">
           {t('login.emailLabel')}
-        </label>
+        </Label>
         <Input
           id="login-email"
           type="email"
@@ -93,12 +95,11 @@ export function LoginForm({ returnTo }: LoginFormProps) {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label htmlFor="login-password" className="text-sm font-medium">
+        <Label htmlFor="login-password" className="text-sm font-medium">
           {t('login.passwordLabel')}
-        </label>
-        <Input
+        </Label>
+        <PasswordInput
           id="login-password"
-          type="password"
           autoComplete="current-password"
           aria-invalid={Boolean(passwordError)}
           placeholder={t('login.passwordPlaceholder')}

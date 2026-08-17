@@ -1,0 +1,53 @@
+{
+  "admin": {
+    "brand": "إدارة SDAKW",
+    "nav": {
+      "overview": "نظرة عامة",
+      "projects": "المشاريع",
+      "newProject": "مشروع جديد",
+      "settings": "الإعدادات",
+      "viewWebsite": "عرض الموقع",
+      "logout": "تسجيل الخروج"
+    },
+    "header": {
+      "title": "لوحة التحكم",
+      "userRole": "مسؤول النظام",
+      "switchLanguage": "English",
+      "openMenu": "فتح قائمة التنقل",
+      "closeMenu": "إغلاق قائمة التنقل"
+    },
+    "settings": {
+      "title": "إعدادات الحساب",
+      "subtitle": "إدارة بيانات اعتماد مسؤول النظام وتفضيلات الأمان.",
+      "securityCardTitle": "الأمان والمصادقة",
+      "securityCardDesc": "تحديث كلمة مرور حسابك للحفاظ على أمان الوصول الإداري."
+    },
+    "overview": {
+      "title": "نظرة عامة على المشاريع",
+      "subtitle": "ملخص شامل لحالة المشاريع والإجراءات السريعة في المنصة.",
+      "emptyTitle": "لا توجد مشاريع حتى الآن",
+      "emptyDescription": "ابدأ بإنشاء أول مشروع حكومي أو خاص لإضافته إلى محفظة الأعمال.",
+      "createFirstProject": "إنشاء أول مشروع",
+      "errorTitle": "تعذّر تحميل بيانات النظرة العامة",
+      "errorDescription": "حدث خطأ أثناء جلب إحصائيات المشاريع من الخادم.",
+      "retry": "إعادة المحاولة"
+    },
+    "metrics": {
+      "total": "إجمالي المشاريع",
+      "published": "المنشورة",
+      "ongoing": "قيد التنفيذ",
+      "completed": "المكتملة",
+      "viewDetails": "عرض في قائمة المشاريع"
+    },
+    "quickActions": {
+      "title": "الإجراءات السريعة",
+      "subtitle": "اختصارات سريعة للعمليات اليومية",
+      "addProjectTitle": "إضافة مشروع جديد",
+      "addProjectDesc": "إنشاء مشروع حكومي أو خاص جديد ونشره",
+      "manageProjectsTitle": "إدارة المشاريع",
+      "manageProjectsDesc": "تصفية وتعديل وتحديث وحذف المشاريع الحالية",
+      "previewSiteTitle": "الموقع العام",
+      "previewSiteDesc": "فتح الموقع الإلكتروني للشركة في نافذة جديدة"
+    }
+  }
+}

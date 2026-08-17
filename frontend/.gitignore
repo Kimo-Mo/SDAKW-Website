@@ -42,8 +42,10 @@ yarn-error.log*
 next-env.d.ts
 
 .agents/
+.agent/
 .opencode/
 .specify/
 specs/
 AGENTS.md
 CLAUDE.md
+backend_readme.md

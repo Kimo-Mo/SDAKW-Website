@@ -33,7 +33,11 @@ export function RequireSession({ children }: RequireSessionProps) {
 
   if (session.isPending) {
     return (
-      <LoadingState label={t('session.checking')} description={t('session.checkingDescription')} />
+      <LoadingState
+        className="h-screen"
+        label={t('session.checking')}
+        description={t('session.checkingDescription')}
+      />
     );
   }
 
@@ -44,6 +48,7 @@ export function RequireSession({ children }: RequireSessionProps) {
 
     return (
       <ErrorState
+        className="h-screen"
         title={t('session.unavailable')}
         description={t('session.unavailableDescription')}
         retryLabel={t('session.retry')}
