@@ -29,7 +29,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
 
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://sdakw.com';
+
   return {
+    metadataBase: new URL(appUrl),
     title: t('title'),
     description: t('description'),
   };

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="50%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="50%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#b45309" />
+    </linearGradient>
+    <radialGradient id="ambientGlow" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#ambientGlow)" />
+
+  <!-- Subtle Architectural Geometric Grid Lines -->
+  <g stroke="#334155" stroke-width="1" stroke-opacity="0.25">
+    <line x1="100" y1="0" x2="100" y2="630" />
+    <line x1="300" y1="0" x2="300" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="900" y1="0" x2="900" y2="630" />
+    <line x1="1100" y1="0" x2="1100" y2="630" />
+    <line x1="0" y1="120" x2="1200" y2="120" />
+    <line x1="0" y1="315" x2="1200" y2="315" />
+    <line x1="0" y1="510" x2="1200" y2="510" />
+  </g>
+
+  <!-- Gold Accent Geometric Emblem -->
+  <g transform="translate(600, 200)">
+    <!-- Outer Shield / Diamond -->
+    <polygon points="0,-70 65,0 0,70 -65,0" fill="none" stroke="url(#goldGrad)" stroke-width="4" />
+    <!-- Inner Building / Construction Geometry -->
+    <path d="M-25,25 L-25,-10 L0,-35 L25,-10 L25,25 Z" fill="url(#goldGrad)" opacity="0.9" />
+    <path d="M-12,25 L-12,0 L12,0 L12,25 Z" fill="#0f172a" />
+  </g>
+
+  <!-- Bilingual Brand Typography -->
+  <!-- Arabic Brand Title -->
+  <text x="600" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="bold" font-size="44" fill="#ffffff" letter-spacing="0.5">
+    شركة سالم دويح العجمي للتجارة العامة والمقاولات
+  </text>
+
+  <!-- English Subtitle -->
+  <text x="600" y="400" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="28" fill="#94a3b8" letter-spacing="2">
+    SALEM DWAIH AL AJMI CO. (SDA) — GENERAL TRADING &amp; CONTRACTING
+  </text>
+
+  <!-- Brand Tagline Badge -->
+  <g transform="translate(600, 480)">
+    <rect x="-240" y="-24" width="480" height="48" rx="24" fill="#1e293b" stroke="#475569" stroke-width="1.5" />
+    <text x="0" y="8" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="18" fill="#f59e0b">
+      فخامة تُبنى.. وقيمةٌ تستمر • Building Value. Sculpting Excellence
+    </text>
+  </g>
+
+  <!-- Experience & Quality Pill Bottom Left / Right -->
+  <text x="100" y="580" text-anchor="start" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="16" fill="#64748b">
+    Established 1999 • Kuwait City
+  </text>
+  <text x="1100" y="580" text-anchor="end" font-family="system-ui, -apple-system, sans-serif" font-weight="500" font-size="16" fill="#64748b">
+    ISO 9001 • ISO 14001 • ISO 45001 Certified
+  </text>
+</svg>

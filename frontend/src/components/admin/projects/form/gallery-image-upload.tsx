@@ -134,7 +134,7 @@ export function GalleryImageUpload({
             return (
               <div
                 key={img.publicId}
-                className="group relative aspect-video overflow-hidden rounded-lg border border-border bg-muted shadow-2xs">
+                className="group relative aspect-video overflow-hidden rounded-lg border border-border bg-muted shadow-xs">
                 <Image
                   src={img.url}
                   alt="Gallery item"
@@ -170,7 +170,7 @@ export function GalleryImageUpload({
             return (
               <div
                 key={`queued-${idx}`}
-                className="group relative aspect-video overflow-hidden rounded-lg border border-primary/50 bg-muted shadow-2xs">
+                className="group relative aspect-video overflow-hidden rounded-lg border border-primary/50 bg-muted shadow-xs">
                 <Image
                   src={preview}
                   alt="Queued gallery preview"

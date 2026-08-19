@@ -1,11 +1,15 @@
 'use client';
 
-import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import { LayoutDashboard, FolderKanban, FolderPlus, Settings, Globe, X } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, FolderPlus, Settings, Globe } from 'lucide-react';
 
 import { Link } from '@/i18n/navigation';
-import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { LogoutButton } from '@/components/auth/logout-button';
 
 interface AdminMobileNavProps {
@@ -16,34 +20,6 @@ interface AdminMobileNavProps {
 
 export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavProps) {
   const t = useTranslations('admin');
-
-  // Handle ESC key press
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
-  // Lock body scroll when mobile drawer is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
-
-  if (!isOpen) return null;
 
   const navItems = [
     {
@@ -84,35 +60,27 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
   };
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden" aria-modal="true" role="dialog">
-      {/* Backdrop */}
-      <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity duration-200"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
-      {/* Drawer panel */}
-      <div className="fixed inset-y-0 inset-s-0 z-50 flex w-full max-w-xs flex-col bg-card border-e border-border shadow-2xl transition-transform duration-200">
+    <Sheet
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) onClose();
+      }}>
+      <SheetContent
+        side="start"
+        closeLabel={t('header.closeMenu')}
+        className="p-0 gap-0 w-full max-w-xs sm:max-w-xs flex flex-col"
+        aria-label={t('header.openMenu')}>
         {/* Drawer Header */}
-        <div className="flex h-16 items-center justify-between border-b border-border px-5">
+        <SheetHeader className="flex flex-row h-16 items-center justify-between px-5 space-y-0 border-b border-border">
           <div className="flex items-center gap-2">
             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
               SD
             </span>
-            <span className="font-heading font-semibold tracking-tight text-base">
+            <SheetTitle className="text-base tracking-tight font-heading">
               {t('brand')}
-            </span>
+            </SheetTitle>
           </div>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={onClose}
-            aria-label={t('header.closeMenu')}
-            className="h-9 w-9 text-muted-foreground hover:text-foreground">
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
+        </SheetHeader>
 
         {/* Navigation Links */}
         <nav className="flex-1 space-y-1.5 overflow-y-auto p-4">
@@ -152,10 +120,10 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
         </nav>
 
         {/* Drawer Footer (Sign out) */}
-        <div className="border-t border-border p-4 bg-muted/20">
+        <div className="border-t border-border p-4 bg-muted/20 mt-auto">
           <LogoutButton className="w-full justify-start" />
         </div>
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   );
 }

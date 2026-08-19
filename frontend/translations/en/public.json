@@ -1,0 +1,317 @@
+{
+  "brand": {
+    "name": "Salem Duwaih Al Ajmi Company for General Trading (SDA) & contracting",
+    "shortName": "Salem Duwaih Al Ajmi Co.",
+    "acronym": "SDA",
+    "tagline": "Building Value. Sculpting Excellence"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "projects": "Projects",
+    "contact": "Contact Us",
+    "getInTouch": "Get in Touch",
+    "menu": "Menu",
+    "closeMenu": "Close Menu",
+    "switchLocale": "العربية",
+    "switchLocaleAria": "Switch language to Arabic"
+  },
+  "hero": {
+    "badge": "Leading Kuwaiti General Contracting Co. (Est. 1999)",
+    "title": "Building Value. Sculpting Excellence",
+    "subtitle": "Over 26 years of excellence in general contracting, natural stone supply & installation, and infrastructure development in the State of Kuwait.",
+    "exploreProjects": "Explore Our Projects",
+    "contactUs": "Contact Our Team",
+    "metrics": {
+      "experience": {
+        "value": "+26",
+        "label": "Years of Excellence & Leadership"
+      },
+      "government": {
+        "value": "Government Projects",
+        "label": "National Infrastructure & Public Works"
+      },
+      "private": {
+        "value": "Private Developments",
+        "label": "Commercial & Residential Complexes"
+      },
+      "iso": {
+        "value": "ISO Certified",
+        "label": "ISO 9001 / 14001 / 45001"
+      }
+    }
+  },
+  "intro": {
+    "badge": "About Us",
+    "title": "Leadership in General Contracting & Infrastructure in Kuwait",
+    "paragraph1": "Founded in 1999 in Kuwait, Salem Duwaih Al Ajmi Company (SDA) is one of the leading enterprises in general contracting, supply and installation of marble, natural stone, granite, as well as real estate development.",
+    "paragraph2": "A pioneering commercial and investment flagship built on the core values of quality, innovation, and professionalism. We provide integrated contracting solutions matching global best practices with strict commitment to transparency and operational excellence.",
+    "learnMore": "Read More About Us",
+    "iso9001Subtitle": "International Quality Management System",
+    "iso14001Subtitle": "Environmental Management System",
+    "iso45001Subtitle": "Occupational Health & Safety System"
+  },
+  "featuredProjects": {
+    "badge": "Featured Works",
+    "title": "Flagship Projects We Take Pride In",
+    "subtitle": "A curated portfolio of high-standard governmental and private construction milestones executed across Kuwait.",
+    "viewAll": "View All Projects",
+    "viewDetails": "View Project Details",
+    "empty": "No featured projects currently showcased.",
+    "error": "Failed to load featured projects. Please try again.",
+    "retry": "Retry",
+    "projectType": {
+      "government": "Government Project",
+      "private": "Private Project"
+    },
+    "status": {
+      "ongoing": "Ongoing",
+      "completed": "Completed"
+    }
+  },
+  "projectsPage": {
+    "badge": "Corporate Portfolio",
+    "title": "Our Landmark Projects & Contracting Works",
+    "subtitle": "Discover our comprehensive portfolio of prestigious governmental infrastructure and high-end private developments delivered across the State of Kuwait.",
+    "totalCount": "{count} Projects Executed",
+    "filters": {
+      "typeLabel": "Project Classification",
+      "statusLabel": "Execution Status",
+      "allTypes": "All Projects",
+      "government": "Government Projects",
+      "private": "Private Developments",
+      "allStatuses": "All Statuses",
+      "ongoing": "Ongoing Execution",
+      "completed": "Completed Milestones",
+      "clearFilters": "Clear All Filters",
+      "showingResults": "Showing {count} projects"
+    },
+    "card": {
+      "governmentEntityLabel": "Government Entity:",
+      "completedIn": "Completed {year}",
+      "ongoing": "In Progress",
+      "viewDetails": "View Project Details"
+    },
+    "empty": {
+      "title": "No Projects Found",
+      "description": "We couldn't find any projects matching your current filter criteria.",
+      "reset": "Reset Filters",
+      "globalTitle": "Portfolio Milestones Coming Soon",
+      "globalDescription": "We are currently preparing new portfolio highlights. Please contact us to learn more about our contracting capabilities.",
+      "contactUs": "Contact Us"
+    },
+    "error": {
+      "title": "Unable to Load Projects",
+      "description": "An unexpected error occurred while fetching the projects catalog. Please check your connection and try again.",
+      "retry": "Try Again"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {current} of {total}"
+    }
+  },
+  "projectDetail": {
+    "breadcrumb": {
+      "projects": "Projects",
+      "currentProject": "Project Details"
+    },
+    "sections": {
+      "description": "About This Project",
+      "gallery": "Project Gallery",
+      "contractors": "Contractors"
+    },
+    "metadata": {
+      "location": "Location",
+      "completionDate": "Completed",
+      "governmentEntity": "Government Entity",
+      "status": {
+        "ongoing": "Ongoing",
+        "completed": "Completed"
+      },
+      "projectType": {
+        "government": "Government",
+        "private": "Private"
+      }
+    },
+    "gallery": {
+      "imageAlt": "Project image {index} of {total}",
+      "lightbox": {
+        "close": "Close",
+        "previous": "Previous image",
+        "next": "Next image",
+        "counter": "{current} of {total}"
+      }
+    },
+    "contractors": {
+      "title": "Contractors",
+      "contractorLabel": "Contractor"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "We couldn't load this project. Please try again.",
+      "retry": "Try Again"
+    },
+    "notFound": {
+      "title": "Project Not Found",
+      "description": "The project you're looking for doesn't exist or has been removed.",
+      "backToProjects": "Back to Projects"
+    },
+    "seo": {
+      "titleSuffix": "| SDAKW"
+    }
+  },
+  "aboutPage": {
+    "badge": "Corporate Profile",
+    "title": "Salem Dwaih Al Ajmi Company",
+    "subtitle": "General Trading (SDA) & Contracting",
+    "tagline": "Building Value. Sculpting Excellence.",
+    "experienceYears": "26+",
+    "experienceLabel": "Years of Proven Excellence (Est. 1999)",
+    "overview": {
+      "heading": "Company Overview",
+      "p1": "Founded in 1999 in Kuwait, Salem Dwaih Al Ajmi Company (SDA) is one of the leading enterprises in general contracting, supply and installation of marble, natural stone, and granite, as well as real estate development.",
+      "p2": "The company was established to be a pioneering commercial and investment flagship built on the core values of quality, innovation, and professionalism. We specialize in providing integrated solutions and strategic services that meet the growing market demands while keeping pace with global best practices.",
+      "p3": "Our business model relies on precise financial and administrative planning, alongside building sustainable partnerships with our clients and commercial partners, maintaining total commitment to the highest standards of transparency and operational excellence. Furthermore, we continuously strive to foster a dynamic work environment that attracts and empowers top talent to navigate rapid economic and technological shifts."
+    },
+    "visionMission": {
+      "visionTitle": "Our Vision",
+      "visionText": "To be the leading benchmark and the most trusted, credible first choice in our sector at both the local and regional levels; elevating our products and services to unprecedented levels of quality and innovation, while achieving sustainable investment growth that enhances our market value and effectively contributes to economic and social development.",
+      "missionTitle": "Our Mission",
+      "missionText": "Our unwavering commitment is to deliver genuine added value to our clients through the optimal investment in resources and human capital, applying the latest technologies and administrative systems to ensure execution precision and performance efficiency. We strive to build enduring relationships based on mutual trust, achieve the highest levels of satisfaction for all stakeholders, and uphold the utmost standards of governance, integrity, and corporate social responsibility."
+    },
+    "values": {
+      "badge": "Core Principles",
+      "heading": "Our Core Values",
+      "subtitle": "The foundational pillars guiding every project and partnership across Kuwait.",
+      "quality": {
+        "title": "Quality",
+        "description": "Uncompromising standards in materials, engineering execution, and long-term structural durability."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Deploying modern construction techniques, smart installation methods, and sustainable solutions."
+      },
+      "professionalism": {
+        "title": "Professionalism",
+        "description": "Rigorous engineering governance, ethical commercial practices, and precision timeline delivery."
+      },
+      "transparency": {
+        "title": "Transparency",
+        "description": "Open communication, honest financial administration, and clear accountability with partners."
+      },
+      "excellence": {
+        "title": "Operational Excellence",
+        "description": "Continuous process optimization, talent empowerment, and adherence to global best practices."
+      }
+    },
+    "certifications": {
+      "badge": "Accreditations",
+      "heading": "Global ISO Certifications",
+      "subtitle": "Certified compliance with international management, safety, and environmental benchmarks.",
+      "iso9001": {
+        "title": "ISO 9001:2015",
+        "name": "Quality Management System",
+        "description": "Certified quality control across general contracting, stone supply, and civil works."
+      },
+      "iso14001": {
+        "title": "ISO 14001:2015",
+        "name": "Environmental Management System",
+        "description": "Sustainable construction practices, waste reduction, and environmental stewardship."
+      },
+      "iso45001": {
+        "title": "ISO 45001:2018",
+        "name": "Occupational Health & Safety",
+        "description": "Rigorous on-site worker safety protocols, risk management, and zero-accident culture."
+      }
+    },
+    "cta": {
+      "heading": "Ready to Build Together?",
+      "subtitle": "Connect with our contracting and engineering specialists to discuss your upcoming project or tender.",
+      "button": "Contact Our Team"
+    }
+  },
+  "contactPage": {
+    "badge": "Get in Touch",
+    "title": "Contact Our Headquarters",
+    "subtitle": "We welcome your inquiries, tender opportunities, and strategic construction partnerships across Kuwait.",
+    "cards": {
+      "addressTitle": "Headquarters",
+      "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Block 5 - Parcel 24 - Hamad Tower - Floor 19",
+      "phoneTitle": "Official Phone",
+      "phoneValue": "+965 2200 0000",
+      "emailTitle": "Official Email",
+      "emailValue": "info@sdakw.com",
+      "hoursTitle": "Working Hours",
+      "hoursValue": "Saturday - Thursday: 8:00 AM - 4:00 PM"
+    },
+    "map": {
+      "heading": "Head Office Location",
+      "description": "Hamad Tower, Floor 19, Ahmed Al Jaber Street, Sharq, Kuwait City.",
+      "getDirections": "Get Directions on Google Maps"
+    },
+    "whatsapp": {
+      "heading": "Instant WhatsApp Consultation",
+      "description": "Chat directly with our client relations team for quick inquiries and project assessments.",
+      "button": "Message on WhatsApp"
+    },
+    "social": {
+      "heading": "Follow Our Channels",
+      "subtitle": "Stay updated on our latest project milestones, tenders, and corporate announcements."
+    }
+  },
+  "services": {
+    "badge": "Core Capabilities",
+    "title": "Comprehensive Engineering & Construction Services",
+    "subtitle": "Delivering integrated contracting solutions with high technical precision and operational excellence.",
+    "service1": {
+      "title": "General Contracting & Construction",
+      "description": "Full execution of black structure, finishing, commercial, and residential complexes with state-of-the-art engineering standards."
+    },
+    "service2": {
+      "title": "Marble & Stone Supply & Installation",
+      "description": "Cutting, shaping, and mechanical/traditional installation of premium marble, granite, and natural stone."
+    },
+    "service3": {
+      "title": "Comprehensive Finishing & Elevators",
+      "description": "Complete interior & exterior finishing solutions integrated with advanced elevator installations for major facilities."
+    }
+  },
+  "cta": {
+    "title": "Planning Your Next Major Construction Project?",
+    "subtitle": "Our engineering team is ready to consult, evaluate tenders, and deliver your project with precision.",
+    "button": "Start Your Consultation"
+  },
+  "contactPreview": {
+    "badge": "Headquarters",
+    "title": "We Welcome Your Partnerships & Inquiries",
+    "subtitle": "Located in the commercial heart of Kuwait City to serve clients and government entities across all sectors.",
+    "addressTitle": "Head Office",
+    "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Block 5 - Parcel 24 - Hamad Tower - Floor 19",
+    "addressTag": "Kuwait City",
+    "hoursTitle": "Official Working Hours",
+    "hoursValue": "Saturday - Thursday: 8:00 AM - 4:00 PM",
+    "hoursTag": "Sat - Thu",
+    "emailTitle": "Official Email",
+    "emailValue": "info@sdakw.com",
+    "emailTag": "Tenders & Inquiries",
+    "button": "Go to Contact Page"
+  },
+  "footer": {
+    "aboutCompany": "Leading Kuwaiti enterprise in general contracting, supply & installation of marble, natural stone, and private & public infrastructure development since 1999.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "addressTitle": "Headquarters",
+    "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Hamad Tower - Floor 19",
+    "phoneTitle": "Phone",
+    "phoneValue": "+965 2200 0000",
+    "emailTitle": "Email",
+    "emailValue": "info@sdakw.com",
+    "whatsappTitle": "WhatsApp",
+    "workingHoursTitle": "Working Hours",
+    "workingHoursValue": "Saturday - Thursday: 8:00 AM - 4:00 PM",
+    "socialTitle": "Follow Us",
+    "adminPortal": "Admin Portal",
+    "copyright": "© {year} Salem Duwaih Al Ajmi Company (SDA). All rights reserved."
+  }
+}

@@ -12,12 +12,15 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const auth = (await import(`../../translations/${locale}/auth.json`)).default;
   const dashboard = (await import(`../../translations/${locale}/dashboard.json`)).default;
   const projects = (await import(`../../translations/${locale}/projects.json`)).default;
+  const publicContent = (await import(`../../translations/${locale}/public.json`)).default;
 
   return {
     locale,
     messages: {
       ...common,
       ...auth,
+      ...publicContent,
+      public: publicContent,
       admin: {
         ...dashboard.admin,
         ...projects.admin,

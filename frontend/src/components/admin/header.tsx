@@ -1,12 +1,11 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { Menu, Globe } from 'lucide-react';
+import { Menu } from 'lucide-react';
 
-import { Link, usePathname } from '@/i18n/navigation';
-import { getAlternateLocale, type Locale } from '@/i18n/routing';
 import { Button } from '@/components/ui/button';
 import { LogoutButton } from '@/components/auth/logout-button';
+import { LanguageSwitcher } from '@/components/shared/language-switcher';
 
 interface AdminHeaderProps {
   onOpenMobileNav: () => void;
@@ -16,10 +15,8 @@ interface AdminHeaderProps {
 
 export function AdminHeader({ onOpenMobileNav, title, className = '' }: AdminHeaderProps) {
   const t = useTranslations('admin');
-  const locale = useLocale() as Locale;
-  const pathname = usePathname();
+  const locale = useLocale();
 
-  const alternateLocale = getAlternateLocale(locale);
   const displayTitle = title || t('header.title');
 
   return (
@@ -44,14 +41,7 @@ export function AdminHeader({ onOpenMobileNav, title, className = '' }: AdminHea
       {/* End: Controls (Locale switcher & Sign out) */}
       <div className="flex items-center gap-2 sm:gap-4">
         {/* Locale Switcher */}
-        <Link
-          href={pathname}
-          locale={alternateLocale}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
-          aria-label={t('header.switchLanguage')}>
-          <Globe className="h-3.5 w-3.5" />
-          <span>{t('header.switchLanguage')}</span>
-        </Link>
+        <LanguageSwitcher locale={locale} variant="admin" />
 
         {/* Header Sign out */}
         <LogoutButton variant="ghost" size="sm" className="hidden sm:flex hover:text-destructive" />
