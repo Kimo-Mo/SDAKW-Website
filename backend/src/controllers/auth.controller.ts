@@ -18,7 +18,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
     res.status(200).json({
       success: true,
-      data: { user },
+      data: { user, token },
     });
   } catch (err) {
     next(err);
@@ -78,6 +78,7 @@ export const updatePassword = async (
     res.status(200).json({
       success: true,
       message: 'Password changed successfully',
+      data: { token },
     });
   } catch (err) {
     next(err);

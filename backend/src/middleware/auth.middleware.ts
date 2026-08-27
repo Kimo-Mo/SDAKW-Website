@@ -21,9 +21,19 @@ interface AuthRequest extends Request {
  * The generic error message prevents leaking implementation details.
  */
 export const authenticate = (req: Request, _res: Response, next: NextFunction): void => {
-  const token: unknown = req.cookies[AUTH_COOKIE_NAME];
+  let token: string | undefined;
 
-  if (!token || typeof token !== 'string') {
+  // 1. Check HTTP-only cookie
+  if (req.cookies && typeof req.cookies[AUTH_COOKIE_NAME] === 'string') {
+    token = req.cookies[AUTH_COOKIE_NAME];
+  }
+
+  // 2. Fallback to Authorization: Bearer <token> (e.g. for iOS Safari ITP cross-site cookie restrictions)
+  if (!token && typeof req.headers.authorization === 'string' && req.headers.authorization.startsWith('Bearer ')) {
+    token = req.headers.authorization.slice(7).trim();
+  }
+
+  if (!token) {
     return next(new ApiError(401, 'Authentication required'));
   }
 
