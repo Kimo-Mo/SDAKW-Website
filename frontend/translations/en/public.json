@@ -5,6 +5,9 @@
     "acronym": "SDA",
     "tagline": "Building Value. Sculpting Excellence"
   },
+  "cursor": {
+    "explore": "Explore"
+  },
   "nav": {
     "home": "Home",
     "about": "About Us",
@@ -22,6 +25,7 @@
     "subtitle": "Over 26 years of excellence in general contracting, natural stone supply & installation, and infrastructure development in the State of Kuwait.",
     "exploreProjects": "Explore Our Projects",
     "contactUs": "Contact Our Team",
+    "secondaryImageAlt": "Salem Duwaih Al Ajmi landmark contracting project site in Kuwait",
     "metrics": {
       "experience": {
         "value": "+26",
@@ -46,10 +50,12 @@
     "title": "Leadership in General Contracting & Infrastructure in Kuwait",
     "paragraph1": "Founded in 1999 in Kuwait, Salem Duwaih Al Ajmi Company (SDA) is one of the leading enterprises in general contracting, supply and installation of marble, natural stone, granite, as well as real estate development.",
     "paragraph2": "A pioneering commercial and investment flagship built on the core values of quality, innovation, and professionalism. We provide integrated contracting solutions matching global best practices with strict commitment to transparency and operational excellence.",
+    "imageAlt": "Architectural engineering and natural stone craftsmanship by SDAKW",
     "learnMore": "Read More About Us",
     "iso9001Subtitle": "International Quality Management System",
     "iso14001Subtitle": "Environmental Management System",
-    "iso45001Subtitle": "Occupational Health & Safety System"
+    "iso45001Subtitle": "Occupational Health & Safety System",
+    "trustBadge": "26+ Years of Proven Execution in Kuwait"
   },
   "featuredProjects": {
     "badge": "Featured Works",
@@ -77,19 +83,18 @@
     "filters": {
       "typeLabel": "Project Classification",
       "statusLabel": "Execution Status",
+      "featuredLabel": "Featured Projects",
       "allTypes": "All Projects",
       "government": "Government Projects",
       "private": "Private Developments",
       "allStatuses": "All Statuses",
       "ongoing": "Ongoing Execution",
       "completed": "Completed Milestones",
+      "featuredOnly": "Featured Projects Only",
       "clearFilters": "Clear All Filters",
       "showingResults": "Showing {count} projects"
     },
     "card": {
-      "governmentEntityLabel": "Government Entity:",
-      "completedIn": "Completed {year}",
-      "ongoing": "In Progress",
       "viewDetails": "View Project Details"
     },
     "empty": {
@@ -118,10 +123,15 @@
     },
     "sections": {
       "description": "About This Project",
+      "overviewKicker": "Overview",
       "gallery": "Project Gallery",
-      "contractors": "Contractors"
+      "galleryKicker": "Gallery",
+      "contractors": "Contractors",
+      "contractorsKicker": "Contractors"
     },
     "metadata": {
+      "projectTypeLabel": "Type",
+      "statusLabel": "Status",
       "location": "Location",
       "completionDate": "Completed",
       "governmentEntity": "Government Entity",
@@ -225,6 +235,28 @@
         "description": "Rigorous on-site worker safety protocols, risk management, and zero-accident culture."
       }
     },
+    "operations": {
+      "badge": "Operational Scale",
+      "heading": "Specialized Contracting & Engineering Capabilities",
+      "subtitle": "Proven technical proficiency, specialized craftsmanship, and dedicated machinery delivering tier-1 excellence across Kuwait.",
+      "pillar1": {
+        "title": "Civil & Infrastructure Contracting",
+        "description": "Comprehensive execution of commercial, residential, and institutional complexes, from earthworks and reinforced concrete foundations to turnkey delivery.",
+        "tag": "Core Construction"
+      },
+      "pillar2": {
+        "title": "Natural Stone & Luxury Marble Craft",
+        "description": "Direct procurement, precision waterjet cutting, mechanical stone cladding, and artisanal marble installation crafted to architectural luxury standards.",
+        "tag": "Artisanal Craftsmanship"
+      },
+      "pillar3": {
+        "title": "Heavy Fleet & Technical Equipment Ready",
+        "description": "Fully integrated modern fleet of heavy excavators, mobile cranes, and specialized cutting machinery ensuring on-time project handover.",
+        "tag": "Fleet Readiness"
+      }
+    },
+    "downloadProfile": "Download Company Profile (PDF)",
+    "verifyCert": "Verified Compliance",
     "cta": {
       "heading": "Ready to Build Together?",
       "subtitle": "Connect with our contracting and engineering specialists to discuss your upcoming project or tender.",
@@ -277,25 +309,15 @@
       "description": "Complete interior & exterior finishing solutions integrated with advanced elevator installations for major facilities."
     }
   },
+  "partners": {
+    "badge": "Partnerships & Trust",
+    "title": "Trusted by Government & Private Sector Leaders",
+    "subtitle": "Proud to deliver critical national infrastructure and landmark developments in collaboration with esteemed organizations across Kuwait."
+  },
   "cta": {
     "title": "Planning Your Next Major Construction Project?",
     "subtitle": "Our engineering team is ready to consult, evaluate tenders, and deliver your project with precision.",
     "button": "Start Your Consultation"
-  },
-  "contactPreview": {
-    "badge": "Headquarters",
-    "title": "We Welcome Your Partnerships & Inquiries",
-    "subtitle": "Located in the commercial heart of Kuwait City to serve clients and government entities across all sectors.",
-    "addressTitle": "Head Office",
-    "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Block 5 - Parcel 24 - Hamad Tower - Floor 19",
-    "addressTag": "Kuwait City",
-    "hoursTitle": "Official Working Hours",
-    "hoursValue": "Saturday - Thursday: 8:00 AM - 4:00 PM",
-    "hoursTag": "Sat - Thu",
-    "emailTitle": "Official Email",
-    "emailValue": "info@sdakw.com",
-    "emailTag": "Tenders & Inquiries",
-    "button": "Go to Contact Page"
   },
   "footer": {
     "aboutCompany": "Leading Kuwaiti enterprise in general contracting, supply & installation of marble, natural stone, and private & public infrastructure development since 1999.",

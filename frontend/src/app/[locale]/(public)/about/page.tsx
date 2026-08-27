@@ -3,9 +3,11 @@ import { getTranslations } from 'next-intl/server';
 import { AboutHero } from '@/components/public/about/about-hero';
 import { CompanyOverview } from '@/components/public/about/company-overview';
 import { VisionMissionGrid } from '@/components/public/about/vision-mission-grid';
+import { OperationsShowcase } from '@/components/public/about/operations-showcase';
 import { CoreValuesGrid } from '@/components/public/about/core-values-grid';
 import { CertificationsShowcase } from '@/components/public/about/certifications-showcase';
 import { AboutCta } from '@/components/public/about/about-cta';
+import { Separator } from '@/components/ui/separator';
 
 interface AboutPageProps {
   params: Promise<{ locale: string }>;
@@ -49,24 +51,35 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
 
   return (
-    <article className="w-full py-8 sm:py-12 lg:py-16">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
-        {/* 1. Hero Cover / Brand Header */}
+    <article className="w-full">
+      <div className="main_section space-y-10 sm:space-y-14 lg:space-y-16">
+        {/* 1. Hero Cover / Asymmetric Editorial Masthead */}
         <AboutHero locale={locale} />
 
-        {/* 2. Full Narrative Company Overview */}
+        <Separator className="bg-border/60" />
+
+        {/* 2. Editorial Narrative Company Overview with Offset Image */}
         <CompanyOverview locale={locale} />
 
-        {/* 3. Side-by-Side Vision & Mission Cards */}
+        {/* 3. Differentiated Vision & Mission Composition */}
         <VisionMissionGrid locale={locale} />
 
-        {/* 4. 5-Pillar Core Corporate Values */}
+        <Separator className="bg-border/60" />
+
+        {/* 4. Specialized Contracting & Operational Showcase with Supporting Image */}
+        <OperationsShowcase locale={locale} />
+
+        <Separator className="bg-border/60" />
+
+        {/* 5. 5-Pillar Core Corporate Values Editorial Matrix */}
         <CoreValuesGrid locale={locale} />
 
-        {/* 5. Triple ISO Certifications Showcase */}
+        {/* 6. Triple ISO Certifications Monolithic Continuous Matrix */}
         <CertificationsShowcase locale={locale} />
 
-        {/* 6. Closing Call-to-Action to Contact */}
+        <Separator className="bg-border/60" />
+
+        {/* 7. Closing Monolithic Call-to-Action */}
         <AboutCta locale={locale} />
       </div>
     </article>

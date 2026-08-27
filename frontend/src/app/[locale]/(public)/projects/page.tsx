@@ -54,10 +54,12 @@ function ProjectsLoadingFallback() {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full space-y-8">
-        <Skeleton className="h-12 w-80 rounded-2xl" />
+        <Skeleton className="h-12 w-80 " />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`fallback-skeleton-${i}`} className="rounded-2xl border border-border/60 overflow-hidden bg-card">
+            <div
+              key={`fallback-skeleton-${i}`}
+              className="border border-border/60 overflow-hidden bg-card">
               <Skeleton className="aspect-video w-full rounded-none" />
               <div className="p-6 space-y-3">
                 <Skeleton className="h-4 w-24 rounded" />

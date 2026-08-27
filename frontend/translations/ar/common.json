@@ -18,7 +18,15 @@
     "close": "إغلاق",
     "closeToast": "إغلاق الإشعار",
     "showPassword": "إظهار كلمة المرور",
-    "hidePassword": "إخفاء كلمة المرور"
+    "hidePassword": "إخفاء كلمة المرور",
+    "theme": {
+      "toggle": "تبديل المظهر",
+      "switchToDark": "التبديل إلى الوضع الداكن",
+      "switchToLight": "التبديل إلى الوضع الفاتح",
+      "theme": "المظهر",
+      "light": "فاتح",
+      "dark": "داكن"
+    }
   },
   "foundation": {
     "badge": "نموذج الأساس",

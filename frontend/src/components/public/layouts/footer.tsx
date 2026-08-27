@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { MapPin, Phone, Mail, MessageSquare, Clock, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
+import Image from 'next/image';
 
 export function PublicFooter() {
   const t = useTranslations('public');
@@ -11,16 +12,23 @@ export function PublicFooter() {
   return (
     <footer className="w-full bg-card border-t border-border mt-auto">
       {/* Main 4-Column Footer Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+      <div className="main_section pb-12!">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Column 1: Company Overview */}
           <div className="space-y-4 text-start">
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-xs group-hover:scale-105 transition-transform">
-                SD
-              </span>
+              <div className="relative w-25 h-full">
+                <Image
+                  src="/images/sdakw_logo.png"
+                  alt="logo"
+                  width={100}
+                  height={100}
+                  className="object-contain w-auto h-auto"
+                  priority
+                />
+              </div>
               <span className="font-heading font-bold tracking-tight text-lg text-foreground group-hover:text-primary transition-colors">
                 {t('brand.shortName')}
               </span>
@@ -157,7 +165,7 @@ export function PublicFooter() {
         {/* Bottom Bar: Copyright Notice */}
         <div className="border-t border-border pt-8 mt-10 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-4">
           <p>{t('footer.copyright', { year: currentYear })}</p>
-          <p className="text-[11px] text-muted-foreground/70">{t('brand.tagline')}</p>
+          <p className="text-xs text-muted-foreground/70">{t('brand.tagline')}</p>
         </div>
       </div>
     </footer>

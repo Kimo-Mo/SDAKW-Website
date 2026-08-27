@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { useTranslations } from 'next-intl';
 import {
   Pagination,
@@ -15,7 +14,8 @@ import type { ProjectsPaginationProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
 /**
- * Public projects pagination integrated directly with shared shadcn/ui Pagination primitives.
+ * Public projects pagination integrated directly with shared shadcn/ui Pagination primitives
+ * and styled with sharp monolithic borders.
  */
 export function ProjectsPagination({
   currentPage,
@@ -39,10 +39,7 @@ export function ProjectsPagination({
       }
     } else {
       pages.push(1);
-
-      if (currentPage > 3) {
-        pages.push('ellipsis');
-      }
+      if (currentPage > 3) pages.push('ellipsis');
 
       const start = Math.max(2, currentPage - 1);
       const end = Math.min(totalPages - 1, currentPage + 1);
@@ -51,10 +48,7 @@ export function ProjectsPagination({
         pages.push(i);
       }
 
-      if (currentPage < totalPages - 2) {
-        pages.push('ellipsis');
-      }
-
+      if (currentPage < totalPages - 2) pages.push('ellipsis');
       pages.push(totalPages);
     }
 
@@ -64,9 +58,9 @@ export function ProjectsPagination({
   const pages = getPageNumbers();
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border/50">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-border">
       {/* Current page indicator info */}
-      <p className="text-xs text-muted-foreground order-2 sm:order-1">
+      <p className="text-xs font-mono text-muted-foreground order-2 sm:order-1">
         {t('pageOf', { current: currentPage, total: totalPages })}
       </p>
 
@@ -86,7 +80,7 @@ export function ProjectsPagination({
               }}
               aria-disabled={currentPage <= 1}
               className={cn(
-                'cursor-pointer rounded-xl',
+                'cursor-pointer rounded-none font-mono text-xs uppercase tracking-wider',
                 currentPage <= 1 && 'pointer-events-none opacity-50'
               )}
             />
@@ -113,8 +107,8 @@ export function ProjectsPagination({
                     onPageChange(page);
                   }}
                   className={cn(
-                    'cursor-pointer h-9 w-9 rounded-xl text-xs font-semibold',
-                    isActive && 'bg-primary text-primary-foreground hover:bg-primary/90'
+                    'cursor-pointer h-9 w-9 rounded-none font-mono text-xs font-semibold',
+                    isActive && 'bg-foreground text-background hover:bg-foreground/90'
                   )}
                 >
                   {page}
@@ -136,7 +130,7 @@ export function ProjectsPagination({
               }}
               aria-disabled={currentPage >= totalPages}
               className={cn(
-                'cursor-pointer rounded-xl',
+                'cursor-pointer rounded-none font-mono text-xs uppercase tracking-wider',
                 currentPage >= totalPages && 'pointer-events-none opacity-50'
               )}
             />

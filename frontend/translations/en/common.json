@@ -18,7 +18,15 @@
     "close": "Close",
     "closeToast": "Close notification",
     "showPassword": "Show password",
-    "hidePassword": "Hide password"
+    "hidePassword": "Hide password",
+    "theme": {
+      "toggle": "Toggle theme",
+      "switchToDark": "Switch to dark mode",
+      "switchToLight": "Switch to light mode",
+      "theme": "Theme",
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "foundation": {
     "badge": "Foundation Sandbox",

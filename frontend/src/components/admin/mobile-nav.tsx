@@ -1,16 +1,14 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { LayoutDashboard, FolderKanban, FolderPlus, Settings, Globe } from 'lucide-react';
 
 import { Link } from '@/i18n/navigation';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LogoutButton } from '@/components/auth/logout-button';
+import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { ThemeToggle } from '@/components/shared/theme-toggle';
+import Image from 'next/image';
 
 interface AdminMobileNavProps {
   isOpen: boolean;
@@ -20,6 +18,7 @@ interface AdminMobileNavProps {
 
 export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavProps) {
   const t = useTranslations('admin');
+  const locale = useLocale();
 
   const navItems = [
     {
@@ -73,12 +72,17 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
         {/* Drawer Header */}
         <SheetHeader className="flex flex-row h-16 items-center justify-between px-5 space-y-0 border-b border-border">
           <div className="flex items-center gap-2">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-              SD
-            </span>
-            <SheetTitle className="text-base tracking-tight font-heading">
-              {t('brand')}
-            </SheetTitle>
+            <div className="relative w-25 h-full">
+              <Image
+                src="/images/sdakw_logo.png"
+                alt="logo"
+                width={100}
+                height={100}
+                className="object-contain w-auto h-auto"
+                priority
+              />
+            </div>
+            <SheetTitle className="text-base tracking-tight font-heading">{t('brand')}</SheetTitle>
           </div>
         </SheetHeader>
 
@@ -119,8 +123,10 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
           </div>
         </nav>
 
-        {/* Drawer Footer (Sign out) */}
-        <div className="border-t border-border p-4 bg-muted/20 mt-auto">
+        {/* Drawer Footer (Theme, Language & Sign out) */}
+        <div className="border-t border-border p-4 bg-muted/20 mt-auto space-y-3">
+          <ThemeToggle variant="mobile" />
+          <LanguageSwitcher locale={locale} variant="mobile" onSwitch={onClose} />
           <LogoutButton className="w-full justify-start" />
         </div>
       </SheetContent>

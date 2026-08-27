@@ -1,13 +1,15 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Menu } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { NavLink } from './nav-link';
-import { LanguageSwitcher } from './language-switcher';
+import { ThemeToggle } from '@/components/shared/theme-toggle';
 import type { PublicHeaderProps, PublicNavigationItem } from '@/types/public';
+import Image from 'next/image';
+import { LanguageSwitcher } from '@/components/shared/language-switcher';
 
 const NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'home', labelKey: 'home', href: '/', exactMatch: true },
@@ -34,16 +36,23 @@ export function PublicHeader({ locale, onOpenMobileNav }: PublicHeaderProps) {
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         isScrolled
           ? 'bg-background/85 backdrop-blur-md border-b border-border/60 shadow-xs'
-          : 'bg-background/40 backdrop-blur-xs border-b border-border/20'
+          : 'bg-background/40 backdrop-blur-xs border-b border-transparent'
       }`}>
-      <div className="max-w-7xl mx-auto flex h-18 items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-18 items-center justify-between">
         {/* Brand Logo & Name */}
         <Link
           href="/"
-          className="flex items-center gap-3 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground font-bold text-sm shadow-xs group-hover:scale-105 transition-transform">
-            SD
-          </span>
+          className="flex items-center gap-2 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
+          <div className="relative w-25 h-full">
+            <Image
+              src="/images/sdakw_logo.png"
+              alt="logo"
+              width={100}
+              height={100}
+              className="object-contain w-auto h-auto"
+              priority
+            />
+          </div>
           <div className="flex flex-col text-start">
             <span className="font-heading font-bold tracking-tight text-base sm:text-lg text-foreground group-hover:text-primary transition-colors">
               {t('brand.shortName')}
@@ -61,8 +70,9 @@ export function PublicHeader({ locale, onOpenMobileNav }: PublicHeaderProps) {
           ))}
         </nav>
 
-        {/* Desktop Actions (Language Switcher & CTA) */}
+        {/* Desktop Actions (Theme Toggle, Language Switcher & CTA) */}
         <div className="hidden lg:flex items-center gap-3">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
           <Link href="/contact">
             <Button
@@ -75,13 +85,12 @@ export function PublicHeader({ locale, onOpenMobileNav }: PublicHeaderProps) {
 
         {/* Mobile Actions (Language Switcher + Hamburger) */}
         <div className="flex items-center gap-2 lg:hidden">
-          <LanguageSwitcher locale={locale} />
           <Button
             variant="ghost"
             size="icon"
             onClick={onOpenMobileNav}
             aria-label={t('nav.menu')}
-            className="h-9 w-9 text-foreground hover:bg-accent">
+            className="h-11 w-11 min-h-11 min-w-11 rounded-xl text-foreground hover:bg-accent flex items-center justify-center">
             <Menu className="h-5 w-5" />
           </Button>
         </div>

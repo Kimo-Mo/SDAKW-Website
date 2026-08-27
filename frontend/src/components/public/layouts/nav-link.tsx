@@ -19,7 +19,7 @@ export function NavLink({ item, onClick, className = '' }: NavLinkProps) {
       aria-current={isActive ? 'page' : undefined}
       className={`relative inline-flex items-center justify-center text-sm transition-all duration-200 rounded-lg px-3.5 py-2 ${
         isActive
-          ? 'text-primary font-semibold bg-primary/10 dark:bg-primary/20 shadow-xs'
+          ? 'text-primary font-semibold'
           : 'text-muted-foreground font-medium hover:text-foreground hover:bg-accent/60'
       } ${className}`}>
       <span>{t(item.labelKey)}</span>

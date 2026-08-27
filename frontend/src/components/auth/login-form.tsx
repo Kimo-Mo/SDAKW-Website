@@ -66,15 +66,7 @@ export function LoginForm({ returnTo }: LoginFormProps) {
   const passwordError = form.formState.errors.password?.message;
 
   return (
-    <form onSubmit={onSubmit} noValidate className="flex w-full flex-col gap-4">
-      {serverError ? (
-        <p
-          role="alert"
-          className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
-          {serverError}
-        </p>
-      ) : null}
-
+    <form onSubmit={onSubmit} noValidate className="flex w-full flex-col gap-5">
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="login-email" className="text-sm font-medium">
           {t('login.emailLabel')}
@@ -112,7 +104,15 @@ export function LoginForm({ returnTo }: LoginFormProps) {
         ) : null}
       </div>
 
-      <Button type="submit" disabled={mutation.isPending}>
+      {serverError ? (
+        <div
+          role="alert"
+          className="border border-destructive/30 bg-destructive/10 p-3 text-sm text-destructive">
+          {serverError}
+        </div>
+      ) : null}
+
+      <Button type="submit" disabled={mutation.isPending} className="w-full">
         {mutation.isPending ? (
           <>
             <Spinner />

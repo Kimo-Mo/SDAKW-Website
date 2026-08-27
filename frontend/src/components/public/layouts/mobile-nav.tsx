@@ -4,14 +4,11 @@ import { useTranslations } from 'next-intl';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { ThemeToggle } from '@/components/shared/theme-toggle';
 import type { PublicMobileNavProps, PublicNavigationItem } from '@/types/public';
+import Image from 'next/image';
 
 const NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'home', labelKey: 'home', href: '/', exactMatch: true },
@@ -20,12 +17,7 @@ const NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'contact', labelKey: 'contact', href: '/contact', exactMatch: false },
 ];
 
-export function PublicMobileNav({
-  isOpen,
-  onClose,
-  currentPath,
-  locale,
-}: PublicMobileNavProps) {
+export function PublicMobileNav({ isOpen, onClose, currentPath, locale }: PublicMobileNavProps) {
   const t = useTranslations('public');
   const isRtl = locale === 'ar';
   const ArrowIcon = isRtl ? ArrowLeft : ArrowRight;
@@ -50,13 +42,17 @@ export function PublicMobileNav({
         aria-label={t('nav.menu')}>
         {/* Drawer Header */}
         <SheetHeader className="flex flex-row h-18 items-center justify-between px-5 space-y-0 border-b border-border">
-          <Link
-            href="/"
-            onClick={onClose}
-            className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm">
-              SD
-            </span>
+          <Link href="/" onClick={onClose} className="flex items-center gap-2.5">
+            <div className="relative w-25 h-full">
+              <Image
+                src="/images/sdakw_logo.png"
+                alt="logo"
+                width={100}
+                height={100}
+                className="object-contain w-auto h-auto"
+                priority
+              />
+            </div>
             <SheetTitle className="font-heading font-bold tracking-tight text-base text-foreground">
               {t('brand.shortName')}
             </SheetTitle>
@@ -91,6 +87,7 @@ export function PublicMobileNav({
 
         {/* Drawer Actions & Footer */}
         <div className="border-t border-border p-5 space-y-3 bg-muted/20 mt-auto">
+          <ThemeToggle variant="mobile" />
           <LanguageSwitcher locale={locale} variant="mobile" onSwitch={onClose} />
 
           <Link href="/contact" onClick={onClose} className="block w-full">

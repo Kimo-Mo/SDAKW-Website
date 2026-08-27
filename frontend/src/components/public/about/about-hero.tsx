@@ -1,66 +1,140 @@
-import React from 'react';
+'use client';
+
 import { useTranslations } from 'next-intl';
-import { Building2, Sparkles } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Building2, FileDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import type { AboutHeroProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
 /**
  * About Us Page Hero Section
- * Displays brand badge, company title, corporate subtitle, executive tagline,
- * and experience highlights callout.
+ * Implements an asymmetric editorial masthead with monolithic typography,
+ * high-contrast mono 26+ years metric block, and sharp architectural framing.
  */
 export function AboutHero({ className }: AboutHeroProps) {
   const t = useTranslations('public');
+  const shouldReduceMotion = useReducedMotion();
+
+  const easeArchitectural = [0.16, 1, 0.3, 1] as const;
+
+  const containerVariants = {
+    hidden: { opacity: shouldReduceMotion ? 1 : 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        delayChildren: shouldReduceMotion ? 0 : 0.04,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
+      y: shouldReduceMotion ? 0 : 16,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: shouldReduceMotion ? 0 : 0.5,
+        ease: easeArchitectural,
+      },
+    },
+  };
 
   return (
-    <section
+    <motion.section
       aria-labelledby="about-hero-heading"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
       className={cn(
-        'relative overflow-hidden rounded-3xl border border-border/80 bg-linear-to-br from-card via-card to-primary/5 p-8 sm:p-12 lg:p-16 shadow-xs text-center space-y-6',
+        'relative border border-border bg-card p-6 sm:p-10 lg:p-12 shadow-xs text-start',
         className
       )}>
-      {/* Background ambient lighting */}
-      <div
-        className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
-        aria-hidden="true"
-      />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+        {/* Left / Editorial Narrative Column */}
+        <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-between space-y-6">
+          <div className="space-y-4">
+            {/* Architectural Category Tag */}
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wider rtl:tracking-normal rtl:font-sans text-muted-foreground uppercase">
+                <Building2 className="h-3.5 w-3.5 text-foreground shrink-0" aria-hidden="true" />
+                <span>{t('aboutPage.badge')}</span>
+                <span className="text-border" aria-hidden="true">|</span>
+              </div>
+            </motion.div>
 
-      <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-        {/* Corporate Profile Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary shadow-xs">
-          <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
-          <span>{t('aboutPage.badge')}</span>
+            {/* Main Corporate Headline */}
+            <motion.div variants={itemVariants} className="space-y-2">
+              <h1
+                id="about-hero-heading"
+                className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground leading-[1.15]">
+                {t('aboutPage.title')}
+              </h1>
+              <p className="text-base sm:text-lg lg:text-xl font-medium text-muted-foreground">
+                {t('aboutPage.subtitle')}
+              </p>
+            </motion.div>
+
+            {/* Corporate Slogan Tagline Callout */}
+            <motion.div
+              variants={itemVariants}
+              className="border-s-2 border-foreground ps-4 py-1">
+              <p className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight text-foreground/90">
+                {t('aboutPage.tagline')}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Download Action */}
+          <motion.div variants={itemVariants} className="pt-2">
+            <a
+              href="/documents/sda-corporate-profile.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+              className="inline-block">
+              <Button
+                variant="outline"
+                size="lg"
+                className="rounded-none px-6 h-11 gap-2.5 text-xs sm:text-sm font-mono rtl:font-sans uppercase tracking-wider rtl:tracking-normal font-semibold border-border hover:bg-muted active:scale-[0.98] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transform-none cursor-pointer">
+                <FileDown className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>{t('aboutPage.downloadProfile')}</span>
+              </Button>
+            </a>
+          </motion.div>
         </div>
 
-        {/* Main Title & Subtitle */}
-        <div className="space-y-2">
-          <h1
-            id="about-hero-heading"
-            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight">
-            {t('aboutPage.title')}
-          </h1>
-          <p className="text-base sm:text-lg font-medium text-muted-foreground">
-            {t('aboutPage.subtitle')}
-          </p>
-        </div>
+        {/* Right / Monolithic Metric Column */}
+        <motion.div
+          variants={itemVariants}
+          className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between border border-border bg-muted/30 p-6 sm:p-8 space-y-6">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between text-xs font-mono text-muted-foreground uppercase tracking-widest border-b border-border pb-3">
+              <span>METRIC_01</span>
+              <span>EST. 1999</span>
+            </div>
+            
+            {/* Bold Heroic Stat */}
+            <div className="font-mono text-6xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-foreground leading-none">
+              {t('aboutPage.experienceYears')}
+            </div>
 
-        {/* Corporate Slogan Tagline */}
-        <p className="font-heading text-xl sm:text-2xl font-semibold tracking-tight text-primary">
-          {t('aboutPage.tagline')}
-        </p>
+            <p className="text-xs sm:text-sm font-sans uppercase tracking-wider rtl:tracking-normal text-muted-foreground leading-relaxed">
+              {t('aboutPage.experienceLabel')}
+            </p>
+          </div>
 
-        {/* Experience Metric Pill */}
-        <div className="pt-2 flex justify-center">
-          <Badge
-            variant="outline"
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-foreground bg-background/80 backdrop-blur-xs border-border/80 shadow-xs rounded-full">
-            <Sparkles className="h-4 w-4 text-amber-500 shrink-0" aria-hidden="true" />
-            <span className="text-primary font-bold">{t('aboutPage.experienceYears')}</span>
-            <span>{t('aboutPage.experienceLabel')}</span>
-          </Badge>
-        </div>
+          {/* Hairline Technical Corner Accents */}
+          <div className="pt-4 border-t border-border flex items-center justify-between text-[11px] font-mono text-muted-foreground">
+            <span>KUWAIT</span>
+            <span>TIER-1 GENERAL CONTRACTING</span>
+          </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }

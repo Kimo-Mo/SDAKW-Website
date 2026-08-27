@@ -40,7 +40,7 @@ export function EmptyState({
         'flex w-full flex-col items-center justify-center gap-4 rounded-3xl border border-dashed border-border/80 bg-card/60 p-8 sm:p-12 text-center shadow-xs max-w-lg mx-auto',
         className
       )}>
-      <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-muted text-muted-foreground border border-border/60">
+      <div className="flex size-14 shrink-0 items-center justify-center bg-muted text-muted-foreground border border-border/60">
         <Icon aria-hidden="true" className="size-7" />
       </div>
 

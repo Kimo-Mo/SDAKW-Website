@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
@@ -10,7 +10,7 @@ import type { GalleryLightboxProps } from '@/types/public';
 /**
  * Full-screen overlay lightbox for browsing project gallery images.
  * Supports animated transitions, keyboard navigation (Escape/Arrows),
- * touch swipe, and RTL-aware directional controls.
+ * touch swipe, and RTL-aware directional controls with sharp monolithic styling.
  */
 export function GalleryLightbox({
   images,
@@ -20,12 +20,15 @@ export function GalleryLightbox({
   locale,
 }: GalleryLightboxProps) {
   const t = useTranslations('public');
+  const [prevInitialIndex, setPrevInitialIndex] = useState(initialIndex);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const isRtl = locale === 'ar';
 
-  useEffect(() => {
+  // Adjust state during render when initialIndex prop changes
+  if (initialIndex !== prevInitialIndex) {
+    setPrevInitialIndex(initialIndex);
     setCurrentIndex(initialIndex);
-  }, [initialIndex]);
+  }
 
   const total = images.length;
 
@@ -87,16 +90,16 @@ export function GalleryLightbox({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-3 sm:p-6 md:p-10 select-none"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-3 sm:p-6 md:p-10 select-none"
         onClick={onClose}
       >
         {/* Top Control Bar */}
         <div
-          className="absolute inset-x-0 top-0 z-20 flex items-center justify-between p-4 sm:p-6 text-white bg-linear-to-b from-black/60 to-transparent"
+          className="absolute inset-x-0 top-0 z-20 flex items-center justify-between p-4 sm:p-6 text-white bg-linear-to-b from-black/80 to-transparent"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Counter */}
-          <div className="text-sm font-medium tracking-wide text-white/90 bg-white/10 px-3 py-1 rounded-full backdrop-blur-xs">
+          <div className="text-xs font-mono tracking-widest text-white/90 bg-white/10 px-3 py-1 border border-white/20 backdrop-blur-xs">
             {t('projectDetail.gallery.lightbox.counter', {
               current: currentIndex + 1,
               total,
@@ -109,7 +112,7 @@ export function GalleryLightbox({
             size="icon"
             onClick={onClose}
             aria-label={t('projectDetail.gallery.lightbox.close')}
-            className="h-10 w-10 rounded-full bg-white/10 text-white hover:bg-white/20 hover:text-white transition-colors"
+            className="h-10 w-10 rounded-none bg-white/10 text-white hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
           >
             <X className="h-5 w-5" aria-hidden="true" />
           </Button>
@@ -125,7 +128,7 @@ export function GalleryLightbox({
               handlePrevious();
             }}
             aria-label={t('projectDetail.gallery.lightbox.previous')}
-            className="absolute left-2 sm:left-6 z-20 h-12 w-12 rounded-full bg-white/10 text-white hover:bg-white/25 hover:text-white transition-all shadow-lg backdrop-blur-xs focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute left-2 sm:left-6 z-20 h-11 w-11 rounded-none border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white transition-all shadow-lg backdrop-blur-xs focus-visible:ring-1 focus-visible:ring-white cursor-pointer"
           >
             {isRtl ? (
               <ChevronRight className="h-6 w-6" aria-hidden="true" />
@@ -167,7 +170,7 @@ export function GalleryLightbox({
                   else handleNext();
                 }
               }}
-              className="max-h-[80vh] max-w-full rounded-lg object-contain shadow-2xl cursor-grab active:cursor-grabbing"
+              className="max-h-[80vh] max-w-full rounded-none border border-white/10 object-contain shadow-2xl cursor-grab active:cursor-grabbing"
             />
           </AnimatePresence>
         </div>
@@ -182,7 +185,7 @@ export function GalleryLightbox({
               handleNext();
             }}
             aria-label={t('projectDetail.gallery.lightbox.next')}
-            className="absolute right-2 sm:right-6 z-20 h-12 w-12 rounded-full bg-white/10 text-white hover:bg-white/25 hover:text-white transition-all shadow-lg backdrop-blur-xs focus-visible:ring-2 focus-visible:ring-white"
+            className="absolute right-2 sm:right-6 z-20 h-11 w-11 rounded-none border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white transition-all shadow-lg backdrop-blur-xs focus-visible:ring-1 focus-visible:ring-white cursor-pointer"
           >
             {isRtl ? (
               <ChevronLeft className="h-6 w-6" aria-hidden="true" />

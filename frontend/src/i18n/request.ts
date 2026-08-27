@@ -1,18 +1,30 @@
+import fs from 'fs';
+import path from 'path';
 import { hasLocale } from 'next-intl';
 import { getRequestConfig } from 'next-intl/server';
 
 import { routing } from './routing';
+
+function readTranslationJson(locale: string, filename: string) {
+  try {
+    const filePath = path.join(process.cwd(), 'translations', locale, filename);
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(fileContent);
+  } catch {
+    return {};
+  }
+}
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
 
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-  const common = (await import(`../../translations/${locale}/common.json`)).default;
-  const auth = (await import(`../../translations/${locale}/auth.json`)).default;
-  const dashboard = (await import(`../../translations/${locale}/dashboard.json`)).default;
-  const projects = (await import(`../../translations/${locale}/projects.json`)).default;
-  const publicContent = (await import(`../../translations/${locale}/public.json`)).default;
+  const common = readTranslationJson(locale, 'common.json');
+  const auth = readTranslationJson(locale, 'auth.json');
+  const dashboard = readTranslationJson(locale, 'dashboard.json');
+  const projects = readTranslationJson(locale, 'projects.json');
+  const publicContent = readTranslationJson(locale, 'public.json');
 
   return {
     locale,

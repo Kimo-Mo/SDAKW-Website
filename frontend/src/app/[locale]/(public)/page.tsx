@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import { HeroSection } from '@/components/public/hero-section';
-import { IntroSection } from '@/components/public/intro-section';
-import { FeaturedProjectsShowcase } from '@/components/public/featured-projects-showcase';
-import { ServicesSection } from '@/components/public/services-section';
-import { CtaSection } from '@/components/public/cta-section';
-import { ContactPreviewSection } from '@/components/public/contact-preview-section';
+import { HeroSection } from '@/components/public/home/hero-section';
+import { HeroSecondaryImage } from '@/components/public/home/hero-secondary-image';
+import { IntroSection } from '@/components/public/home/intro-section';
+import { FeaturedProjectsShowcase } from '@/components/public/home/featured-projects-showcase';
+import { ServicesSection } from '@/components/public/home/services-section';
+import { CtaSection } from '@/components/public/home/cta-section';
+import { PartnersSection } from '@/components/public/home/partners-section';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -50,23 +51,26 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <div className="w-full flex flex-col flex-1">
-      {/* 1. Hero Section */}
+      {/* 1. Flagship Hero Section */}
       <HeroSection />
 
-      {/* 2. Company Introduction Section */}
+      {/* 2. Secondary Hero Image with Scroll Parallax/Scale */}
+      <HeroSecondaryImage />
+
+      {/* 3. Company Introduction & Craftsmanship Section */}
       <IntroSection />
 
-      {/* 3. Featured Projects Showcase */}
+      {/* 4. Featured Projects Showcase with Staggered Entrance */}
       <FeaturedProjectsShowcase locale={locale} />
 
-      {/* 4. Services Overview Section */}
+      {/* 5. Services Overview Section with Staggered Entrance */}
       <ServicesSection />
 
-      {/* 5. Consultation Call-to-Action */}
+      {/* 6. Consultation Call-to-Action */}
       <CtaSection />
 
-      {/* 6. Contact Preview Section */}
-      <ContactPreviewSection />
+      {/* 7. Auto-scrolling Strategic Partners & Clients Carousel */}
+      <PartnersSection />
     </div>
   );
 }

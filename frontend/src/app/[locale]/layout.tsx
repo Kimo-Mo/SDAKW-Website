@@ -1,24 +1,26 @@
 import { hasLocale } from 'next-intl';
 import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server';
-import { Inter, Noto_Sans_Arabic } from 'next/font/google';
+import { IBM_Plex_Sans_Arabic, IBM_Plex_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 
 import { Providers } from './providers';
 import { getLocaleDirection, routing } from '@/i18n/routing';
 import '@/styles/globals.css';
 
-// Inter covers Latin; Noto Sans Arabic covers Arabic glyphs (Inter itself
-// has NO Arabic support). Both variable fonts are applied to <html> always,
-// and globals.css picks the active one from the `lang` attribute —
-// so headings, body copy and components follow the active locale.
-const inter = Inter({
-  variable: '--font-inter',
-  subsets: ['latin'],
+// IBM Plex Sans Arabic covers both Arabic and Latin glyphs with harmonized modernist architectural geometry.
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  variable: '--font-sans',
+  subsets: ['arabic', 'latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
 });
 
-const notoSansArabic = Noto_Sans_Arabic({
-  variable: '--font-arabic',
-  subsets: ['arabic'],
+// IBM Plex Mono covers utility labels, dates, project codes, and metadata captions.
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: '--font-mono',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
 });
 
 export function generateStaticParams() {
@@ -53,9 +55,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
 
   return (
     <html
+      data-scroll-behavior="smooth"
       lang={locale}
+      suppressHydrationWarning
       dir={getLocaleDirection(locale)}
-      className={`${inter.variable} ${notoSansArabic.variable} h-full antialiased`}>
+      className={`${ibmPlexSansArabic.variable} ${ibmPlexMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Providers messages={messages} locale={locale}>
           {children}

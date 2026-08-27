@@ -48,8 +48,8 @@ export default async function ContactPage({ params }: ContactPageProps) {
   const { locale } = await params;
 
   return (
-    <article className="w-full py-8 sm:py-12 lg:py-16">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+    <article className="w-full">
+      <div className="main_section space-y-12 sm:space-y-16">
         {/* 1. Header with Badge & Title */}
         <ContactHeader locale={locale} />
 

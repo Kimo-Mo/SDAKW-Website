@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
@@ -21,7 +21,7 @@ const PAGE_SIZE = 9;
 /**
  * Public Projects Listing View Orchestrator:
  * - Server data dehydration & TanStack Query cache synchronization
- * - URL search params deep-linking & browser history synchronization
+ * - URL search params deep-linking & browser history synchronization (projectType, status, featured)
  * - Filter transitions with keepPreviousData for race-condition prevention
  * - Automatic page clamping for out-of-range URLs
  * - Smooth scroll on pagination
@@ -52,6 +52,10 @@ export function ProjectsListingView({
     return 'all';
   }, [searchParams]);
 
+  const isFeaturedOnly: boolean = useMemo(() => {
+    return searchParams.get('featured') === 'true';
+  }, [searchParams]);
+
   const activePage: number = useMemo(() => {
     const raw = searchParams.get('page');
     if (raw) {
@@ -75,11 +79,14 @@ export function ProjectsListingView({
     if (activeStatus !== 'all') {
       params.status = activeStatus;
     }
+    if (isFeaturedOnly) {
+      params.featured = true;
+    }
     return params;
-  }, [activeType, activeStatus, activePage]);
+  }, [activeType, activeStatus, isFeaturedOnly, activePage]);
 
-  // Is this the default initial view (page 1, all filters)?
-  const isDefaultView = activeType === 'all' && activeStatus === 'all' && activePage === 1;
+  // Is this the default initial view (page 1, all filters, no featured)?
+  const isDefaultView = activeType === 'all' && activeStatus === 'all' && !isFeaturedOnly && activePage === 1;
 
   // 3. TanStack Query Server State
   const {
@@ -103,15 +110,21 @@ export function ProjectsListingView({
     totalPages: initialData?.pagination?.totalPages ?? 1,
   };
 
-  const hasActiveFilters = activeType !== 'all' || activeStatus !== 'all';
+  const hasActiveFilters = activeType !== 'all' || activeStatus !== 'all' || isFeaturedOnly;
 
   // 4. Update URL Search Parameters
   const updateUrlParams = useCallback(
-    (newParams: { type?: ProjectTypeFilter; status?: ProjectStatusFilter; page?: number }) => {
+    (newParams: {
+      type?: ProjectTypeFilter;
+      status?: ProjectStatusFilter;
+      featured?: boolean;
+      page?: number;
+    }) => {
       const params = new URLSearchParams(searchParams.toString());
 
       const nextType = newParams.type !== undefined ? newParams.type : activeType;
       const nextStatus = newParams.status !== undefined ? newParams.status : activeStatus;
+      const nextFeatured = newParams.featured !== undefined ? newParams.featured : isFeaturedOnly;
       const nextPage = newParams.page !== undefined ? newParams.page : 1;
 
       if (nextType && nextType !== 'all') {
@@ -126,6 +139,12 @@ export function ProjectsListingView({
         params.delete('status');
       }
 
+      if (nextFeatured) {
+        params.set('featured', 'true');
+      } else {
+        params.delete('featured');
+      }
+
       if (nextPage && nextPage > 1) {
         params.set('page', nextPage.toString());
       } else {
@@ -136,10 +155,10 @@ export function ProjectsListingView({
       const nextUrl = queryString ? `${pathname}?${queryString}` : pathname;
       router.push(nextUrl, { scroll: false });
     },
-    [activeType, activeStatus, pathname, router, searchParams]
+    [activeType, activeStatus, isFeaturedOnly, pathname, router, searchParams]
   );
 
-  // 5. Page Clamping: if URL has ?page=999, clamp to totalPages when data loads (finding E2 / T014)
+  // 5. Page Clamping: if URL has ?page=999, clamp to totalPages when data loads
   useEffect(() => {
     if (data?.pagination?.totalPages && data.pagination.totalPages > 0) {
       if (activePage > data.pagination.totalPages) {
@@ -157,8 +176,12 @@ export function ProjectsListingView({
     updateUrlParams({ status, page: 1 });
   };
 
+  const handleFeaturedChange = (featured: boolean) => {
+    updateUrlParams({ featured, page: 1 });
+  };
+
   const handleResetFilters = () => {
-    updateUrlParams({ type: 'all', status: 'all', page: 1 });
+    updateUrlParams({ type: 'all', status: 'all', featured: false, page: 1 });
   };
 
   const handlePageChange = (newPage: number) => {
@@ -184,14 +207,16 @@ export function ProjectsListingView({
         <ProjectsFilters
           selectedType={activeType}
           selectedStatus={activeStatus}
+          isFeaturedOnly={isFeaturedOnly}
           onTypeChange={handleTypeChange}
           onStatusChange={handleStatusChange}
+          onFeaturedChange={handleFeaturedChange}
           onResetFilters={handleResetFilters}
           hasActiveFilters={hasActiveFilters}
           totalResults={pagination.total}
         />
 
-        {/* Projects Grid with All Observable States */}
+        {/* Projects Grid with Staggered Entrance */}
         <ProjectsGrid
           projects={projects}
           isLoading={isLoading && !data}

@@ -1,52 +1,66 @@
-import React from 'react';
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { ArrowUpRight, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Reveal } from '@/components/shared/reveal';
 import type { WhatsAppCtaProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
 /**
  * Direct WhatsApp Consultation Card
- * Prominently offers an instant chat trigger via official WhatsApp link.
+ * Prominently offers an instant chat trigger via official WhatsApp link
+ * with asymmetric editorial staging and sharp monolithic framing.
  */
 export function WhatsAppCta({ className }: WhatsAppCtaProps) {
   const t = useTranslations('public');
 
   return (
-    <section
-      aria-labelledby="whatsapp-cta-heading"
-      className={cn(
-        'relative overflow-hidden rounded-3xl border border-emerald-500/20 bg-linear-to-br from-emerald-500/10 via-card to-card p-6 sm:p-10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start',
-        className
-      )}>
-      <div className="flex flex-col md:flex-row items-center gap-5">
-        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-md ring-4 ring-emerald-500/20">
-          <MessageSquare className="h-7 w-7" aria-hidden="true" />
-        </div>
-        <div className="space-y-1.5">
-          <h2
-            id="whatsapp-cta-heading"
-            className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground">
-            {t('contactPage.whatsapp.heading')}
-          </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
-            {t('contactPage.whatsapp.description')}
-          </p>
-        </div>
-      </div>
+    <Reveal variant="fade-scale">
+      <section
+        aria-labelledby="whatsapp-cta-heading"
+        className={cn(
+          'border border-border bg-card p-8 sm:p-10 shadow-xs text-start transition-all duration-300 hover:border-foreground/40',
+          className
+        )}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Column: WhatsApp Consultation Details */}
+          <div className="lg:col-span-8 space-y-3">
+            <div className="text-xs font-mono rtl:font-sans font-semibold tracking-widest rtl:tracking-normal text-muted-foreground uppercase">
+              DIRECT // CLIENT RELATIONS
+            </div>
 
-      <a
-        href="https://wa.me/96522000000"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shrink-0">
-        <Button
-          size="lg"
-          className="gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white px-7 h-12 shadow-sm font-semibold cursor-pointer">
-          <span>{t('contactPage.whatsapp.button')}</span>
-          <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-        </Button>
-      </a>
-    </section>
+            <div className="flex items-center gap-2.5">
+              <MessageSquare className="h-5 w-5 text-foreground shrink-0" aria-hidden="true" />
+              <h2
+                id="whatsapp-cta-heading"
+                className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-foreground">
+                {t('contactPage.whatsapp.heading')}
+              </h2>
+            </div>
+
+            <p className="text-xs sm:text-sm md:text-base text-muted-foreground max-w-2xl leading-relaxed">
+              {t('contactPage.whatsapp.description')}
+            </p>
+          </div>
+
+          {/* Right Column: Sharp Action Button */}
+          <div className="lg:col-span-4 flex lg:justify-end">
+            <a
+              href="https://wa.me/96522000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto rounded-none px-7 h-12 gap-2.5 font-mono rtl:font-sans text-xs sm:text-sm uppercase tracking-wider rtl:tracking-normal font-semibold shadow-xs cursor-pointer active:scale-[0.98] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transform-none">
+                <span>{t('contactPage.whatsapp.button')}</span>
+                <ArrowUpRight className="h-4 w-4 rtl:rotate-180 shrink-0" aria-hidden="true" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+    </Reveal>
   );
 }

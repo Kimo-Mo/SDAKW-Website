@@ -6,6 +6,7 @@ import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LogoutButton } from '@/components/auth/logout-button';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import { ThemeToggle } from '@/components/shared/theme-toggle';
 
 interface AdminHeaderProps {
   onOpenMobileNav: () => void;
@@ -38,8 +39,11 @@ export function AdminHeader({ onOpenMobileNav, title, className = '' }: AdminHea
         </h1>
       </div>
 
-      {/* End: Controls (Locale switcher & Sign out) */}
+      {/* End: Controls (Theme Toggle, Locale switcher & Sign out) */}
       <div className="flex items-center gap-2 sm:gap-4">
+        {/* Theme Toggle */}
+        <ThemeToggle variant="admin" className="hidden lg:flex" />
+
         {/* Locale Switcher */}
         <LanguageSwitcher locale={locale} variant="admin" />
 

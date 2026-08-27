@@ -1,6 +1,8 @@
-import React from 'react';
+'use client';
+
 import { useTranslations } from 'next-intl';
-import { ArrowUpRight, MessageSquare, Share2 } from 'lucide-react';
+import { ArrowUpRight, MessageSquare } from 'lucide-react';
+import { Reveal, RevealItem } from '@/components/shared/reveal';
 import type { SocialChannelsProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
@@ -15,7 +17,7 @@ function InstagramIcon({ className }: { className?: string }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <rect width="20" height="20" x="2" y="2" rx="0" ry="0" />
       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </svg>
@@ -58,7 +60,8 @@ function FacebookIcon({ className }: { className?: string }) {
 
 /**
  * Social Media Channels Grid
- * Provides verified links for Instagram, LinkedIn, Facebook, and WhatsApp.
+ * Provides verified links for Instagram, LinkedIn, Facebook, and WhatsApp
+ * formatted as a monolithic specification matrix.
  */
 export function SocialChannels({ className }: SocialChannelsProps) {
   const t = useTranslations('public');
@@ -69,85 +72,96 @@ export function SocialChannels({ className }: SocialChannelsProps) {
       handle: '@sdakw',
       url: 'https://instagram.com/sdakw',
       icon: InstagramIcon,
-      color: 'hover:text-pink-600 hover:border-pink-500/40',
+      tag: 'VISUAL ARCHIVE',
     },
     {
       name: 'LinkedIn',
-      handle: 'Salem Dwaih Al Ajmi Co.',
+      handle: 'Salem Duwaih Al Ajmi Co.',
       url: 'https://linkedin.com/company/sdakw',
       icon: LinkedinIcon,
-      color: 'hover:text-blue-600 hover:border-blue-500/40',
+      tag: 'CORPORATE NETWORK',
     },
     {
       name: 'Facebook',
       handle: 'SDA General Trading & Contracting',
       url: 'https://facebook.com/sdakw',
       icon: FacebookIcon,
-      color: 'hover:text-blue-700 hover:border-blue-600/40',
+      tag: 'COMMUNITY & NEWS',
     },
     {
       name: 'WhatsApp',
       handle: '+965 2200 0000',
       url: 'https://wa.me/96522000000',
       icon: MessageSquare,
-      color: 'hover:text-emerald-600 hover:border-emerald-500/40',
+      tag: 'DIRECT MESSAGING',
     },
   ];
 
   return (
     <section
       aria-labelledby="social-channels-heading"
-      className={cn('space-y-6 text-start', className)}>
-      <div className="space-y-1.5 max-w-2xl">
-        <div className="flex items-center gap-2">
-          <Share2 className="h-4 w-4 text-primary" aria-hidden="true" />
+      className={cn('space-y-8 text-start w-full', className)}>
+      {/* Header section with asymmetric editorial staging */}
+      <Reveal variant="fade-scale">
+        <div className="space-y-3 max-w-3xl border-b border-border pb-6">
+          <div className="text-xs font-mono rtl:font-sans font-semibold tracking-widest rtl:tracking-normal text-muted-foreground uppercase">
+            02 // {t('contactPage.social.heading')}
+          </div>
+
           <h2
             id="social-channels-heading"
-            className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground leading-tight">
             {t('contactPage.social.heading')}
           </h2>
+
+          <p className="text-xs sm:text-sm md:text-base text-muted-foreground leading-relaxed">
+            {t('contactPage.social.subtitle')}
+          </p>
         </div>
-        <p className="text-xs sm:text-sm text-muted-foreground">
-          {t('contactPage.social.subtitle')}
-        </p>
-      </div>
+      </Reveal>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {channels.map((channel) => {
-          const Icon = channel.icon;
+      <Reveal variant="stagger-children" staggerDelay={0.08}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {channels.map((channel) => {
+            const Icon = channel.icon;
 
-          return (
-            <a
-              key={channel.name}
-              href={channel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                'group flex items-center justify-between rounded-2xl border border-border/80 bg-card p-4 shadow-xs transition-all duration-300 hover:shadow-md cursor-pointer relative',
-                channel.color
-              )}>
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-muted/60 text-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-heading text-sm font-semibold text-foreground group-hover:text-inherit transition-colors">
-                    {channel.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground truncate max-w-35">
-                    {channel.handle}
-                  </p>
-                </div>
-              </div>
+            return (
+              <RevealItem key={channel.name}>
+                <a
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col justify-between border border-border bg-card p-5 sm:p-6 shadow-xs transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-foreground/40 hover:bg-muted/20 hover:shadow-md cursor-pointer relative h-full space-y-4 motion-reduce:transform-none">
+                  <div className="space-y-3">
+                    {/* Top Metadata Header Bar */}
+                    <div className="flex items-center justify-between border-b border-border pb-3">
+                      <Icon className="h-5 w-5 text-foreground" />
+                      <ArrowUpRight
+                        className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground rtl:rotate-180"
+                        aria-hidden="true"
+                      />
+                    </div>
 
-              <ArrowUpRight
-                className="absolute inset-e-4 top-4 h-4 w-4 text-muted-foreground/60 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground rtl:scale-x-[-1]"
-                aria-hidden="true"
-              />
-            </a>
-          );
-        })}
-      </div>
+                    <h3 className="font-heading text-base font-bold text-foreground transition-colors group-hover:text-foreground">
+                      {channel.name}
+                    </h3>
+
+                    <p
+                      dir="ltr"
+                      className="font-mono text-xs text-muted-foreground truncate text-start">
+                      {channel.handle}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 border-t border-border/40 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                    {channel.tag}
+                  </div>
+                </a>
+              </RevealItem>
+            );
+          })}
+        </div>
+      </Reveal>
     </section>
   );
 }

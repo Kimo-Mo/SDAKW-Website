@@ -1,84 +1,110 @@
-import React from 'react';
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { Clock, Mail, MapPin, PhoneCall } from 'lucide-react';
+import { Reveal, RevealItem } from '@/components/shared/reveal';
 import type { ContactCardsGridProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
 /**
  * 4-Card Contact Touchpoints Grid
- * Renders Headquarters Address, Official Phone, Official Email, and Working Hours.
+ * Renders Headquarters Address, Official Phone, Official Email, and Working Hours
+ * as a monolithic specification matrix with sharp borders and mono indices.
  */
 export function ContactCardsGrid({ className }: ContactCardsGridProps) {
   const t = useTranslations('public');
 
+  const cards = [
+    {
+      key: 'address',
+      index: '01',
+      icon: MapPin,
+      title: t('contactPage.cards.addressTitle'),
+      tag: 'HEADQUARTERS',
+      content: (
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          {t('contactPage.cards.addressValue')}
+        </p>
+      ),
+    },
+    {
+      key: 'phone',
+      index: '02',
+      icon: PhoneCall,
+      title: t('contactPage.cards.phoneTitle'),
+      tag: 'DIRECT LINE',
+      content: (
+        <a
+          href="tel:+96522000000"
+          dir="ltr"
+          className="font-mono text-sm sm:text-base text-foreground font-bold hover:text-primary transition-colors inline-block">
+          {t('contactPage.cards.phoneValue')}
+        </a>
+      ),
+    },
+    {
+      key: 'email',
+      index: '03',
+      icon: Mail,
+      title: t('contactPage.cards.emailTitle'),
+      tag: 'DIGITAL INQUIRIES',
+      content: (
+        <a
+          href="mailto:info@sdakw.com"
+          className="font-mono text-xs sm:text-sm text-foreground font-bold hover:text-primary transition-colors inline-block break-all">
+          {t('contactPage.cards.emailValue')}
+        </a>
+      ),
+    },
+    {
+      key: 'hours',
+      index: '04',
+      icon: Clock,
+      title: t('contactPage.cards.hoursTitle'),
+      tag: 'OPERATIONAL SCHEDULE',
+      content: (
+        <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+          {t('contactPage.cards.hoursValue')}
+        </p>
+      ),
+    },
+  ];
+
   return (
-    <section
-      aria-label="Contact Information"
-      className={cn('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6', className)}>
-      {/* 1. Office Address */}
-      <div className="group rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md space-y-3 text-start flex flex-col justify-between">
-        <div className="space-y-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-            <MapPin className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <h2 className="font-heading font-semibold text-base text-foreground">
-            {t('contactPage.cards.addressTitle')}
-          </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            {t('contactPage.cards.addressValue')}
-          </p>
-        </div>
-      </div>
+    <section aria-label="Contact Information" className={cn('w-full', className)}>
+      <Reveal variant="stagger-children" staggerDelay={0.08}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {cards.map((card) => {
+            const Icon = card.icon;
 
-      {/* 2. Telephone Line */}
-      <div className="group rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md space-y-3 text-start flex flex-col justify-between">
-        <div className="space-y-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-            <PhoneCall className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <h2 className="font-heading font-semibold text-base text-foreground">
-            {t('contactPage.cards.phoneTitle')}
-          </h2>
-          <a
-            href="tel:+96522000000"
-            dir="ltr"
-            className="text-xs sm:text-sm text-primary font-bold hover:underline inline-block">
-            {t('contactPage.cards.phoneValue')}
-          </a>
-        </div>
-      </div>
+            return (
+              <RevealItem key={card.key}>
+                <div className="group border border-border bg-card p-5 sm:p-6 shadow-xs transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-foreground/40 hover:bg-muted/20 hover:shadow-md space-y-4 text-start flex flex-col justify-between h-full motion-reduce:transform-none">
+                  <div className="space-y-3">
+                    {/* Top Metadata Header Bar */}
+                    <div className="flex items-center justify-between border-b border-border pb-3">
+                      <span className="font-mono text-xs font-bold text-muted-foreground">
+                        TOUCHPOINT_{card.index}
+                      </span>
+                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                    </div>
 
-      {/* 3. Official Email */}
-      <div className="group rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md space-y-3 text-start flex flex-col justify-between">
-        <div className="space-y-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-            <Mail className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <h2 className="font-heading font-semibold text-base text-foreground">
-            {t('contactPage.cards.emailTitle')}
-          </h2>
-          <a
-            href="mailto:info@sdakw.com"
-            className="text-xs sm:text-sm text-primary font-bold hover:underline inline-block break-all">
-            {t('contactPage.cards.emailValue')}
-          </a>
-        </div>
-      </div>
+                    <h2 className="font-heading font-bold text-base text-foreground transition-colors group-hover:text-foreground">
+                      {card.title}
+                    </h2>
 
-      {/* 4. Working Hours */}
-      <div className="group rounded-2xl border border-border/80 bg-card p-6 shadow-xs transition-all duration-300 hover:border-primary/40 hover:shadow-md space-y-3 text-start flex flex-col justify-between">
-        <div className="space-y-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-            <Clock className="h-5 w-5" aria-hidden="true" />
-          </div>
-          <h2 className="font-heading font-semibold text-base text-foreground">
-            {t('contactPage.cards.hoursTitle')}
-          </h2>
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            {t('contactPage.cards.hoursValue')}
-          </p>
+                    {card.content}
+                  </div>
+
+                  <div className="pt-3 border-t border-border/40 text-[10px] font-mono text-muted-foreground uppercase tracking-widest">
+                    {card.tag}
+                  </div>
+                </div>
+              </RevealItem>
+            );
+          })}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

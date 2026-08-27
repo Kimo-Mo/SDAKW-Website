@@ -236,6 +236,7 @@ export type ProjectStatusFilter = 'all' | 'ongoing' | 'completed';
 export interface ProjectsFilterState {
   projectType: ProjectTypeFilter;
   status: ProjectStatusFilter;
+  featured?: boolean;
   page: number;
 }
 
@@ -249,8 +250,10 @@ export interface ProjectsHeaderProps {
 export interface ProjectsFiltersProps {
   selectedType: ProjectTypeFilter;
   selectedStatus: ProjectStatusFilter;
+  isFeaturedOnly: boolean;
   onTypeChange: (type: ProjectTypeFilter) => void;
   onStatusChange: (status: ProjectStatusFilter) => void;
+  onFeaturedChange: (featured: boolean) => void;
   onResetFilters: () => void;
   hasActiveFilters: boolean;
   totalResults?: number;
@@ -366,6 +369,11 @@ export interface CoreValuesGridProps {
 
 export interface CertificationsShowcaseProps {
   locale: string;
+  className?: string;
+}
+
+export interface OperationsShowcaseProps {
+  locale?: string;
   className?: string;
 }
 

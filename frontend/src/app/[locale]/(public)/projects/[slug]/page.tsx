@@ -77,32 +77,32 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
 function ProjectDetailSkeleton() {
   return (
     <article className="w-full py-8 sm:py-12 lg:py-16 text-start animate-pulse">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Navigation skeleton */}
-        <div className="flex items-center justify-between pb-2 border-b border-border/40">
-          <Skeleton className="h-4 w-28 rounded-md" />
-          <Skeleton className="h-4 w-48 rounded-md hidden sm:block" />
+        <div className="flex items-center justify-between pb-3 border-b border-border">
+          <Skeleton className="h-4 w-28 rounded-none" />
+          <Skeleton className="h-4 w-48 rounded-none hidden sm:block" />
         </div>
 
         {/* Hero skeleton */}
-        <Skeleton className="aspect-video sm:aspect-21/9 w-full rounded-2xl sm:rounded-3xl" />
+        <Skeleton className="aspect-video sm:aspect-21/9 w-full rounded-none" />
 
         {/* Metadata bar skeleton */}
         <div className="flex flex-wrap gap-2.5 sm:gap-3 py-2">
-          <Skeleton className="h-7 w-28 rounded-full" />
-          <Skeleton className="h-7 w-24 rounded-full" />
-          <Skeleton className="h-7 w-36 rounded-lg" />
-          <Skeleton className="h-7 w-32 rounded-lg" />
+          <Skeleton className="h-7 w-28 rounded-none" />
+          <Skeleton className="h-7 w-24 rounded-none" />
+          <Skeleton className="h-7 w-36 rounded-none" />
+          <Skeleton className="h-7 w-32 rounded-none" />
         </div>
 
         {/* Title & Description skeleton */}
         <div className="space-y-6 sm:space-y-8">
-          <Skeleton className="h-9 w-3/4 max-w-xl rounded-lg" />
-          <div className="rounded-2xl border border-border/60 p-6 sm:p-8 space-y-4">
-            <Skeleton className="h-4 w-32 rounded-md" />
-            <Skeleton className="h-5 w-full rounded-md" />
-            <Skeleton className="h-5 w-5/6 rounded-md" />
-            <Skeleton className="h-5 w-4/6 rounded-md" />
+          <Skeleton className="h-9 w-3/4 max-w-xl rounded-none" />
+          <div className="border border-border p-6 sm:p-8 space-y-4">
+            <Skeleton className="h-4 w-32 rounded-none" />
+            <Skeleton className="h-5 w-full rounded-none" />
+            <Skeleton className="h-5 w-5/6 rounded-none" />
+            <Skeleton className="h-5 w-4/6 rounded-none" />
           </div>
         </div>
       </div>

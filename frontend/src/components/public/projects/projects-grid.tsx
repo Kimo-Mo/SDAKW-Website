@@ -5,8 +5,9 @@ import { AlertCircle, Building2, FilterX, RefreshCw, Send } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { ProjectCard } from '@/components/public/project-card';
+import { ProjectCard } from '@/components/public/projects/project-card';
 import { EmptyState } from '@/components/shared/empty-state';
+import { Reveal, RevealItem } from '@/components/shared/reveal';
 import type { ProjectsGridProps } from '@/types/public';
 
 /**
@@ -14,7 +15,7 @@ import type { ProjectsGridProps } from '@/types/public';
  * - Loading Skeletons
  * - Error Banner with Retry
  * - Dual Empty States (No filter matches vs. Global zero projects)
- * - Animated Project Card Grid
+ * - Animated Project Card Grid with staggered entrance reveals
  */
 export function ProjectsGrid({
   projects,
@@ -37,30 +38,21 @@ export function ProjectsGrid({
         {Array.from({ length: 6 }).map((_, index) => (
           <div
             key={`project-skeleton-${index}`}
-            className="flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card p-0 shadow-xs">
+            className="flex flex-col h-full overflow-hidden border border-border bg-card p-0 shadow-xs">
             {/* Image Placeholder */}
-            <Skeleton className="aspect-video w-full rounded-none" />
+            <Skeleton className="aspect-16/10 w-full rounded-none" />
 
             {/* Card Content Skeleton */}
-            <div className="flex flex-1 flex-col justify-between p-5 sm:p-6 space-y-4">
-              <div className="space-y-3">
-                {/* Badge / Location */}
-                <div className="flex items-center gap-2">
-                  <Skeleton className="h-4 w-24 rounded-md" />
-                  <Skeleton className="h-4 w-16 rounded-md ms-auto" />
-                </div>
-                {/* Title */}
-                <Skeleton className="h-6 w-4/5 rounded-md" />
-                {/* Description lines */}
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full rounded-md" />
-                  <Skeleton className="h-4 w-2/3 rounded-md" />
-                </div>
-              </div>
-
-              {/* Link Footer */}
-              <div className="pt-3 border-t border-border/40 flex items-center justify-between">
-                <Skeleton className="h-4 w-28 rounded-md" />
+            <div className="flex flex-1 flex-col p-5 sm:p-6 space-y-3">
+              {/* Type // Status line */}
+              <Skeleton className="h-4 w-32 rounded-none" />
+              {/* Title */}
+              <Skeleton className="h-7 w-4/5 rounded-none" />
+              {/* Location line */}
+              <Skeleton className="h-4 w-1/2 rounded-none" />
+              {/* View cue pinned to foot */}
+              <div className="mt-auto pt-3">
+                <Skeleton className="h-4 w-24 rounded-none" />
               </div>
             </div>
           </div>
@@ -72,9 +64,9 @@ export function ProjectsGrid({
   // 2. Error State: Isolated Error Banner
   if (isError) {
     return (
-      <div className="rounded-2xl border border-destructive/30 bg-destructive/5 p-8 sm:p-12 text-center max-w-2xl mx-auto shadow-sm">
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-destructive/10 text-destructive mb-4">
-          <AlertCircle className="h-7 w-7" aria-hidden="true" />
+      <div className="border border-destructive/30 bg-destructive/5 p-8 sm:p-12 text-center max-w-2xl mx-auto shadow-xs">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center bg-destructive/10 text-destructive mb-4">
+          <AlertCircle className="h-6 w-6" aria-hidden="true" />
         </div>
         <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-2">
           {t('error.title')}
@@ -85,7 +77,7 @@ export function ProjectsGrid({
         <Button
           onClick={onRetry}
           variant="outline"
-          className="gap-2 rounded-xl border-destructive/30 hover:bg-destructive/10 text-foreground font-medium shadow-xs">
+          className="gap-2 rounded-none border-border hover:bg-muted text-foreground font-mono text-xs uppercase tracking-wider shadow-xs cursor-pointer">
           <RefreshCw className="h-4 w-4" aria-hidden="true" />
           <span>{t('error.retry')}</span>
         </Button>
@@ -104,7 +96,7 @@ export function ProjectsGrid({
           description={t('empty.description')}
           actionLabel={t('empty.reset')}
           onAction={onResetFilters}
-          className="max-w-6xl"
+          className="max-w-6xl rounded-none border border-border"
         />
       );
     }
@@ -119,26 +111,30 @@ export function ProjectsGrid({
           <Link href="/contact">
             <Button
               variant="default"
-              className="gap-2 rounded-xl px-6 shadow-xs font-medium cursor-pointer">
+              className="gap-2 rounded-none px-6 shadow-xs font-mono text-xs uppercase tracking-wider cursor-pointer">
               <Send className="h-4 w-4" aria-hidden="true" />
               <span>{t('empty.contactUs')}</span>
             </Button>
           </Link>
         }
-        className="max-w-6xl"
+        className="max-w-6xl rounded-none border border-border"
       />
     );
   }
 
-  // 4. Success State: Project Cards Grid
+  // 4. Success State: Staggered Project Cards Grid with Uniform Heights
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-      role="region"
-      aria-label={t('title')}>
-      {projects.map((project) => (
-        <ProjectCard key={project._id || project.slug} project={project} locale={locale} />
-      ))}
-    </div>
+    <Reveal variant="stagger-children" staggerDelay={0.08}>
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch"
+        role="region"
+        aria-label={t('title')}>
+        {projects.map((project) => (
+          <RevealItem key={project._id || project.slug} className="h-full">
+            <ProjectCard project={project} locale={locale} />
+          </RevealItem>
+        ))}
+      </div>
+    </Reveal>
   );
 }

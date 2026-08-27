@@ -1,4 +1,3 @@
-import React from 'react';
 import type { BrandedImageFallbackProps } from '@/types/public';
 import { cn } from '@/lib/utils';
 
@@ -24,7 +23,7 @@ export function BrandedImageFallback({
       role="img"
       aria-label="SDAKW Project Image Placeholder"
       className={cn(
-        'relative w-full overflow-hidden bg-linear-to-br from-card via-muted/50 to-primary/10 flex flex-col items-center justify-center p-6 text-center select-none border border-border/40',
+        'relative w-full overflow-hidden bg-card flex flex-col items-center justify-center p-6 text-center select-none border border-hairline',
         aspectClass,
         className
       )}>
@@ -36,7 +35,7 @@ export function BrandedImageFallback({
 
       <div className="relative z-10 flex flex-col items-center gap-3">
         {/* Geometric Emblem SVG */}
-        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-card border border-border/80 shadow-xs text-primary transition-transform duration-300">
+        <div className="flex h-14 w-14 items-center justify-center bg-card border border-border/80 shadow-xs text-primary transition-transform duration-300">
           <svg
             className="h-8 w-8"
             viewBox="0 0 48 48"
@@ -59,7 +58,7 @@ export function BrandedImageFallback({
               SDAKW
             </p>
             <p className="text-xs sm:text-xs text-muted-foreground font-medium">
-              Salem Dwaih Al Ajmi Co.
+              Salem Duwaih Al Ajmi Co.
             </p>
           </div>
         )}
