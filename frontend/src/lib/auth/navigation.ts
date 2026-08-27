@@ -61,7 +61,7 @@ export const isLocalizedLoginPathname = isLoginPathname;
  * - refuses to redirect while already on the login route,
  * - prevents duplicate redirects while one is already in progress.
  */
-export function redirectToLoginBrowser(returnTo?: string | null): void {
+export function redirectToLoginBrowser(returnTo?: string | null, locale?: Locale): void {
   if (typeof window === 'undefined') return;
 
   const pathname = window.location.pathname;
@@ -71,7 +71,11 @@ export function redirectToLoginBrowser(returnTo?: string | null): void {
 
   redirectInProgress = true;
   const target = returnTo ?? pathname;
-  window.location.assign(createLoginHref(routing.defaultLocale, target));
+  const activeLocale =
+    locale ??
+    (document.cookie.match(/NEXT_LOCALE=([^;]+)/)?.[1] as Locale) ??
+    routing.defaultLocale;
+  window.location.assign(createLoginHref(activeLocale, target));
 }
 
 /** Clears the single-navigation redirect guard. */
