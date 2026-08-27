@@ -14,7 +14,10 @@ const envSchema = z.object({
   JWT_SECRET: z.string().min(16, 'JWT_SECRET must be at least 16 characters'),
   JWT_EXPIRES_IN: z.string().default('7d'),
 
-  CLIENT_URL: z.string().url('CLIENT_URL must be a valid URL'),
+  CLIENT_URL: z
+    .string()
+    .url('CLIENT_URL must be a valid URL')
+    .transform((url) => url.replace(/\/+$/, '')),
 
   CLOUDINARY_CLOUD_NAME: z.string().min(1, 'CLOUDINARY_CLOUD_NAME is required'),
   CLOUDINARY_API_KEY: z.string().min(1, 'CLOUDINARY_API_KEY is required'),
