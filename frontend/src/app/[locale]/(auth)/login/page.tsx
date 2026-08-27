@@ -20,10 +20,12 @@ export default async function LoginRoute({ params, searchParams }: LoginRoutePro
   let isAuthenticated = false;
 
   if (cookieHeader.trim().length > 0) {
-    const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1').replace(
-      /\/+$/,
-      ''
-    );
+    const rawApiUrl =
+      process.env.BACKEND_API_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      'http://localhost:5000/api/v1';
+
+    const apiUrl = rawApiUrl.replace(/\/+$/, '');
 
     try {
       const response = await fetch(`${apiUrl}/auth/me`, {

@@ -53,7 +53,8 @@ Configure `.env.local` based on `.env.example`:
 
 | Variable | Required | Description | Example |
 |---|---|---|---|
-| `NEXT_PUBLIC_API_URL` | Yes | Base URL of the SDAKW backend API. **Must include the `/api/v1` prefix** when frontend and backend run as separate origins. Leave empty only for local mocks on same origin. | `http://localhost:4000/api/v1` |
+| `BACKEND_API_URL` | Yes (in Prod) | Target URL of the SDAKW backend REST API. Used by Next.js edge rewrites and SSR server-side calls. | `https://api.sdakw.com/api/v1` |
+| `NEXT_PUBLIC_API_URL` | Optional | Client-side API base URL. Defaults to relative `/api/v1` to route through Next.js Same-Origin reverse proxy (guaranteeing First-Party Cookie compatibility for iOS Safari). | `/api/v1` |
 | `NEXT_PUBLIC_APP_URL` | Optional | Canonical URL of the frontend application used for metadata and Open Graph link generation. Defaults to `https://sdakw.com`. | `https://sdakw.com` |
 
 ---
@@ -230,10 +231,11 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
 ## 6. Key Features Implemented
 
 ### Admin Authentication & Session Management
-- **HTTP-Only Cookie Sessions:** All authentication cookies are issued and managed securely by the backend API. The frontend never stores tokens in `localStorage` or JavaScript-accessible cookies.
+- **Same-Origin Reverse Proxy & First-Party Cookies:** Next.js proxies all `/api/v1/*` requests to `BACKEND_API_URL` via `next.config.ts` rewrites, ensuring all auth cookies are treated as first-party cookies (preventing iOS Safari ITP cross-site cookie blocking).
+- **Dual Authentication Layer:** The backend issues HTTP-only session cookies and returns JWT tokens for client-side bearer fallback (`Authorization: Bearer <token>`), guaranteeing robust session persistence across all browsers and webviews.
 - **Authoritative Session Verification:** The `RequireSession` component and admin layouts verify session validity against `GET /api/v1/auth/me` before rendering protected administrative interfaces.
-- **Automatic 401 Interception:** Centralized Axios response interceptor in `src/lib/api/client.ts` automatically captures unauthorized responses and safely redirects to `/login` with return path preservation.
-- **Password Modification:** Self-service password updates with automatic backend session rotation (`PATCH /api/v1/auth/change-password`).
+- **Automatic 401 Interception:** Centralized Axios response interceptor in `src/lib/api/client.ts` automatically captures unauthorized responses, clears stale tokens, and safely redirects to `/login` with return path preservation.
+- **Password Modification:** Self-service password updates with automatic session rotation (`PATCH /api/v1/auth/change-password`).
 
 ### Admin Projects CRUD & Workflow
 - **Overview Metrics:** Summary KPI cards displaying total projects, published count, and category breakdown.
@@ -329,12 +331,13 @@ npm run typecheck
 The frontend application is optimized for deployment on **Vercel** or any standard Node.js server container.
 
 ### Production Environment Variables
-Set the following environment variables in your deployment dashboard:
-- `NEXT_PUBLIC_API_URL`: Production backend API base URL (e.g. `https://api.sdakw.com/api/v1`).
+Set the following environment variables in your deployment dashboard (e.g. Vercel Project Settings > Environment Variables):
+- `BACKEND_API_URL`: Production backend REST API base URL (e.g. `https://sdakw-website.onrender.com/api/v1` or `https://api.sdakw.com/api/v1`).
+- `NEXT_PUBLIC_API_URL`: Optional (defaults to `/api/v1`).
 - `NEXT_PUBLIC_APP_URL`: Production canonical domain (e.g. `https://sdakw.com`).
 
-### Cross-Origin Cookie Requirements
-Because admin authentication relies on **HTTP-only session cookies**, ensure the following configurations are set on the backend when frontend and backend are hosted on different domains:
-1. **CORS `origin` (`CLIENT_URL`):** Must exactly match the frontend production origin (`https://sdakw.com`).
-2. **CORS `credentials`:** Must be set to `true`.
-3. **Cookie `SameSite` & `Secure`:** Session cookies must be issued with `SameSite=None` (or `SameSite=Lax` if under the same root domain) and `Secure=true` over HTTPS.
+### Reverse Proxy & Cookie Architecture
+With Next.js API rewrites in `next.config.ts`, requests sent to `/api/v1/*` are proxied to `BACKEND_API_URL` at the network edge:
+1. **First-Party Cookies:** Cookies are set on the frontend domain itself, preventing cross-site cookie blocking on iOS/Safari.
+2. **CORS `CLIENT_URL`:** On the backend (Render), set `CLIENT_URL` to your frontend domain (`https://sdakw-website.vercel.app` or `https://sdakw.com`).
+3. **Cookie `SameSite` & `Secure`:** The backend sets `SameSite=None; Secure=true` in production with full dual cookie/bearer token support.

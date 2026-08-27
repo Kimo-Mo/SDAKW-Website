@@ -16,7 +16,10 @@ export interface PublicAdminUser {
 
 export interface AuthSuccessEnvelope {
   success: true
-  data: { user: PublicAdminUser }
+  data: {
+    user: PublicAdminUser
+    token?: string
+  }
 }
 
 export interface AuthErrorEnvelope {
@@ -33,10 +36,13 @@ export interface LogoutResult {
 
 /**
  * POST /auth/login — validates credentials on the backend, which sets the
- * HTTP-only session cookie. Returns only the public user.
+ * HTTP-only session cookie and returns the public user with token.
  */
 export async function login(credentials: LoginCredentials): Promise<PublicAdminUser> {
   const { data } = await apiClient.post<AuthSuccessEnvelope>("/auth/login", credentials)
+  if (typeof window !== 'undefined' && data.data.token) {
+    localStorage.setItem('auth_token', data.data.token)
+  }
   return data.data.user
 }
 
@@ -50,10 +56,13 @@ export async function getCurrentAdmin(): Promise<PublicAdminUser> {
 }
 
 /**
- * POST /auth/logout — ends the backend session (idempotent). Returns only
- * the backend success result; the cookie is cleared by the backend.
+ * POST /auth/logout — ends the backend session (idempotent). Clears both
+ * the client token fallback and the backend cookie.
  */
 export async function logout(): Promise<LogoutResult> {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('auth_token')
+  }
   const { data } = await apiClient.post<LogoutResult>("/auth/logout")
   return data
 }
@@ -66,6 +75,9 @@ export interface ChangePasswordPayload {
 export interface ChangePasswordResult {
   success: true
   message: string
+  data?: {
+    token?: string
+  }
 }
 
 /**
@@ -79,5 +91,8 @@ export async function changePassword(
     "/auth/change-password",
     payload
   )
+  if (typeof window !== 'undefined' && data.data?.token) {
+    localStorage.setItem('auth_token', data.data.token)
+  }
   return data
 }
