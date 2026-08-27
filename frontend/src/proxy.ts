@@ -1,7 +1,14 @@
+import { NextRequest } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
 
-export default createMiddleware(routing);
+const handleI18n = createMiddleware(routing);
+
+export function proxy(request: NextRequest) {
+  return handleI18n(request);
+}
+
+export default proxy;
 
 export const config = {
   matcher: [

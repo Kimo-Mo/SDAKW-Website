@@ -33,6 +33,9 @@ function LanguageSwitcherInner({
     const search = searchParams?.toString();
     const targetPath = search ? `${pathname}?${search}` : pathname;
 
+    // Explicitly persist the NEXT_LOCALE cookie across all routes and sessions
+    document.cookie = `NEXT_LOCALE=${alternateLocale};path=/;max-age=31536000;SameSite=Lax`;
+
     router.replace(targetPath, { locale: alternateLocale });
     if (onSwitch) {
       onSwitch();
