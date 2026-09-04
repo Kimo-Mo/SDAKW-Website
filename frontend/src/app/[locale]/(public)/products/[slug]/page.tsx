@@ -5,6 +5,20 @@ import { getTranslations } from 'next-intl/server';
 import { getPublicProductBySlug } from '@/lib/api/public-products';
 import { ProductDetailView } from '@/components/public/product-detail/product-detail-view';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  BRAND_NAMES,
+  cleanDescription,
+  createAlternates,
+  formatLocalizedList,
+  getAlternateOgLocale,
+  getOgLocale,
+  getSiteUrl,
+} from '@/lib/seo';
+import {
+  JsonLdScript,
+  buildBreadcrumbListSchema,
+  buildProductSchema,
+} from '@/lib/jsonld';
 
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -13,63 +27,98 @@ interface ProductDetailPageProps {
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: 'public' });
+  const siteUrl = getSiteUrl();
 
   try {
     const product = await getPublicProductBySlug(slug);
-    if (!product) {
+    if (!product || product.published === false) {
       return {
         title: `${t('productDetail.notFound.title')} | ${t('brand.shortName')}`,
+        robots: { index: false, follow: false },
       };
     }
 
-    const localizedName =
-      locale === 'ar'
-        ? product.name?.ar || product.name?.en || ''
-        : product.name?.en || product.name?.ar || '';
+    const isArabic = locale === 'ar';
+    const siteName = isArabic ? BRAND_NAMES.ar : BRAND_NAMES.en;
 
-    const localizedMaterial =
-      locale === 'ar'
-        ? product.material?.ar || product.material?.en || ''
-        : product.material?.en || product.material?.ar || '';
+    const localizedName = isArabic
+      ? product.name?.ar || product.name?.en || ''
+      : product.name?.en || product.name?.ar || '';
 
-    const title = `${localizedName} | ${t('brand.shortName')}`;
-    const description = localizedMaterial || t('productsPage.subtitle');
+    let description = '';
+    if (isArabic) {
+      const material = product.material?.ar || product.material?.en || '';
+      const origin = formatLocalizedList(product.origin?.ar || product.origin?.en);
+      const uses = formatLocalizedList(product.uses?.ar || product.uses?.en);
+
+      const parts: string[] = [];
+      if (material) parts.push(`خامة ${material}`);
+      if (origin) parts.push(`بلد المنشأ: ${origin}`);
+      if (uses) parts.push(`الاستخدامات: ${uses}`);
+
+      description = parts.length > 0 ? parts.join(' - ') : t('productsPage.subtitle');
+    } else {
+      const material = product.material?.en || product.material?.ar || '';
+      const origin = formatLocalizedList(product.origin?.en || product.origin?.ar);
+      const uses = formatLocalizedList(product.uses?.en || product.uses?.ar);
+
+      const parts: string[] = [];
+      if (material) parts.push(`${material} natural stone`);
+      if (origin) parts.push(`Origin: ${origin}`);
+      if (uses) parts.push(`Ideal for ${uses}`);
+
+      description = parts.length > 0 ? parts.join(' - ') : t('productsPage.subtitle');
+    }
+
+    description = cleanDescription(description, 160);
+
+    const alternates = createAlternates(`/products/${slug}`, locale);
+
+    const ogImages = product.coverImage?.url
+      ? [
+          {
+            url: product.coverImage.url,
+            alt: localizedName,
+          },
+        ]
+      : [
+          {
+            url: `${siteUrl}/images/og-share-card.svg`,
+            width: 1200,
+            height: 630,
+            alt: localizedName,
+          },
+        ];
+
+    const twitterImages = product.coverImage?.url
+      ? [product.coverImage.url]
+      : [`${siteUrl}/images/og-share-card.svg`];
 
     return {
-      title,
+      title: localizedName,
       description,
+      alternates,
       openGraph: {
-        title,
+        title: localizedName,
         description,
+        url: alternates.canonical,
         type: 'article',
-        locale: locale === 'ar' ? 'ar_KW' : 'en_US',
-        images: product.coverImage?.url
-          ? [
-              {
-                url: product.coverImage.url,
-                alt: localizedName,
-              },
-            ]
-          : [
-              {
-                url: '/images/og-share-card.svg',
-                width: 1200,
-                height: 630,
-                alt: title,
-              },
-            ],
+        siteName,
+        locale: getOgLocale(locale),
+        alternateLocale: [getAlternateOgLocale(locale)],
+        images: ogImages,
       },
-      alternates: {
-        canonical: `/${locale}/products/${slug}`,
-        languages: {
-          ar: `/ar/products/${slug}`,
-          en: `/en/products/${slug}`,
-        },
+      twitter: {
+        card: 'summary_large_image',
+        title: localizedName,
+        description,
+        images: twitterImages,
       },
     };
   } catch {
     return {
       title: `${t('productDetail.notFound.title')} | ${t('brand.shortName')}`,
+      robots: { index: false, follow: false },
     };
   }
 }
@@ -108,6 +157,8 @@ function ProductDetailSkeleton() {
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: 'public' });
+  const siteUrl = getSiteUrl();
 
   let product;
   try {
@@ -117,13 +168,29 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     notFound();
   }
 
-  if (!product) {
+  if (!product || product.published === false) {
     notFound();
   }
 
+  const isArabic = locale === 'ar';
+  const localizedName = isArabic
+    ? product.name?.ar || product.name?.en || ''
+    : product.name?.en || product.name?.ar || '';
+
+  const productSchema = buildProductSchema(product, locale);
+  const breadcrumbSchema = buildBreadcrumbListSchema([
+    { name: t('nav.home'), url: `${siteUrl}/${locale}` },
+    { name: t('nav.products'), url: `${siteUrl}/${locale}/products` },
+    { name: localizedName, url: `${siteUrl}/${locale}/products/${slug}` },
+  ]);
+
   return (
-    <Suspense fallback={<ProductDetailSkeleton />}>
-      <ProductDetailView product={product} locale={locale} />
-    </Suspense>
+    <>
+      {/* JSON-LD Product & BreadcrumbList Rich Snippets */}
+      <JsonLdScript data={[productSchema, breadcrumbSchema]} />
+      <Suspense fallback={<ProductDetailSkeleton />}>
+        <ProductDetailView product={product} locale={locale} />
+      </Suspense>
+    </>
   );
 }

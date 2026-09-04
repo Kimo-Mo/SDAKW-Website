@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView, useReducedMotion, type Variants } from 'framer-motion';
+import { m, useInView, useReducedMotion, type Variants } from 'framer-motion';
 
 export type RevealVariant = 'fade-up' | 'fade-scale' | 'stagger-children';
 
@@ -43,9 +43,9 @@ export function RevealItem({
   }
 
   return (
-    <motion.div variants={revealItemVariants} className={className}>
+    <m.div variants={revealItemVariants} className={className}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -53,6 +53,7 @@ export function RevealItem({
  * Reusable Multi-Variant Scroll-Reveal Wrapper.
  * Supports 'fade-up', 'fade-scale', and 'stagger-children' entrance profiles.
  * Fully honors prefers-reduced-motion across all variants.
+ * Uses lightweight LazyMotion m.div component.
  */
 export function Reveal({
   children,
@@ -85,21 +86,21 @@ export function Reveal({
     };
 
     return (
-      <motion.div
+      <m.div
         ref={ref}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
         variants={containerVariants}
         className={className}>
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 
   // Variant: Fade Scale
   if (variant === 'fade-scale') {
     return (
-      <motion.div
+      <m.div
         ref={ref}
         initial={{ opacity: 0, scale: 0.96, y: 14 }}
         animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.96, y: 14 }}
@@ -110,13 +111,13 @@ export function Reveal({
         }}
         className={className}>
         {children}
-      </motion.div>
+      </m.div>
     );
   }
 
   // Variant: Fade Up (Default)
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: yOffset }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
@@ -127,6 +128,6 @@ export function Reveal({
       }}
       className={className}>
       {children}
-    </motion.div>
+    </m.div>
   );
 }

@@ -7,6 +7,8 @@ import { FeaturedProjectsShowcase } from '@/components/public/home/featured-proj
 import { ServicesSection } from '@/components/public/home/services-section';
 import { CtaSection } from '@/components/public/home/cta-section';
 import { PartnersSection } from '@/components/public/home/partners-section';
+import { createAlternates, getOgLocale } from '@/lib/seo';
+import { JsonLdScript, buildOrganizationSchema } from '@/lib/jsonld';
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
       title,
       description,
       type: 'website',
-      locale: locale === 'ar' ? 'ar_KW' : 'en_US',
+      locale: getOgLocale(locale),
       images: [
         {
           url: '/images/og-share-card.svg',
@@ -36,13 +38,7 @@ export async function generateMetadata({ params }: HomePageProps): Promise<Metad
         },
       ],
     },
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        ar: '/ar',
-        en: '/en',
-      },
-    },
+    alternates: createAlternates('', locale),
   };
 }
 
@@ -51,6 +47,9 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <div className="w-full flex flex-col flex-1">
+      {/* JSON-LD Organization & GeneralContractor Rich Snippets */}
+      <JsonLdScript data={buildOrganizationSchema(locale)} />
+
       {/* 1. Flagship Hero Section */}
       <HeroSection />
 

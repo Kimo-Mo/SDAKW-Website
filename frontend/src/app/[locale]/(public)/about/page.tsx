@@ -8,6 +8,12 @@ import { CoreValuesGrid } from '@/components/public/about/core-values-grid';
 import { CertificationsShowcase } from '@/components/public/about/certifications-showcase';
 import { AboutCta } from '@/components/public/about/about-cta';
 import { Separator } from '@/components/ui/separator';
+import { createAlternates, getOgLocale, getSiteUrl } from '@/lib/seo';
+import {
+  JsonLdScript,
+  buildOrganizationSchema,
+  buildBreadcrumbListSchema,
+} from '@/lib/jsonld';
 
 interface AboutPageProps {
   params: Promise<{ locale: string }>;
@@ -27,7 +33,7 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
       title,
       description,
       type: 'website',
-      locale: locale === 'ar' ? 'ar_KW' : 'en_US',
+      locale: getOgLocale(locale),
       images: [
         {
           url: '/images/og-share-card.svg',
@@ -37,21 +43,26 @@ export async function generateMetadata({ params }: AboutPageProps): Promise<Meta
         },
       ],
     },
-    alternates: {
-      canonical: `/${locale}/about`,
-      languages: {
-        ar: '/ar/about',
-        en: '/en/about',
-      },
-    },
+    alternates: createAlternates('/about', locale),
   };
 }
 
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'public' });
+  const siteUrl = getSiteUrl();
+
+  const organizationSchema = buildOrganizationSchema(locale);
+  const breadcrumbSchema = buildBreadcrumbListSchema([
+    { name: t('nav.home'), url: `${siteUrl}/${locale}` },
+    { name: t('nav.about'), url: `${siteUrl}/${locale}/about` },
+  ]);
 
   return (
     <article className="w-full">
+      {/* JSON-LD Rich Snippets */}
+      <JsonLdScript data={[organizationSchema, breadcrumbSchema]} />
+
       <div className="main_section space-y-10 sm:space-y-14 lg:space-y-16">
         {/* 1. Hero Cover / Asymmetric Editorial Masthead */}
         <AboutHero locale={locale} />

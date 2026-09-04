@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
+import { m, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 
 /**
  * CustomCursor — Signature Architectural Cursor Interaction.
@@ -96,7 +96,7 @@ export function CustomCursor() {
   }
 
   return (
-    <motion.div
+    <m.div
       aria-hidden="true"
       style={{
         x: smoothX,
@@ -111,7 +111,7 @@ export function CustomCursor() {
       }}
       transition={{ duration: 0.15 }}>
       {isExplore ? (
-        <motion.div
+        <m.div
           key="explore-pill"
           initial={{ scale: 0.85, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -119,14 +119,14 @@ export function CustomCursor() {
           transition={{ type: 'spring', damping: 24, stiffness: 350 }}
           className="rounded-full bg-foreground text-background px-3.5 py-1.5 text-xs font-semibold tracking-wide shadow-lg flex items-center justify-center whitespace-nowrap">
           <span>{t('cursor.explore')}</span>
-        </motion.div>
+        </m.div>
       ) : (
-        <motion.div
+        <m.div
           key="cursor-dot"
           className="h-2 w-2 rounded-full bg-foreground shadow-xs"
           transition={{ type: 'spring', damping: 24, stiffness: 350 }}
         />
       )}
-    </motion.div>
+    </m.div>
   );
 }

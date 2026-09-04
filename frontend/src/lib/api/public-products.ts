@@ -11,7 +11,7 @@ import type {
  */
 export const PUBLIC_PRODUCT_QUERY_CONFIG = {
   staleTime: 5 * 60 * 1000, // 5 minutes
-  gcTime: 15 * 60 * 1000, // 15 minutes
+  gcTime: 30 * 60 * 1000, // 30 minutes
   refetchOnWindowFocus: false,
   refetchOnReconnect: true,
   retry: 2,

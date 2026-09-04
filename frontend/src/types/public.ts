@@ -415,7 +415,7 @@ export interface SocialChannelsProps {
  */
 export interface BrandedImageFallbackProps {
   className?: string;
-  aspectRatio?: 'video' | 'square' | '4/3';
+  aspectRatio?: 'video' | 'square' | '4/3' | '16/10';
   showLabel?: boolean;
 }
 

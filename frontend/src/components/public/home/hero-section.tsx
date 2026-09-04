@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { ArrowRight, FolderKanban, PhoneCall } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import { HeroMetrics } from './hero-metrics';
  * Public Home Page Hero Section.
  * Implements the focal architectural entrance motion sequence
  * with staggered metric revelations and strict prefers-reduced-motion support.
+ * Uses lightweight LazyMotion m components.
  */
 export function HeroSection() {
   const t = useTranslations('public');
@@ -45,7 +46,7 @@ export function HeroSection() {
   };
 
   return (
-    <motion.section
+    <m.section
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -57,21 +58,21 @@ export function HeroSection() {
       />
 
       {/* Flagship Headline */}
-      <motion.h1
+      <m.h1
         variants={itemVariants}
         className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground max-w-4xl leading-[1.15]">
         {t('hero.title')}
-      </motion.h1>
+      </m.h1>
 
       {/* Subtitle Value Proposition */}
-      <motion.p
+      <m.p
         variants={itemVariants}
         className="mt-6 text-sm sm:text-base md:text-lg text-muted-foreground max-w-2xl leading-relaxed">
         {t('hero.subtitle')}
-      </motion.p>
+      </m.p>
 
       {/* Primary Action Buttons */}
-      <motion.div
+      <m.div
         variants={itemVariants}
         className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 w-full sm:w-auto">
         <Link href="/projects" className="w-full sm:w-auto">
@@ -93,10 +94,10 @@ export function HeroSection() {
             <span>{t('hero.contactUs')}</span>
           </Button>
         </Link>
-      </motion.div>
+      </m.div>
 
       {/* 4 Sector Metric Badges Grid with Staggered Entrance and Micro-lifts */}
       <HeroMetrics />
-    </motion.section>
+    </m.section>
   );
 }

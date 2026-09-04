@@ -5,6 +5,7 @@ import { ContactCardsGrid } from '@/components/public/contact/contact-cards-grid
 import { LocationMapCard } from '@/components/public/contact/location-map-card';
 import { WhatsAppCta } from '@/components/public/contact/whatsapp-cta';
 import { SocialChannels } from '@/components/public/contact/social-channels';
+import { createAlternates, getOgLocale } from '@/lib/seo';
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
       title,
       description,
       type: 'website',
-      locale: locale === 'ar' ? 'ar_KW' : 'en_US',
+      locale: getOgLocale(locale),
       images: [
         {
           url: '/images/og-share-card.svg',
@@ -34,13 +35,7 @@ export async function generateMetadata({ params }: ContactPageProps): Promise<Me
         },
       ],
     },
-    alternates: {
-      canonical: `/${locale}/contact`,
-      languages: {
-        ar: '/ar/contact',
-        en: '/en/contact',
-      },
-    },
+    alternates: createAlternates('/contact', locale),
   };
 }
 

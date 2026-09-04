@@ -16,7 +16,9 @@ export function BrandedImageFallback({
       ? 'aspect-square'
       : aspectRatio === '4/3'
         ? 'aspect-4/3'
-        : 'aspect-video';
+        : aspectRatio === '16/10'
+          ? 'aspect-16/10'
+          : 'aspect-video';
 
   return (
     <div

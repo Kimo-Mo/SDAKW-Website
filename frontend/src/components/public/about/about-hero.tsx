@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion, useReducedMotion } from 'framer-motion';
+import { m, useReducedMotion } from 'framer-motion';
 import { Building2, FileDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import type { AboutHeroProps } from '@/types/public';
@@ -45,7 +45,7 @@ export function AboutHero({ className }: AboutHeroProps) {
   };
 
   return (
-    <motion.section
+    <m.section
       aria-labelledby="about-hero-heading"
       initial="hidden"
       animate="visible"
@@ -59,16 +59,16 @@ export function AboutHero({ className }: AboutHeroProps) {
         <div className="lg:col-span-7 xl:col-span-8 flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             {/* Architectural Category Tag */}
-            <motion.div variants={itemVariants}>
+            <m.div variants={itemVariants}>
               <div className="inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-wider rtl:tracking-normal rtl:font-sans text-muted-foreground uppercase">
                 <Building2 className="h-3.5 w-3.5 text-foreground shrink-0" aria-hidden="true" />
                 <span>{t('aboutPage.badge')}</span>
                 <span className="text-border" aria-hidden="true">|</span>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Main Corporate Headline */}
-            <motion.div variants={itemVariants} className="space-y-2">
+            <m.div variants={itemVariants} className="space-y-2">
               <h1
                 id="about-hero-heading"
                 className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-foreground leading-[1.15]">
@@ -77,20 +77,20 @@ export function AboutHero({ className }: AboutHeroProps) {
               <p className="text-base sm:text-lg lg:text-xl font-medium text-muted-foreground">
                 {t('aboutPage.subtitle')}
               </p>
-            </motion.div>
+            </m.div>
 
             {/* Corporate Slogan Tagline Callout */}
-            <motion.div
+            <m.div
               variants={itemVariants}
               className="border-s-2 border-foreground ps-4 py-1">
               <p className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight text-foreground/90">
                 {t('aboutPage.tagline')}
               </p>
-            </motion.div>
+            </m.div>
           </div>
 
           {/* Download Action */}
-          <motion.div variants={itemVariants} className="pt-2">
+          <m.div variants={itemVariants} className="pt-2">
             <a
               href="/documents/sda-corporate-profile.pdf"
               target="_blank"
@@ -105,11 +105,11 @@ export function AboutHero({ className }: AboutHeroProps) {
                 <span>{t('aboutPage.downloadProfile')}</span>
               </Button>
             </a>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Right / Monolithic Metric Column */}
-        <motion.div
+        <m.div
           variants={itemVariants}
           className="lg:col-span-5 xl:col-span-4 flex flex-col justify-between border border-border bg-muted/30 p-6 sm:p-8 space-y-6">
           <div className="space-y-3">
@@ -133,8 +133,8 @@ export function AboutHero({ className }: AboutHeroProps) {
             <span>KUWAIT</span>
             <span>TIER-1 GENERAL CONTRACTING</span>
           </div>
-        </motion.div>
+        </m.div>
       </div>
-    </motion.section>
+    </m.section>
   );
 }

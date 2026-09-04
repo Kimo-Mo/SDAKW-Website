@@ -20,8 +20,14 @@
     "switchLocale": "English",
     "switchLocaleAria": "التبديل إلى اللغة الإنجليزية",
     "phoneValue": "+96550979575",
+    "phoneAria": "الاتصال بالهاتف: +96550979575",
     "emailValue": "info@sdakw.com",
-    "addressValue": "الكويت"
+    "emailAria": "إرسال بريد إلكتروني: info@sdakw.com",
+    "addressValue": "الكويت",
+    "addressAria": "موقع المقر الرئيسي على خرائط جوجل",
+    "socialLinkedIn": "حساب لينكد إن لشركة سالم دويح العجمي",
+    "socialInstagram": "حساب إنستغرام لشركة سالم دويح العجمي",
+    "socialFacebook": "صفحة فيسبوك لشركة سالم دويح العجمي"
   },
   "hero": {
     "badge": "شركة مقاولات عامة كويتية رائدة (تأسست 1999)",

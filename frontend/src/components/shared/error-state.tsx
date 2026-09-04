@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { TriangleAlertIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -30,7 +30,7 @@ export function ErrorState({
   className,
 }: ErrorStateProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
@@ -53,6 +53,6 @@ export function ErrorState({
           {retryLabel}
         </Button>
       ) : null}
-    </motion.div>
+    </m.div>
   );
 }

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { FolderSearch, type LucideIcon } from 'lucide-react';
 import React from 'react';
 
@@ -30,7 +30,7 @@ export function EmptyState({
   className,
 }: EmptyStateProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
@@ -64,6 +64,6 @@ export function EmptyState({
           </Button>
         </div>
       ) : null}
-    </motion.div>
+    </m.div>
   );
 }

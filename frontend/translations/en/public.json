@@ -20,8 +20,14 @@
     "switchLocale": "العربية",
     "switchLocaleAria": "Switch language to Arabic",
     "phoneValue": "+96550979575",
+    "phoneAria": "Call official phone: +96550979575",
     "emailValue": "info@sdakw.com",
-    "addressValue": "Kuwait"
+    "emailAria": "Send email to: info@sdakw.com",
+    "addressValue": "Kuwait",
+    "addressAria": "Headquarters location on Google Maps",
+    "socialLinkedIn": "Salem Duwaih Al-Ajmi Co. on LinkedIn",
+    "socialInstagram": "Salem Duwaih Al-Ajmi Co. on Instagram",
+    "socialFacebook": "Salem Duwaih Al-Ajmi Co. on Facebook"
   },
   "hero": {
     "badge": "Leading Kuwaiti General Contracting Co. (Est. 1999)",

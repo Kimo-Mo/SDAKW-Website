@@ -48,6 +48,7 @@ export function ContactHeader({ className }: ContactHeaderProps) {
                   alt={t('contactPage.title')}
                   fill
                   priority
+                  fetchPriority="high"
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 550px"
                   className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-102 motion-reduce:transform-none"
                 />

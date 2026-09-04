@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { getPublicProjects } from '@/lib/api/public-projects';
 import { ProjectsListingView } from '@/components/public/projects/projects-listing-view';
 import { Skeleton } from '@/components/ui/skeleton';
+import { createAlternates, getOgLocale } from '@/lib/seo';
 
 interface ProjectsPageProps {
   params: Promise<{ locale: string }>;
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: ProjectsPageProps): Promise<M
       title,
       description,
       type: 'website',
-      locale: locale === 'ar' ? 'ar_KW' : 'en_US',
+      locale: getOgLocale(locale),
       images: [
         {
           url: '/images/og-share-card.svg',
@@ -33,13 +34,7 @@ export async function generateMetadata({ params }: ProjectsPageProps): Promise<M
         },
       ],
     },
-    alternates: {
-      canonical: `/${locale}/projects`,
-      languages: {
-        ar: '/ar/projects',
-        en: '/en/projects',
-      },
-    },
+    alternates: createAlternates('/projects', locale),
   };
 }
 

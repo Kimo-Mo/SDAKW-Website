@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import { m, useReducedMotion, type Variants } from 'framer-motion';
 import { Clock, Landmark, Building2, ShieldCheck, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -35,7 +35,7 @@ export function HeroMetricCard({
   const Icon = item.icon;
 
   return (
-    <motion.div
+    <m.div
       custom={index}
       variants={variants}
       className={cn(
@@ -63,7 +63,7 @@ export function HeroMetricCard({
       </div>
 
       <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{item.label}</p>
-    </motion.div>
+    </m.div>
   );
 }
 

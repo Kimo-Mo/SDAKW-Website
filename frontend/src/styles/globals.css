@@ -185,6 +185,15 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+}
+
 .main_section {
   @apply w-full max-w-7xl mx-auto py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8;
 }

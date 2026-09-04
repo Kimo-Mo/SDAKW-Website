@@ -27,7 +27,8 @@ export function ProjectHero({ coverImage, title, className }: ProjectHeroProps) 
           alt={title}
           fill
           priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+          fetchPriority="high"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"
           onError={() => setImageError(true)}
           className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-102 motion-reduce:transform-none"
         />

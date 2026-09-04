@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 import { Spinner } from '@/components/ui/spinner';
 import { cn } from '@/lib/utils/utils';
@@ -11,7 +11,7 @@ interface LoadingStateProps {
 
 export function LoadingState({ label, description, className }: LoadingStateProps) {
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2 }}
@@ -26,6 +26,6 @@ export function LoadingState({ label, description, className }: LoadingStateProp
         <p className="text-sm font-medium text-foreground">{label}</p>
         {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
       </div>
-    </motion.div>
+    </m.div>
   );
 }

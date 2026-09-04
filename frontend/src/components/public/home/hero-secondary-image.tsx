@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { m, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 
 /**
  * HeroSecondaryImage — Signature Architectural Showcase Image.
@@ -31,12 +31,12 @@ export function HeroSecondaryImage() {
       ref={containerRef}
       aria-label={t('hero.secondaryImageAlt')}
       className="main_section py-0!">
-      <motion.div
+      <m.div
         style={shouldReduceMotion ? undefined : { scale, y }}
         className="relative overflow-hidden border border-border bg-card shadow-xs">
         {/* Outer aspect ratio container */}
         <div className="relative aspect-video sm:aspect-21/9 w-full overflow-hidden">
-          <motion.div
+          <m.div
             style={shouldReduceMotion ? undefined : { y: imageY, scale: 1.08 }}
             className="absolute inset-0 w-full h-full">
             <Image
@@ -44,10 +44,11 @@ export function HeroSecondaryImage() {
               alt={t('hero.secondaryImageAlt')}
               fill
               priority
+              fetchPriority="high"
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
               className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-102 motion-reduce:transform-none"
             />
-          </motion.div>
+          </m.div>
 
           {/* Architectural gradient scrim for seamless visual grounding */}
           <div
@@ -63,7 +64,7 @@ export function HeroSecondaryImage() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

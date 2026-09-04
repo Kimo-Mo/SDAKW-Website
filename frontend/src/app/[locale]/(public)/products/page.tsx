@@ -4,6 +4,7 @@ import { getTranslations } from 'next-intl/server';
 import { getPublicProducts } from '@/lib/api/public-products';
 import { ProductsListingView } from '@/components/public/products/products-listing-view';
 import { Skeleton } from '@/components/ui/skeleton';
+import { createAlternates, getOgLocale } from '@/lib/seo';
 
 interface ProductsPageProps {
   params: Promise<{ locale: string }>;
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: ProductsPageProps): Promise<M
       title,
       description,
       type: 'website',
-      locale: locale === 'ar' ? 'ar_KW' : 'en_US',
+      locale: getOgLocale(locale),
       images: [
         {
           url: '/images/og-share-card.svg',
@@ -33,13 +34,7 @@ export async function generateMetadata({ params }: ProductsPageProps): Promise<M
         },
       ],
     },
-    alternates: {
-      canonical: `/${locale}/products`,
-      languages: {
-        ar: '/ar/products',
-        en: '/en/products',
-      },
-    },
+    alternates: createAlternates('/products', locale),
   };
 }
 

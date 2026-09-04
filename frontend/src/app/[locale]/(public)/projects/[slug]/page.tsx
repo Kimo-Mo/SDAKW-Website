@@ -5,6 +5,19 @@ import { getTranslations } from 'next-intl/server';
 import { getPublicProjectBySlug } from '@/lib/api/public-projects';
 import { ProjectDetailView } from '@/components/public/project-detail/project-detail-view';
 import { Skeleton } from '@/components/ui/skeleton';
+import {
+  BRAND_NAMES,
+  cleanDescription,
+  createAlternates,
+  getAlternateOgLocale,
+  getOgLocale,
+  getSiteUrl,
+} from '@/lib/seo';
+import {
+  JsonLdScript,
+  buildBreadcrumbListSchema,
+  buildProjectSchema,
+} from '@/lib/jsonld';
 
 interface ProjectDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -13,63 +26,78 @@ interface ProjectDetailPageProps {
 export async function generateMetadata({ params }: ProjectDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: 'public' });
+  const siteUrl = getSiteUrl();
 
   try {
     const project = await getPublicProjectBySlug(slug);
-    if (!project) {
+    if (!project || project.published === false) {
       return {
         title: `${t('projectDetail.notFound.title')} | ${t('brand.shortName')}`,
+        robots: { index: false, follow: false },
       };
     }
 
-    const localizedTitle =
-      locale === 'ar'
-        ? project.title?.ar || project.title?.en || ''
-        : project.title?.en || project.title?.ar || '';
+    const isArabic = locale === 'ar';
+    const siteName = isArabic ? BRAND_NAMES.ar : BRAND_NAMES.en;
 
-    const localizedDescription =
-      locale === 'ar'
-        ? project.description?.ar || project.description?.en || ''
-        : project.description?.en || project.description?.ar || '';
+    const localizedTitle = isArabic
+      ? project.title?.ar || project.title?.en || ''
+      : project.title?.en || project.title?.ar || '';
 
-    const title = `${localizedTitle} | ${t('brand.shortName')}`;
-    const description = localizedDescription || t('projectsPage.subtitle');
+    const rawDescription = isArabic
+      ? project.description?.ar || project.description?.en || ''
+      : project.description?.en || project.description?.ar || '';
+
+    const description =
+      cleanDescription(rawDescription) || t('projectsPage.subtitle');
+
+    const alternates = createAlternates(`/projects/${slug}`, locale);
+
+    const ogImages = project.coverImage?.url
+      ? [
+          {
+            url: project.coverImage.url,
+            alt: localizedTitle,
+          },
+        ]
+      : [
+          {
+            url: `${siteUrl}/images/og-share-card.svg`,
+            width: 1200,
+            height: 630,
+            alt: localizedTitle,
+          },
+        ];
+
+    const twitterImages = project.coverImage?.url
+      ? [project.coverImage.url]
+      : [`${siteUrl}/images/og-share-card.svg`];
 
     return {
-      title,
+      title: localizedTitle,
       description,
+      alternates,
       openGraph: {
-        title,
+        title: localizedTitle,
         description,
+        url: alternates.canonical,
         type: 'article',
-        locale: locale === 'ar' ? 'ar_KW' : 'en_US',
-        images: project.coverImage?.url
-          ? [
-              {
-                url: project.coverImage.url,
-                alt: localizedTitle,
-              },
-            ]
-          : [
-              {
-                url: '/images/og-share-card.svg',
-                width: 1200,
-                height: 630,
-                alt: title,
-              },
-            ],
+        siteName,
+        locale: getOgLocale(locale),
+        alternateLocale: [getAlternateOgLocale(locale)],
+        images: ogImages,
       },
-      alternates: {
-        canonical: `/${locale}/projects/${slug}`,
-        languages: {
-          ar: `/ar/projects/${slug}`,
-          en: `/en/projects/${slug}`,
-        },
+      twitter: {
+        card: 'summary_large_image',
+        title: localizedTitle,
+        description,
+        images: twitterImages,
       },
     };
   } catch {
     return {
       title: `${t('projectDetail.notFound.title')} | ${t('brand.shortName')}`,
+      robots: { index: false, follow: false },
     };
   }
 }
@@ -112,6 +140,8 @@ function ProjectDetailSkeleton() {
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: 'public' });
+  const siteUrl = getSiteUrl();
 
   let project;
   try {
@@ -121,13 +151,29 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
     notFound();
   }
 
-  if (!project) {
+  if (!project || project.published === false) {
     notFound();
   }
 
+  const isArabic = locale === 'ar';
+  const localizedTitle = isArabic
+    ? project.title?.ar || project.title?.en || ''
+    : project.title?.en || project.title?.ar || '';
+
+  const projectSchema = buildProjectSchema(project, locale);
+  const breadcrumbSchema = buildBreadcrumbListSchema([
+    { name: t('nav.home'), url: `${siteUrl}/${locale}` },
+    { name: t('nav.projects'), url: `${siteUrl}/${locale}/projects` },
+    { name: localizedTitle, url: `${siteUrl}/${locale}/projects/${slug}` },
+  ]);
+
   return (
-    <Suspense fallback={<ProjectDetailSkeleton />}>
-      <ProjectDetailView project={project} locale={locale} />
-    </Suspense>
+    <>
+      {/* JSON-LD Project & BreadcrumbList Rich Snippets */}
+      <JsonLdScript data={[projectSchema, breadcrumbSchema]} />
+      <Suspense fallback={<ProjectDetailSkeleton />}>
+        <ProjectDetailView project={project} locale={locale} />
+      </Suspense>
+    </>
   );
 }

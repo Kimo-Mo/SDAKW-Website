@@ -82,7 +82,7 @@ export function PublicFooter() {
                   href="/admin"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-1">
+                  className="text-xs text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
                   <span>{t('footer.adminPortal')}</span>
                   <ArrowUpRight className="h-3 w-3 rtl:-scale-x-100" />
                 </Link>
@@ -166,7 +166,7 @@ export function PublicFooter() {
         {/* Bottom Bar: Copyright Notice */}
         <div className="border-t border-border pt-8 mt-10 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-foreground gap-4">
           <p>{t('footer.copyright', { year: currentYear })}</p>
-          <p className="text-xs text-muted-foreground/70">{t('brand.tagline')}</p>
+          <p className="text-xs text-muted-foreground">{t('brand.tagline')}</p>
         </div>
       </div>
     </footer>

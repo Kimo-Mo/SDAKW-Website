@@ -40,7 +40,7 @@ function GallerySlide({ image, index, total, projectTitle, onClick }: GallerySli
           src={image.url}
           alt={`${projectTitle} - ${t('projectDetail.gallery.imageAlt', { index: index + 1, total })}`}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 75vw, (max-width: 1280px) 50vw, 420px"
           onError={() => setImageError(true)}
           className="object-contain transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/slide:scale-102"
         />

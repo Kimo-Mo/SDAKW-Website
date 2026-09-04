@@ -66,8 +66,8 @@ export function OperationsShowcase({ className }: OperationsShowcaseProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         {/* Left: Offset Architectural Image (col-span-5) */}
         <Reveal variant="fade-scale" className="lg:col-span-5 flex">
-          <div className="relative overflow-hidden border border-border bg-muted/20 shadow-xs w-full flex flex-col min-h-75 lg:min-h-full">
-            <div className="relative flex-1 w-full min-h-75 overflow-hidden">
+          <div className="relative overflow-hidden border border-border bg-muted/20 shadow-xs w-full flex flex-col aspect-4/3 sm:aspect-16/10 lg:aspect-auto lg:h-full">
+            <div className="relative flex-1 w-full overflow-hidden">
               <Image
                 src="/images/about-2.webp"
                 alt={t('aboutPage.operations.heading')}

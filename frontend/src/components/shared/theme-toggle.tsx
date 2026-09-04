@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTheme } from 'next-themes';
 import { useTranslations } from 'next-intl';
 import { Sun, Moon } from 'lucide-react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils/utils';
@@ -85,7 +85,7 @@ export function ThemeToggle({
         )}>
         {mounted ? (
           <AnimatePresence mode="wait" initial={false}>
-            <motion.span
+            <m.span
               key={isDark ? 'dark' : 'light'}
               initial={shouldReduceMotion ? false : { opacity: 0, rotate: -45, scale: 0.8 }}
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -97,7 +97,7 @@ export function ThemeToggle({
               ) : (
                 <Moon className="h-4 w-4" />
               )}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         ) : (
           <span className="h-4 w-4" />
@@ -121,7 +121,7 @@ export function ThemeToggle({
         )}>
         {mounted ? (
           <AnimatePresence mode="wait" initial={false}>
-            <motion.span
+            <m.span
               key={isDark ? 'dark' : 'light'}
               initial={shouldReduceMotion ? false : { opacity: 0, rotate: -45, scale: 0.8 }}
               animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -133,7 +133,7 @@ export function ThemeToggle({
               ) : (
                 <Moon className="h-4 w-4" />
               )}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         ) : (
           <span className="h-4 w-4" />
@@ -156,7 +156,7 @@ export function ThemeToggle({
       )}>
       {mounted ? (
         <AnimatePresence mode="wait" initial={false}>
-          <motion.span
+          <m.span
             key={isDark ? 'dark' : 'light'}
             initial={shouldReduceMotion ? false : { opacity: 0, rotate: -45, scale: 0.8 }}
             animate={{ opacity: 1, rotate: 0, scale: 1 }}
@@ -168,7 +168,7 @@ export function ThemeToggle({
             ) : (
               <Moon className="h-4 w-4 text-foreground" />
             )}
-          </motion.span>
+          </m.span>
         </AnimatePresence>
       ) : (
         <span className="h-4 w-4" />

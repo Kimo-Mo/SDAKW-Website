@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, m } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -29,6 +29,7 @@ export function GalleryLightbox({
   const t = useTranslations('public');
   const [prevInitialIndex, setPrevInitialIndex] = useState(initialIndex);
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const isRtl = locale === 'ar';
 
   if (initialIndex !== prevInitialIndex) {
@@ -47,6 +48,25 @@ export function GalleryLightbox({
     if (total <= 1) return;
     setCurrentIndex((prev) => (prev === total - 1 ? 0 : prev + 1));
   }, [total]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    const swipeThreshold = 50;
+    if (diff > swipeThreshold) {
+      if (isRtl) handleNext();
+      else handlePrevious();
+    } else if (diff < -swipeThreshold) {
+      if (isRtl) handlePrevious();
+      else handleNext();
+    }
+    setTouchStartX(null);
+  };
 
   // Keyboard navigation & body scroll lock
   useEffect(() => {
@@ -88,7 +108,7 @@ export function GalleryLightbox({
 
   return (
     <AnimatePresence>
-      <motion.div
+      <m.div
         role="dialog"
         aria-modal="true"
         aria-label={t('productDetail.sections.gallery')}
@@ -140,12 +160,14 @@ export function GalleryLightbox({
           </Button>
         )}
 
-        {/* Main Image Container with gesture swipe */}
+        {/* Main Image Container with touch gesture swipe */}
         <div
           className="relative max-h-[85vh] max-w-[90vw] flex items-center justify-center overflow-hidden"
-          onClick={(e) => e.stopPropagation()}>
+          onClick={(e) => e.stopPropagation()}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}>
           <AnimatePresence mode="wait">
-            <motion.img
+            <m.img
               key={`lightbox-img-${currentIndex}`}
               src={currentImage.url}
               alt={t('productDetail.gallery.imageAlt', {
@@ -156,20 +178,7 @@ export function GalleryLightbox({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25, ease: 'easeOut' }}
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.3}
-              onDragEnd={(_, info) => {
-                const swipeThreshold = 50;
-                if (info.offset.x > swipeThreshold) {
-                  if (isRtl) handleNext();
-                  else handlePrevious();
-                } else if (info.offset.x < -swipeThreshold) {
-                  if (isRtl) handlePrevious();
-                  else handleNext();
-                }
-              }}
-              className="max-h-[80vh] max-w-full rounded-none border border-white/10 object-contain shadow-2xl cursor-grab active:cursor-grabbing"
+              className="max-h-[80vh] max-w-full rounded-none border border-white/10 object-contain shadow-2xl"
             />
           </AnimatePresence>
         </div>
@@ -192,7 +201,7 @@ export function GalleryLightbox({
             )}
           </Button>
         )}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }

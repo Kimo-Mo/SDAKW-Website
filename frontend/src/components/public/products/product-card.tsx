@@ -65,7 +65,7 @@ export function ProductCard({ product, locale, className }: ProductCardProps) {
             className="object-cover transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] motion-reduce:transform-none"
           />
         ) : (
-          <BrandedImageFallback aspectRatio="video" />
+          <BrandedImageFallback aspectRatio="16/10" />
         )}
       </div>
 
