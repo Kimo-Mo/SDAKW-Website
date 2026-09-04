@@ -46,7 +46,10 @@ export function HeroMetricCard({
         <span className="font-mono text-xs font-bold text-muted-foreground">
           METRIC_{item.index}
         </span>
-        <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+        <Icon
+          className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors"
+          aria-hidden="true"
+        />
       </div>
 
       <div
@@ -59,9 +62,7 @@ export function HeroMetricCard({
         {item.value}
       </div>
 
-      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">
-        {item.label}
-      </p>
+      <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2">{item.label}</p>
     </motion.div>
   );
 }
@@ -132,12 +133,7 @@ export function HeroMetrics({ items, className }: HeroMetricsProps) {
         className
       )}>
       {metricList.map((item, index) => (
-        <HeroMetricCard
-          key={item.id}
-          item={item}
-          index={index}
-          variants={metricVariants}
-        />
+        <HeroMetricCard key={item.id} item={item} index={index} variants={metricVariants} />
       ))}
     </div>
   );

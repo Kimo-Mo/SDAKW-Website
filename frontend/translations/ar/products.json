@@ -1,0 +1,181 @@
+{
+  "admin": {
+    "products": {
+      "title": "كتالوج المنتجات",
+      "subtitle": "عرض وتصفية وتعديل وإدارة جميع المواد والمنتجات (الرخام، الجرانيت، الحجر الطبيعي، الكوارتز)",
+      "addNewProduct": "إضافة منتج جديد",
+      "searchPlaceholder": "البحث باسم المنتج...",
+      "filters": {
+        "category": "التصنيف",
+        "allCategories": "جميع التصنيفات",
+        "natural_granite": "جرانيت طبيعي",
+        "natural_stone": "حجر طبيعي",
+        "natural_marble": "رخام طبيعي",
+        "quartz_industrial": "كوارتز صناعي",
+        "published": "حالة النشر",
+        "allPublished": "الكل",
+        "isPublished": "منشور",
+        "isDraft": "مسودة",
+        "clear": "مسح الفلاتر"
+      },
+      "table": {
+        "cover": "الغلاف",
+        "product": "المنتج",
+        "category": "التصنيف",
+        "material": "المادة",
+        "visibility": "الظهور",
+        "actions": "الإجراءات",
+        "edit": "تعديل",
+        "delete": "حذف"
+      },
+      "categories": {
+        "natural_granite": "جرانيت طبيعي",
+        "natural_stone": "حجر طبيعي",
+        "natural_marble": "رخام طبيعي",
+        "quartz_industrial": "كوارتز صناعي"
+      },
+      "badges": {
+        "published": "منشور",
+        "draft": "مسودة"
+      },
+      "pagination": {
+        "page": "صفحة {current} من {total}",
+        "showing": "عرض {start} إلى {end} من أصل {total} منتج",
+        "prev": "السابق",
+        "next": "التالي",
+        "pageSize": "لكل صفحة:"
+      },
+      "deleteDialog": {
+        "title": "حذف المنتج",
+        "description": "هل أنت متأكد من رغبتك في حذف منتج \"{name}\"؟ سيؤدي هذا الإجراء إلى حذف المنتج وجميع الصور المرتبطة به نهائياً من Cloudinary. لا يمكن التراجع عن هذا الإجراء.",
+        "confirm": "تأكيد الحذف",
+        "deleting": "جارٍ الحذف...",
+        "cancel": "إلغاء"
+      },
+      "toasts": {
+        "deleteSuccess": "تم حذف المنتج بنجاح.",
+        "deleteError": "تعذّر حذف المنتج. يرجى المحاولة مرة أخرى."
+      },
+      "empty": {
+        "noFilterResultsTitle": "لا توجد منتجات مطابقة",
+        "noFilterResultsDesc": "لم يتم العثور على منتجات تطابق معايير البحث والتصفية المحددة.",
+        "noProductsTitle": "لا توجد منتجات مضافة حتى الآن",
+        "noProductsDesc": "ابدأ بإضافة أول منتج مواد إلى الكتالوج.",
+        "createFirst": "إضافة أول منتج"
+      },
+      "error": {
+        "title": "تعذّر تحميل المنتجات",
+        "description": "حدث خطأ أثناء جلب بيانات المنتجات من الخادم.",
+        "retry": "إعادة المحاولة"
+      },
+      "form": {
+        "createTitle": "إضافة منتج جديد",
+        "createSubtitle": "إضافة منتج مادة جديدة (رخام، جرانيت، حجر، كوارتز) إلى الكتالوج.",
+        "editTitle": "تعديل المنتج",
+        "editSubtitle": "تحديث مواصفات المنتج والخصائص والصور المعروضة.",
+        "backToProducts": "العودة إلى المنتجات",
+        "sections": {
+          "basicInfo": "البيانات الأساسية",
+          "basicInfoDesc": "تحديد اسم المنتج وتصنيف المادة والنوع الرئيسي.",
+          "attributes": "مواصفات وخصائص المنتج",
+          "attributesDesc": "إضافة وسوم ثنائية اللغة للألوان ودول المنشأ ومجالات الاستخدام وتشطيبات السطح.",
+          "media": "صور المنتج",
+          "mediaDesc": "رفع صورة الغلاف الرئيسية وما يصل إلى 10 صور للمعرض."
+        },
+        "fields": {
+          "nameAr": "اسم المنتج (بالعربية)",
+          "nameArPlaceholder": "مثال: رخام كريما مارفيل",
+          "nameEn": "اسم المنتج (بالإنجليزية)",
+          "nameEnPlaceholder": "مثال: Crema Marfil Marble",
+          "category": "التصنيف",
+          "categoryPlaceholder": "اختر التصنيف",
+          "materialAr": "المادة (بالعربية)",
+          "materialArPlaceholder": "مثال: رخام طبيعي إسباني",
+          "materialEn": "المادة (بالإنجليزية)",
+          "materialEnPlaceholder": "مثال: Spanish Natural Marble",
+          "published": "منشور (ظاهر في كتالوج المواد العام)",
+          "draft": "مسودة (مخفي من كتالوج المواد العام)"
+        },
+        "tags": {
+          "colorTitle": "الألوان المتاحة",
+          "colorDesc": "تحديد درجات الألوان المتوفرة لهذه المادة.",
+          "colorPlaceholderAr": "اللون بالعربية (مثال: بيج)",
+          "colorPlaceholderEn": "Color in English (e.g. Beige)",
+          "originTitle": "بلد المنشأ",
+          "originDesc": "تحديد دول استخراج المحاجر أو التصنيع.",
+          "originPlaceholderAr": "بلد المنشأ (مثال: إسبانيا)",
+          "originPlaceholderEn": "Origin in English (e.g. Spain)",
+          "usesTitle": "الاستخدامات والتطبيقات",
+          "usesDesc": "تحديد الاستخدامات الموصى بها (أرضيات، جدران، سلالم، أسطح).",
+          "usesPlaceholderAr": "الاستخدام (مثال: أرضيات داخلية)",
+          "usesPlaceholderEn": "Use in English (e.g. Indoor Flooring)",
+          "surfaceTitle": "تشطيبات السطح",
+          "surfaceDesc": "تحديد أنواع معالجة السطح المتوفرة (مصقول، مطفي، معالج حرارياً، إلخ).",
+          "surfacePlaceholderAr": "نوع السطح (مثال: مصقول، مطفي)",
+          "surfacePlaceholderEn": "Finish in English (e.g. Polished, Honed)",
+          "add": "إضافة",
+          "empty": "لم يتم إضافة عناصر بعد. أدخل القيمتين بالعربية والإنجليزية وانقر على إضافة.",
+          "pairRequired": "يجب إدخال القيمة بالعربية والإنجليزية معاً لإضافة عنصر.",
+          "atLeastOne": "يجب إضافة عنصر واحد على الأقل."
+        },
+        "media": {
+          "coverTitle": "صورة الغلاف",
+          "coverDesc": "الصورة الرئيسية المميزة للوح المادة أو العينة.",
+          "galleryTitle": "صور المعرض",
+          "galleryDesc": "رفع حتى 10 صور لمعرض المنتج. (مستخدم {count}/10)",
+          "dropCover": "انقر أو اسحب صورة هنا لتعيين غلاف المنتج",
+          "dropGallery": "انقر أو اسحب الصور هنا لإضافتها إلى المعرض",
+          "replaceCover": "تغيير الغلاف",
+          "removeCover": "حذف الغلاف",
+          "removeImage": "حذف الصورة",
+          "capWarning": "تم الوصول للحد الأقصى لصور المعرض (10 صور كحد أقصى)."
+        },
+        "buttons": {
+          "create": "إضافة المنتج",
+          "saving": "جارٍ حفظ المنتج...",
+          "update": "حفظ التعديلات",
+          "cancel": "إلغاء"
+        },
+        "steps": {
+          "creating": "جارٍ إنشاء سجل المنتج...",
+          "uploadingCover": "جارٍ رفع صورة الغلاف إلى Cloudinary...",
+          "uploadingGallery": "جارٍ رفع {count} صورة إلى المعرض...",
+          "complete": "اكتمل بنجاح!"
+        },
+        "toasts": {
+          "createSuccess": "تم إنشاء المنتج بنجاح.",
+          "updateSuccess": "تم تحديث بيانات المنتج بنجاح.",
+          "partialUploadError": "تم إنشاء المنتج بنجاح، ولكن تعذّر رفع بعض الصور. يمكنك إعادة المحاولة هنا.",
+          "partialUploadCoverFailed": "تم حفظ المنتج، لكن تعذّر رفع صورة الغلاف. يمكنك إعادة رفعها.",
+          "partialUploadGalleryFailed": "تم حفظ المنتج، لكن تعذّر رفع صور المعرض. يمكنك إعادة رفعها.",
+          "partialUploadBothFailed": "تم حفظ المنتج، لكن تعذّر رفع صور الغلاف والمعرض.",
+          "deleteCoverSuccess": "تم حذف صورة الغلاف بنجاح.",
+          "deleteGallerySuccess": "تم حذف صورة المعرض بنجاح.",
+          "deleteCoverError": "تعذّر حذف صورة الغلاف. يرجى المحاولة مرة أخرى.",
+          "deleteGalleryError": "تعذّر حذف صورة المعرض. يرجى المحاولة مرة أخرى.",
+          "createError": "تعذّر إنشاء المنتج. يرجى التحقق من المدخلات والمحاولة مرة أخرى.",
+          "updateError": "تعذّر تحديث المنتج. يرجى التحقق من المدخلات والمحاولة مرة أخرى.",
+          "missingIdError": "تم إنشاء المنتج، ولكن لم يتم استلام معرّف المنتج من الخادم."
+        },
+        "errors": {
+          "loadTitle": "تعذّر تحميل بيانات المنتج",
+          "loadDesc": "لم نتمكن من جلب بيانات المنتج. قد يكون المنتج محذوفاً أو حدث خطأ في الخادم.",
+          "retry": "إعادة المحاولة"
+        },
+        "validation": {
+          "nameArRequired": "اسم المنتج بالعربية مطلوب (حرفان على الأقل).",
+          "nameEnRequired": "اسم المنتج بالإنجليزية مطلوب (حرفان على الأقل).",
+          "categoryRequired": "تصنيف المنتج مطلوب.",
+          "materialArRequired": "المادة بالعربية مطلوبة (حرفان على الأقل).",
+          "materialEnRequired": "المادة بالإنجليزية مطلوبة (حرفان على الأقل).",
+          "colorRequired": "يجب إضافة لون واحد على الأقل.",
+          "originRequired": "يجب إضافة بلد منشأ واحد على الأقل.",
+          "usesRequired": "يجب إضافة استخدام واحد على الأقل.",
+          "surfaceRequired": "يجب إضافة تشطيب سطح واحد على الأقل.",
+          "itemArRequired": "القيمة بالعربية مطلوبة.",
+          "itemEnRequired": "القيمة بالإنجليزية مطلوبة."
+        }
+      }
+    }
+  }
+}

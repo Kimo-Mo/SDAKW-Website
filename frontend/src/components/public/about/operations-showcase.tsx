@@ -69,7 +69,7 @@ export function OperationsShowcase({ className }: OperationsShowcaseProps) {
           <div className="relative overflow-hidden border border-border bg-muted/20 shadow-xs w-full flex flex-col min-h-75 lg:min-h-full">
             <div className="relative flex-1 w-full min-h-75 overflow-hidden">
               <Image
-                src="/images/about-2.jpg"
+                src="/images/about-2.webp"
                 alt={t('aboutPage.operations.heading')}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"
@@ -101,7 +101,7 @@ export function OperationsShowcase({ className }: OperationsShowcaseProps) {
                       <span className="font-mono text-sm font-bold text-foreground">
                         {cap.index}.
                       </span>
-                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
                     </div>
                     <span className="font-mono rtl:font-sans text-[11px] uppercase tracking-wider rtl:tracking-normal px-2 py-0.5 bg-muted text-muted-foreground border border-border">
                       {cap.tag}

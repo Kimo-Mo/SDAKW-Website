@@ -30,14 +30,54 @@ export const PARTNERS_LIST: PartnerItem[] = [
       en: 'Ministry of Education',
       ar: 'وزارة التربية',
     },
-    logoSrc: '/images/partners/وزارة-التربية-الكويت.png',
+    logoSrc: '/images/partners/وزارة-التربية-الكويت.webp',
   },
   {
     id: 'moaia',
     name: {
       en: 'Ministry of Awqaf and Islamic Affairs',
-      ar: 'وزارة الاوقاف والشؤون الاسلامية',
+      ar: 'وزارة الأوقاف والشؤون الإسلامية',
     },
-    logoSrc: '/images/partners/وزارة الاوقاف.png',
+    logoSrc: '/images/partners/وزارة الاوقاف.webp',
+  },
+  {
+    id: 'arab-contractors',
+    name: {
+      en: 'The Arab Contractors',
+      ar: 'المقاولون العرب',
+    },
+    logoSrc: '/images/partners/almokawelon_alarab.webp',
+  },
+  {
+    id: 'canar',
+    name: {
+      en: 'Canar Trading & Contracting',
+      ar: 'شركة كنار للتجارة والمقاولات',
+    },
+    logoSrc: '/images/partners/canar.webp',
+  },
+  {
+    id: 'first-group',
+    name: {
+      en: 'First Group for Contracting',
+      ar: 'مجموعة فيرست للإنشاءات',
+    },
+    logoSrc: '/images/partners/first_group.webp',
+  },
+  {
+    id: 'recafco',
+    name: {
+      en: 'RECAFCO',
+      ar: 'شركة ريكافكو',
+    },
+    logoSrc: '/images/partners/recafco.webp',
+  },
+  {
+    id: 'srbg',
+    name: {
+      en: 'SRBG',
+      ar: 'شركة إس آر بي جي',
+    },
+    logoSrc: '/images/partners/srpg.webp',
   },
 ];

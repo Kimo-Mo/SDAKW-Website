@@ -88,7 +88,7 @@ export function CoreValuesGrid({ className }: CoreValuesGridProps) {
                       <span className="font-mono text-xs font-bold text-foreground">
                         VAL_{value.index}
                       </span>
-                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
                     </div>
 
                     <h3 className="font-heading text-base sm:text-lg font-bold text-foreground tracking-tight">

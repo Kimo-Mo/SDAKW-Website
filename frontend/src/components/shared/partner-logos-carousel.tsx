@@ -19,6 +19,7 @@ export interface PartnerLogosCarouselProps {
 /**
  * PartnerLogosCarousel — Reusable Continuous Auto-Scrolling Client/Partner Showcase.
  * Features smooth continuous auto-scrolling with Embla Autoplay, pause-on-hover/focus,
+ * uniform fixed-light chip containers for mixed-background logo normalization,
  * automatic RTL logical direction handling, grayscale-to-color transitions,
  * and complete autoplay disabling under prefers-reduced-motion.
  */
@@ -52,17 +53,7 @@ export function PartnerLogosCarousel({
   }, [items]);
 
   return (
-    <div className={cn('relative w-full overflow-hidden', className)}>
-      {/* Side gradient feathering for smooth edge transitions */}
-      <div
-        className="pointer-events-none absolute inset-y-0 inset-s-0 z-10 w-16 sm:w-24 bg-linear-to-e from-background to-transparent"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 inset-e-0 z-10 w-16 sm:w-24 bg-linear-to-s from-background to-transparent"
-        aria-hidden="true"
-      />
-
+    <div className={cn('relative w-full overflow-hidden py-2', className)}>
       <Carousel
         opts={{
           align: 'start',
@@ -80,23 +71,30 @@ export function PartnerLogosCarousel({
             return (
               <CarouselItem
                 key={`${item.id}-${index}`}
-                className="ps-4 sm:ps-6 basis-1/1 sm:basis-1/2 md:basis-1/3 ">
-                <div
-                  title={displayName}
-                  className="group relative flex h-32.5 items-center justify-center border border-border/70 bg-card/60 px-6 py-4 shadow-2xs transition-all duration-300 hover:border-foreground/40 hover:bg-card hover:shadow-xs">
-                  <div className="relative  w-full max-w-32.5 flex items-center justify-center">
-                    <Image
-                      src={item.logoSrc}
-                      alt={displayName}
-                      width={130}
-                      height={130}
-                      className="object-contain max-h-24 w-auto transition-transform duration-300 group-hover:scale-105"
-                    />
+                className="ps-4 sm:ps-6 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                <div className="group flex flex-col items-center">
+                  {/* Uniform Fixed-Light Card/Chip Container (Normalizes transparent & white-background logos across light/dark modes) */}
+                  <div
+                    title={displayName}
+                    className="relative flex h-34 sm:h-40 w-full items-center justify-center rounded-xl border border-[#E5DFD6] bg-[#FAF8F5] p-4 sm:p-5 shadow-2xs transition-all duration-300 hover:border-[#CA9E62] hover:shadow-xs">
+                    <div className="relative flex h-full w-full items-center justify-center">
+                      <Image
+                        src={item.logoSrc}
+                        alt={displayName}
+                        width={160}
+                        height={90}
+                        className="object-contain max-h-16 sm:max-h-20 w-auto max-w-[85%] transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Partner Name Caption */}
+                  <div className="mt-2.5 text-center px-1">
+                    <p className="text-xs sm:text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors line-clamp-1 truncate">
+                      {displayName}
+                    </p>
                   </div>
                 </div>
-                  <div className="mt-2 text-center">
-                    <p className="text-sm">{displayName}</p>
-                  </div>
               </CarouselItem>
             );
           })}

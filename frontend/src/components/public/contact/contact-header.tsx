@@ -44,7 +44,7 @@ export function ContactHeader({ className }: ContactHeaderProps) {
             <div className="relative overflow-hidden border border-border bg-card shadow-xs">
               <div className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden">
                 <Image
-                  src="/images/contact-1.jpg"
+                  src="/images/contact-1.webp"
                   alt={t('contactPage.title')}
                   fill
                   priority

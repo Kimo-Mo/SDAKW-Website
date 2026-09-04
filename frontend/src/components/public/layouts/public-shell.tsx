@@ -7,6 +7,7 @@ import { PublicMobileNav } from './mobile-nav';
 import { PublicFooter } from './footer';
 import { CustomCursor } from '@/components/shared/custom-cursor';
 import type { PublicShellProps } from '@/types/public';
+import TopUtilityBar from './topUtilityBar';
 
 export function PublicShell({ children, locale }: PublicShellProps) {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
@@ -18,6 +19,7 @@ export function PublicShell({ children, locale }: PublicShellProps) {
       <CustomCursor />
 
       {/* Sticky Header */}
+      <TopUtilityBar />
       <PublicHeader
         currentPath={pathname}
         locale={locale}

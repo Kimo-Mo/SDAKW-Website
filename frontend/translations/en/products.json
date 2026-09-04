@@ -1,0 +1,181 @@
+{
+  "admin": {
+    "products": {
+      "title": "Products Catalog",
+      "subtitle": "View, search, filter, edit, and manage all materials products (marble, granite, stone, quartz)",
+      "addNewProduct": "Add New Product",
+      "searchPlaceholder": "Search by product name...",
+      "filters": {
+        "category": "Category",
+        "allCategories": "All Categories",
+        "natural_granite": "Natural Granite",
+        "natural_stone": "Natural Stone",
+        "natural_marble": "Natural Marble",
+        "quartz_industrial": "Industrial Quartz",
+        "published": "Published State",
+        "allPublished": "All Visibility",
+        "isPublished": "Published",
+        "isDraft": "Draft",
+        "clear": "Clear Filters"
+      },
+      "table": {
+        "cover": "Cover",
+        "product": "Product",
+        "category": "Category",
+        "material": "Material",
+        "visibility": "Visibility",
+        "actions": "Actions",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "categories": {
+        "natural_granite": "Natural Granite",
+        "natural_stone": "Natural Stone",
+        "natural_marble": "Natural Marble",
+        "quartz_industrial": "Industrial Quartz"
+      },
+      "badges": {
+        "published": "Published",
+        "draft": "Draft"
+      },
+      "pagination": {
+        "page": "Page {current} of {total}",
+        "showing": "Showing {start} to {end} of {total} products",
+        "prev": "Previous",
+        "next": "Next",
+        "pageSize": "Per page:"
+      },
+      "deleteDialog": {
+        "title": "Delete Product",
+        "description": "Are you sure you want to delete \"{name}\"? This will permanently remove the product and its associated gallery images from Cloudinary. This action cannot be undone.",
+        "confirm": "Delete Product",
+        "deleting": "Deleting...",
+        "cancel": "Cancel"
+      },
+      "toasts": {
+        "deleteSuccess": "Product deleted successfully.",
+        "deleteError": "Failed to delete product. Please try again."
+      },
+      "empty": {
+        "noFilterResultsTitle": "No matching products",
+        "noFilterResultsDesc": "No products match the selected search and filter criteria.",
+        "noProductsTitle": "No products created yet",
+        "noProductsDesc": "Get started by adding your first material product to the catalog.",
+        "createFirst": "Add First Product"
+      },
+      "error": {
+        "title": "Unable to load products",
+        "description": "A network or server error occurred while retrieving products.",
+        "retry": "Retry"
+      },
+      "form": {
+        "createTitle": "Create New Product",
+        "createSubtitle": "Add a new material (marble, granite, stone, quartz) to the catalog.",
+        "editTitle": "Edit Product",
+        "editSubtitle": "Update product specifications, attributes, and media gallery.",
+        "backToProducts": "Back to Products",
+        "sections": {
+          "basicInfo": "Basic Information",
+          "basicInfoDesc": "Specify product name, classification category, and primary material.",
+          "attributes": "Product Specifications",
+          "attributesDesc": "Add bilingual tags for colors, countries of origin, applications/uses, and surface finishes.",
+          "media": "Product Images",
+          "mediaDesc": "Upload high-resolution cover photo and up to 10 gallery images."
+        },
+        "fields": {
+          "nameAr": "Product Name (Arabic)",
+          "nameArPlaceholder": "e.g. رخام كريما مارفيل",
+          "nameEn": "Product Name (English)",
+          "nameEnPlaceholder": "e.g. Crema Marfil Marble",
+          "category": "Category",
+          "categoryPlaceholder": "Select category",
+          "materialAr": "Material (Arabic)",
+          "materialArPlaceholder": "e.g. رخام طبيعي إسباني",
+          "materialEn": "Material (English)",
+          "materialEnPlaceholder": "e.g. Spanish Natural Marble",
+          "published": "Published (Visible in public materials catalog)",
+          "draft": "Draft (Hidden from public materials catalog)"
+        },
+        "tags": {
+          "colorTitle": "Colors",
+          "colorDesc": "Specify available color tones and shades for this material.",
+          "colorPlaceholderAr": "اللون بالعربية (مثال: بيج)",
+          "colorPlaceholderEn": "Color in English (e.g. Beige)",
+          "originTitle": "Country of Origin",
+          "originDesc": "Specify quarrying or manufacturing origin countries.",
+          "originPlaceholderAr": "بلد المنشأ (مثال: إسبانيا)",
+          "originPlaceholderEn": "Origin in English (e.g. Spain)",
+          "usesTitle": "Applications & Uses",
+          "usesDesc": "Specify recommended applications (flooring, cladding, stairs, countertops).",
+          "usesPlaceholderAr": "الاستخدام (مثال: أرضيات داخلية)",
+          "usesPlaceholderEn": "Use in English (e.g. Indoor Flooring)",
+          "surfaceTitle": "Surface Finishes",
+          "surfaceDesc": "Specify available surface treatments and finishes (polished, honed, flamed, etc.).",
+          "surfacePlaceholderAr": "نوع السطح (مثال: مصقول، مطفي)",
+          "surfacePlaceholderEn": "Finish in English (e.g. Polished, Honed)",
+          "add": "Add",
+          "empty": "No items added yet. Enter Arabic and English values and click Add.",
+          "pairRequired": "Both Arabic and English values are required to add an entry.",
+          "atLeastOne": "At least one item is required."
+        },
+        "media": {
+          "coverTitle": "Cover Image",
+          "coverDesc": "Primary featured photo of the material slab or installation.",
+          "galleryTitle": "Gallery Images",
+          "galleryDesc": "Upload up to 10 showcase images. ({count}/10 used)",
+          "dropCover": "Click or drag an image here to set cover photo",
+          "dropGallery": "Click or drag images here to add to gallery",
+          "replaceCover": "Replace Cover",
+          "removeCover": "Remove Cover",
+          "removeImage": "Remove Image",
+          "capWarning": "Gallery limit reached (10 images maximum)."
+        },
+        "buttons": {
+          "create": "Create Product",
+          "saving": "Saving Product...",
+          "update": "Save Changes",
+          "cancel": "Cancel"
+        },
+        "steps": {
+          "creating": "Creating base product record...",
+          "uploadingCover": "Uploading cover image to Cloudinary...",
+          "uploadingGallery": "Uploading {count} gallery images...",
+          "complete": "Complete!"
+        },
+        "toasts": {
+          "createSuccess": "Product created successfully.",
+          "updateSuccess": "Product updated successfully.",
+          "partialUploadError": "Product was created, but some image uploads failed. You can retry them here.",
+          "partialUploadCoverFailed": "Product saved, but cover image upload failed. You can retry uploading it.",
+          "partialUploadGalleryFailed": "Product saved, but gallery images upload failed. You can retry uploading them.",
+          "partialUploadBothFailed": "Product saved, but cover and gallery image uploads failed.",
+          "deleteCoverSuccess": "Cover image removed successfully.",
+          "deleteGallerySuccess": "Gallery image removed successfully.",
+          "deleteCoverError": "Failed to remove cover image. Please try again.",
+          "deleteGalleryError": "Failed to remove gallery image. Please try again.",
+          "createError": "Failed to create product. Please verify inputs and try again.",
+          "updateError": "Failed to update product. Please verify inputs and try again.",
+          "missingIdError": "Product was created, but product ID was missing from server response."
+        },
+        "errors": {
+          "loadTitle": "Unable to load product details",
+          "loadDesc": "The product could not be retrieved. It may have been deleted or a server error occurred.",
+          "retry": "Retry"
+        },
+        "validation": {
+          "nameArRequired": "Arabic product name is required (at least 2 characters).",
+          "nameEnRequired": "English product name is required (at least 2 characters).",
+          "categoryRequired": "Product category is required.",
+          "materialArRequired": "Arabic material is required (at least 2 characters).",
+          "materialEnRequired": "English material is required (at least 2 characters).",
+          "colorRequired": "At least one color is required.",
+          "originRequired": "At least one country of origin is required.",
+          "usesRequired": "At least one application/use is required.",
+          "surfaceRequired": "At least one surface finish is required.",
+          "itemArRequired": "Arabic value is required.",
+          "itemEnRequired": "English value is required."
+        }
+      }
+    }
+  }
+}

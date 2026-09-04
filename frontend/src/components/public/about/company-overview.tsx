@@ -53,7 +53,7 @@ export function CompanyOverview({ className }: CompanyOverviewProps) {
             <div className="relative overflow-hidden border border-border bg-muted/20 shadow-xs">
               <div className="relative aspect-4/3 sm:aspect-5/4 lg:aspect-4/5 w-full overflow-hidden">
                 <Image
-                  src="/images/about-1.jpg"
+                  src="/images/about-1.webp"
                   alt={t('aboutPage.overview.heading')}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"

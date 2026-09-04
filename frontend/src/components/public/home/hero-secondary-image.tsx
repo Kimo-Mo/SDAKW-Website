@@ -40,7 +40,7 @@ export function HeroSecondaryImage() {
             style={shouldReduceMotion ? undefined : { y: imageY, scale: 1.08 }}
             className="absolute inset-0 w-full h-full">
             <Image
-              src="/images/hero-secondary.jpg"
+              src="/images/hero-secondary.webp"
               alt={t('hero.secondaryImageAlt')}
               fill
               priority

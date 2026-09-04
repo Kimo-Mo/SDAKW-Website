@@ -69,7 +69,7 @@ function LanguageSwitcherInner({
         size="sm"
         onClick={handleSwitch}
         aria-label={ariaLabel}
-        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground ${className}`}>
+        className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-primary ${className}`}>
         <Globe className="h-3.5 w-3.5" />
         <span>{alternateLabel}</span>
       </Button>
@@ -83,8 +83,8 @@ function LanguageSwitcherInner({
       size="sm"
       onClick={handleSwitch}
       aria-label={ariaLabel}
-      className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 min-h-10 text-xs sm:text-sm font-medium bg-background/80 shadow-xs backdrop-blur-xs hover:bg-accent ${className}`}>
-      <Globe className="h-4 w-4 text-muted-foreground shrink-0" />
+      className={`inline-flex items-center gap-1.5 px-3.5 py-2 min-h-9 text-xs sm:text-sm font-medium bg-background/80 shadow-xs backdrop-blur-xs hover:bg-accent ${className}`}>
+      <Globe className="h-4 w-4 text-foreground shrink-0" />
       <span>{alternateLabel}</span>
     </Button>
   );

@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Menu } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
@@ -8,82 +7,62 @@ import { Button } from '@/components/ui/button';
 import { NavLink } from './nav-link';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
 import type { PublicHeaderProps, PublicNavigationItem } from '@/types/public';
-import Image from 'next/image';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
+import HeaderLogo from './headerLogo';
 
-const NAV_ITEMS: PublicNavigationItem[] = [
+const FIRST_NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'home', labelKey: 'home', href: '/', exactMatch: true },
   { id: 'about', labelKey: 'about', href: '/about', exactMatch: false },
+];
+const SECOND_NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'projects', labelKey: 'projects', href: '/projects', exactMatch: false },
-  { id: 'contact', labelKey: 'contact', href: '/contact', exactMatch: false },
+  { id: 'products', labelKey: 'products', href: '/products', exactMatch: false },
 ];
 
 export function PublicHeader({ locale, onOpenMobileNav }: PublicHeaderProps) {
   const t = useTranslations('public');
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/85 backdrop-blur-md border-b border-border/60 shadow-xs'
-          : 'bg-background/40 backdrop-blur-xs border-b border-transparent'
-      }`}>
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex h-18 items-center justify-between">
-        {/* Brand Logo & Name */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
-          <div className="relative w-25 h-full">
-            <Image
-              src="/images/sdakw_logo.png"
-              alt="logo"
-              width={100}
-              height={100}
-              className="object-contain w-auto h-auto"
-              priority
-            />
-          </div>
-          <div className="flex flex-col text-start">
-            <span className="font-heading font-bold tracking-tight text-base sm:text-lg text-foreground group-hover:text-primary transition-colors">
-              {t('brand.shortName')}
-            </span>
-            <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:inline-block truncate max-w-50 xl:max-w-xs">
-              {t('brand.tagline')}
-            </span>
-          </div>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
-          {NAV_ITEMS.map((item) => (
-            <NavLink key={item.id} item={item} />
-          ))}
-        </nav>
-
-        {/* Desktop Actions (Theme Toggle, Language Switcher & CTA) */}
-        <div className="hidden lg:flex items-center gap-3">
-          <ThemeToggle />
+    <header className="sticky top-0 z-40 w-full shadow-xs backdrop-blur-sm bg-background">
+      <div
+        className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all duration-300 h-16 lg:h-20`}>
+        {/* Desktop Actions (Theme Toggle, Language Switcher) */}
+        <div className="hidden lg:flex items-center gap-2">
           <LanguageSwitcher locale={locale} />
+          <ThemeToggle />
+        </div>
+
+        <div className="flex items-center gap-3 h-full">
+          {/* First Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {FIRST_NAV_ITEMS.map((item) => (
+              <NavLink key={item.id} item={item} />
+            ))}
+          </nav>
+
+          {/* Brand Logo & Name */}
+          <HeaderLogo />
+
+          {/* Second Desktop Navigation Links */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {SECOND_NAV_ITEMS.map((item) => (
+              <NavLink key={item.id} item={item} />
+            ))}
+          </nav>
+        </div>
+
+        {/* Desktop Actions (CTA) */}
+        <div className="hidden lg:block">
           <Link href="/contact">
             <Button
               size="sm"
-              className="rounded-full px-4 h-9 font-medium shadow-xs hover:shadow-sm">
+              className="px-4 h-9 font-medium">
               {t('nav.getInTouch')}
             </Button>
           </Link>
         </div>
 
-        {/* Mobile Actions (Language Switcher + Hamburger) */}
+        {/* Mobile Actions (Hamburger Menu) */}
         <div className="flex items-center gap-2 lg:hidden">
           <Button
             variant="ghost"

@@ -1,62 +1,12 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ArrowUpRight, MessageSquare } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { Reveal, RevealItem } from '@/components/shared/reveal';
 import type { SocialChannelsProps } from '@/types/public';
 import { cn } from '@/lib/utils';
+import { FacebookIcon, InstagramIcon, LinkedinIcon, WhatsappIcon } from '@/components/shared/social-icons';
 
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true">
-      <rect width="20" height="20" x="2" y="2" rx="0" ry="0" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
-function LinkedinIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
-
-function FacebookIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true">
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
 
 /**
  * Social Media Channels Grid
@@ -90,9 +40,9 @@ export function SocialChannels({ className }: SocialChannelsProps) {
     },
     {
       name: 'WhatsApp',
-      handle: '+965 2200 0000',
-      url: 'https://wa.me/96522000000',
-      icon: MessageSquare,
+      handle: '+96550979575',
+      url: 'https://wa.me/+96550979575',
+      icon: WhatsappIcon,
       tag: 'DIRECT MESSAGING',
     },
   ];
@@ -135,9 +85,9 @@ export function SocialChannels({ className }: SocialChannelsProps) {
                   <div className="space-y-3">
                     {/* Top Metadata Header Bar */}
                     <div className="flex items-center justify-between border-b border-border pb-3">
-                      <Icon className="h-5 w-5 text-foreground" />
+                      <Icon className="h-5 w-5 text-foreground " />
                       <ArrowUpRight
-                        className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground rtl:rotate-180"
+                        className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground rtl:-scale-x-100"
                         aria-hidden="true"
                       />
                     </div>

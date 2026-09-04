@@ -8,11 +8,12 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-  const [common, auth, dashboard, projects, publicContent] = await Promise.all([
+  const [common, auth, dashboard, projects, products, publicContent] = await Promise.all([
     import(`../../translations/${locale}/common.json`).then((m) => m.default),
     import(`../../translations/${locale}/auth.json`).then((m) => m.default),
     import(`../../translations/${locale}/dashboard.json`).then((m) => m.default),
     import(`../../translations/${locale}/projects.json`).then((m) => m.default),
+    import(`../../translations/${locale}/products.json`).then((m) => m.default),
     import(`../../translations/${locale}/public.json`).then((m) => m.default),
   ]);
 
@@ -26,6 +27,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       admin: {
         ...dashboard.admin,
         ...projects.admin,
+        ...products.admin,
       },
     },
   };

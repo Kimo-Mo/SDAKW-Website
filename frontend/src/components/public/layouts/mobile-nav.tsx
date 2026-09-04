@@ -1,19 +1,20 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { ArrowRight, ArrowLeft, XIcon } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
 import type { PublicMobileNavProps, PublicNavigationItem } from '@/types/public';
-import Image from 'next/image';
+import MainLogo from '@/components/shared/mainLogo';
 
 const NAV_ITEMS: PublicNavigationItem[] = [
   { id: 'home', labelKey: 'home', href: '/', exactMatch: true },
   { id: 'about', labelKey: 'about', href: '/about', exactMatch: false },
   { id: 'projects', labelKey: 'projects', href: '/projects', exactMatch: false },
+  { id: 'products', labelKey: 'products', href: '/products', exactMatch: false },
   { id: 'contact', labelKey: 'contact', href: '/contact', exactMatch: false },
 ];
 
@@ -39,24 +40,22 @@ export function PublicMobileNav({ isOpen, onClose, currentPath, locale }: Public
         side="start"
         closeLabel={t('nav.closeMenu')}
         className="p-0 gap-0 w-full max-w-xs sm:max-w-sm flex flex-col"
-        aria-label={t('nav.menu')}>
+        aria-label={t('nav.menu')}
+        showCloseButton={false}>
         {/* Drawer Header */}
         <SheetHeader className="flex flex-row h-18 items-center justify-between px-5 space-y-0 border-b border-border">
           <Link href="/" onClick={onClose} className="flex items-center gap-2.5">
-            <div className="relative w-25 h-full">
-              <Image
-                src="/images/sdakw_logo.png"
-                alt="logo"
-                width={100}
-                height={100}
-                className="object-contain w-auto h-auto"
-                priority
-              />
-            </div>
+            <MainLogo />
             <SheetTitle className="font-heading font-bold tracking-tight text-base text-foreground">
               {t('brand.shortName')}
             </SheetTitle>
           </Link>
+          <SheetClose
+            render={
+              <Button variant="ghost" className="h-8 w-8 p-0 rounded-lg" aria-label="close menu" />
+            }>
+            <XIcon className="h-4 w-4" />
+          </SheetClose>
         </SheetHeader>
 
         {/* Drawer Navigation List */}

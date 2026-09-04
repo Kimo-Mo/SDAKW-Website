@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { LayoutDashboard, FolderKanban, FolderPlus, Settings, Globe } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, FolderPlus, Boxes, PackagePlus, Settings, Globe } from 'lucide-react';
 
 import { Link } from '@/i18n/navigation';
 import { LogoutButton } from '@/components/auth/logout-button';
-import Image from 'next/image';
+import MainLogo from '../shared/mainLogo';
 
 interface AdminSidebarProps {
   currentPath: string;
@@ -38,6 +38,20 @@ export function AdminSidebar({ currentPath, className = '' }: AdminSidebarProps)
       exact: true,
     },
     {
+      id: 'products',
+      label: t('nav.products'),
+      href: '/admin/products',
+      icon: Boxes,
+      exact: false,
+    },
+    {
+      id: 'newProduct',
+      label: t('nav.newProduct'),
+      href: '/admin/products/new',
+      icon: PackagePlus,
+      exact: true,
+    },
+    {
       id: 'settings',
       label: t('nav.settings'),
       href: '/admin/settings',
@@ -58,16 +72,7 @@ export function AdminSidebar({ currentPath, className = '' }: AdminSidebarProps)
       className={`hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0 lg:inset-s-0 bg-card border-e border-border z-30 ${className}`}>
       {/* Brand / Logo Area */}
       <div className="flex h-16 shrink-0 items-center gap-3 border-b border-border px-6">
-        <div className="relative w-25 h-full">
-          <Image
-            src="/images/sdakw_logo.png"
-            alt="logo"
-            width={100}
-            height={100}
-            className="object-contain w-auto h-auto"
-            priority
-          />
-        </div>
+        <MainLogo />
         <div className="flex flex-col">
           <span className="font-heading font-semibold text-sm leading-tight text-foreground">
             {t('brand')}

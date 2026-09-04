@@ -4,7 +4,7 @@ import React from 'react';
  * Navigation item link specification for public header and mobile nav.
  */
 export interface PublicNavigationItem {
-  id: 'home' | 'about' | 'projects' | 'contact';
+  id: 'home' | 'about' | 'projects' | 'products' | 'contact';
   labelKey: string;
   href: string;
   exactMatch?: boolean;
@@ -428,5 +428,125 @@ export interface EmptyStateProps {
   className?: string;
 }
 
+/**
+ * ── Public Product Types & Domain Models ──────────────────────────────────────
+ */
 
+export type PublicProductCategory =
+  | 'natural_granite'
+  | 'natural_stone'
+  | 'natural_marble'
+  | 'quartz_industrial';
+
+export type ProductCategoryFilter = 'all' | PublicProductCategory;
+
+export interface PublicProduct {
+  _id: string;
+  slug: string;
+  name: {
+    ar: string;
+    en: string;
+  };
+  category: PublicProductCategory;
+  material: {
+    ar: string;
+    en: string;
+  };
+  color: {
+    ar: string[];
+    en: string[];
+  };
+  origin: {
+    ar: string[];
+    en: string[];
+  };
+  uses: {
+    ar: string[];
+    en: string[];
+  };
+  surface: {
+    ar: string[];
+    en: string[];
+  };
+  coverImage: {
+    url: string;
+    publicId: string;
+  } | null;
+  gallery?: Array<{
+    url: string;
+    publicId: string;
+  }>;
+  published: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
+
+export interface PublicSingleProductApiResponse {
+  success: boolean;
+  data: {
+    product: PublicProduct;
+  };
+  error?: string;
+}
+
+export interface PublicProductsPagination {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface PublicProductsApiResponse {
+  success: boolean;
+  data: {
+    products: PublicProduct[];
+    pagination: PublicProductsPagination;
+  };
+  error?: string;
+}
+
+export interface PublicProductsQueryParams {
+  page?: number;
+  limit?: number;
+  category?: PublicProductCategory;
+}
+
+export interface ProductsListingViewProps {
+  initialData?: {
+    products: PublicProduct[];
+    pagination: PublicProductsPagination;
+  };
+  locale: string;
+}
+
+export interface ProductCardProps {
+  product: PublicProduct;
+  locale: string;
+  className?: string;
+}
+
+export interface ProductDetailViewProps {
+  product: PublicProduct;
+  locale: string;
+}
+
+export interface ProductHeroProps {
+  coverImage: { url: string; publicId: string } | null;
+  title: string;
+  locale: string;
+  className?: string;
+}
+
+export interface ProductSpecificationsProps {
+  product: PublicProduct;
+  locale: string;
+  className?: string;
+}
+
+export interface ProductGalleryProps {
+  images?: Array<{ url: string; publicId: string }>;
+  productTitle: string;
+  locale: string;
+  className?: string;
+}
 

@@ -35,7 +35,7 @@ export function ContactCardsGrid({ className }: ContactCardsGridProps) {
       tag: 'DIRECT LINE',
       content: (
         <a
-          href="tel:+96522000000"
+          href="tel:+96550979575"
           dir="ltr"
           className="font-mono text-sm sm:text-base text-foreground font-bold hover:text-primary transition-colors inline-block">
           {t('contactPage.cards.phoneValue')}
@@ -86,7 +86,10 @@ export function ContactCardsGrid({ className }: ContactCardsGridProps) {
                       <span className="font-mono text-xs font-bold text-muted-foreground">
                         TOUCHPOINT_{card.index}
                       </span>
-                      <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                      <Icon
+                        className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors"
+                        aria-hidden="true"
+                      />
                     </div>
 
                     <h2 className="font-heading font-bold text-base text-foreground transition-colors group-hover:text-foreground">

@@ -29,7 +29,7 @@ export function BrandedImageFallback({
       )}>
       {/* Background Architectural Grid Accent */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-15 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] bg-size-[16px_16px]"
+        className="pointer-events-none absolute inset-0 opacity-15 bg-[radial-gradient(var(--muted-foreground)_1px,transparent_1px)] bg-size-[16px_16px]"
         aria-hidden="true"
       />
 

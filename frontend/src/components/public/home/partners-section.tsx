@@ -14,7 +14,7 @@ export function PartnersSection() {
   const t = useTranslations('public');
 
   return (
-    <section className="w-full border-t border-border/60 bg-muted/10 py-14 sm:py-18 lg:py-20">
+    <section className="w-full py-14 sm:py-18 lg:py-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Section Header with Asymmetric Editorial Staging */}
         <Reveal variant="fade-scale">

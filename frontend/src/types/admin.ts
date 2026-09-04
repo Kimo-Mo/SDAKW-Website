@@ -203,3 +203,99 @@ export interface FormMediaState {
   existingGallery: BackendImage[];
   deletingGalleryPublicId: string | null;
 }
+
+// ── Product Types ─────────────────────────────────────────────────────────────
+
+export type ProductCategory =
+  | 'natural_granite'
+  | 'natural_stone'
+  | 'natural_marble'
+  | 'quartz_industrial';
+
+export interface BilingualArray {
+  ar: string[];
+  en: string[];
+}
+
+export interface BilingualPair {
+  ar: string;
+  en: string;
+}
+
+export interface BackendProduct {
+  _id: string;
+  name: BilingualText;
+  category: ProductCategory;
+  material: BilingualText;
+  color: BilingualArray;
+  origin: BilingualArray;
+  uses: BilingualArray;
+  surface: BilingualArray;
+  slug?: string;
+  coverImage?: BackendImage | null;
+  gallery?: BackendImage[];
+  published: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface AdminProductsQueryParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+  category?: ProductCategory;
+  published?: boolean;
+}
+
+export interface ProductsFilterState {
+  search: string;
+  category: 'all' | ProductCategory;
+  published: 'all' | 'published' | 'unpublished';
+  limit: number;
+  page: number;
+}
+
+export interface ProductFormValues {
+  name: { ar: string; en: string };
+  category: ProductCategory;
+  material: { ar: string; en: string };
+  color: BilingualPair[];
+  origin: BilingualPair[];
+  uses: BilingualPair[];
+  surface: BilingualPair[];
+  published: boolean;
+}
+
+export interface CreateProductPayload {
+  name: BilingualText;
+  category: ProductCategory;
+  material: BilingualText;
+  color: BilingualArray;
+  origin: BilingualArray;
+  uses: BilingualArray;
+  surface: BilingualArray;
+  published: boolean;
+}
+
+export type UpdateProductPayload = Partial<CreateProductPayload>;
+
+export interface AdminProductsApiResponse {
+  success: boolean;
+  data: {
+    products: BackendProduct[];
+    pagination?: PaginationMetadata;
+  };
+}
+
+export interface AdminSingleProductApiResponse {
+  success: boolean;
+  data: {
+    product?: BackendProduct;
+  } | BackendProduct;
+}
+
+export interface AdminProductDeleteApiResponse {
+  success: boolean;
+  message: string;
+}
+

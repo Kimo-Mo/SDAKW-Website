@@ -25,11 +25,13 @@ Bilingual (Arabic / English) web application for Salem Duwaih Al Ajmi Company (S
 ## 2. Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - npm 10+
 - Running instance of the SDAKW backend API (local or remote)
 
 ### Installation
+
 ```bash
 # 1. Clone the repository
 git clone https://github.com/Kimo-Mo/SDAKW-Website.git
@@ -51,11 +53,11 @@ The application will be accessible at [http://localhost:3000](http://localhost:3
 
 Configure `.env.local` based on `.env.example`:
 
-| Variable | Required | Description | Example |
-|---|---|---|---|
-| `BACKEND_API_URL` | Yes (in Prod) | Target URL of the SDAKW backend REST API. Used by Next.js edge rewrites and SSR server-side calls. | `https://api.sdakw.com/api/v1` |
-| `NEXT_PUBLIC_API_URL` | Optional | Client-side API base URL. Defaults to relative `/api/v1` to route through Next.js Same-Origin reverse proxy (guaranteeing First-Party Cookie compatibility for iOS Safari). | `/api/v1` |
-| `NEXT_PUBLIC_APP_URL` | Optional | Canonical URL of the frontend application used for metadata and Open Graph link generation. Defaults to `https://sdakw.com`. | `https://sdakw.com` |
+| Variable              | Required      | Description                                                                                                                                                                 | Example                        |
+| --------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `BACKEND_API_URL`     | Yes (in Prod) | Target URL of the SDAKW backend REST API. Used by Next.js edge rewrites and SSR server-side calls.                                                                          | `https://api.sdakw.com/api/v1` |
+| `NEXT_PUBLIC_API_URL` | Optional      | Client-side API base URL. Defaults to relative `/api/v1` to route through Next.js Same-Origin reverse proxy (guaranteeing First-Party Cookie compatibility for iOS Safari). | `/api/v1`                      |
+| `NEXT_PUBLIC_APP_URL` | Optional      | Canonical URL of the frontend application used for metadata and Open Graph link generation. Defaults to `https://sdakw.com`.                                                | `https://sdakw.com`            |
 
 ---
 
@@ -65,14 +67,14 @@ Configure `.env.local` based on `.env.example`:
 frontend/
 ├── public/
 │   ├── images/
-│   │   ├── partners/               # Partner & ministry logos (.webp, .png)
-│   │   ├── about-1.jpg             # Placeholder: About page section visual
-│   │   ├── about-2.jpg             # Placeholder: About page secondary visual
-│   │   ├── about-preview.jpg       # Placeholder: About preview card visual
-│   │   ├── contact-1.jpg           # Placeholder: Contact page visual
-│   │   ├── hero-secondary.jpg      # Placeholder: Home secondary hero visual
+│   │   ├── partners/               # Partner & ministry logos (.webp)
+│   │   ├── about-1.webp             # Placeholder: About page section visual
+│   │   ├── about-2.webp             # Placeholder: About page secondary visual
+│   │   ├── about-preview.webp       # Placeholder: About preview card visual
+│   │   ├── contact-1.webp           # Placeholder: Contact page visual
+│   │   ├── hero-secondary.webp      # Placeholder: Home secondary hero visual
 │   │   ├── og-share-card.svg       # Social media Open Graph preview card
-│   │   └── sdakw_logo.png          # Official brand logo
+│   │   └── sdakw-logo.webp          # Official brand logo
 │   └── patt-1.svg                  # Architectural repeating background pattern
 ├── translations/                   # Domain-scoped translation catalogs
 │   ├── ar/                         # Arabic messages (default locale)
@@ -187,9 +189,10 @@ frontend/
 The application strictly adheres to a **monochrome, architectural modernist design language** reflecting civil engineering and contracting authority.
 
 ### Core Principles
+
 - **Monochrome Ink & Paper Palette:** Strict black, white, and balanced neutral grays. Accent colors are intentionally reserved for semantic indicators (e.g. destructive actions, warning states, chart metrics).
-  - *Light Mode:* Canvas `#fcfcfc`, Cards `#ffffff`, Foreground `#000000`, Borders `#e4e4e4`, Muted `#f5f5f5` / `#525252`.
-  - *Dark Mode:* Canvas `#1C1C1C`, Cards `#090909`, Foreground `#ffffff`, Borders `#242424`, Muted `#1d1d1d` / `#a4a4a4`.
+  - _Light Mode:_ Canvas `#fcfcfc`, Cards `#ffffff`, Foreground `#000000`, Borders `#e4e4e4`, Muted `#f5f5f5` / `#525252`.
+  - _Dark Mode:_ Canvas `#1C1C1C`, Cards `#090909`, Foreground `#ffffff`, Borders `#242424`, Muted `#1d1d1d` / `#a4a4a4`.
 - **Sharp Right Angles (`radius: 0`):** `--radius: 0rem` is enforced across all cards, dialogs, inputs, buttons, tables, and sheets. **Do not introduce rounded corners (`rounded-md`, `rounded-lg`)** to maintain the brutalist architectural aesthetic. (Small circular pills are reserved exclusively for icon buttons and status tags where specifically designed).
 - **Typography:**
   - **Sans (Primary):** `IBM Plex Sans Arabic` (`--font-sans`) — harmoniously handles both Arabic and Latin typographic glyphs with balanced geometric proportions.
@@ -202,6 +205,7 @@ The application strictly adheres to a **monochrome, architectural modernist desi
 ## 5. Internationalization (i18n) & RTL
 
 ### Routing & Navigation
+
 - Supported locales: Arabic (`ar`, default) and English (`en`).
 - Configured in `src/i18n/routing.ts` with `localePrefix: "never"`.
 - Direction is automatically determined (`rtl` for Arabic, `ltr` for English) and applied at the `<html>` root alongside the `lang` attribute.
@@ -211,7 +215,9 @@ The application strictly adheres to a **monochrome, architectural modernist desi
   ```
 
 ### Domain-Scoped Message Catalogs
+
 Translations are split into domain files under `translations/[locale]/`:
+
 1. `common.json` — Global UI elements, nav labels, footer links, generic buttons, error states.
 2. `auth.json` — Admin login form, validation errors, session prompts.
 3. `dashboard.json` — Admin metrics overview, sidebar navigation, quick actions.
@@ -221,16 +227,18 @@ Translations are split into domain files under `translations/[locale]/`:
 These files are merged in `src/i18n/request.ts` and provided to the client.
 
 ### Adding New Translation Keys (Important Warning)
+
 > [!WARNING]
 > **Translation Parity Requirement:** Whenever adding a new translation key, you **must** add it to **both** `translations/en/<domain>.json` and `translations/ar/<domain>.json` under the exact same nested key hierarchy.
 >
-> *Bug Class Warning:* Omitting a key in either language or mismatching the domain namespace results in missing key warnings, fallback rendering failures, or hydration mismatches in production.
+> _Bug Class Warning:_ Omitting a key in either language or mismatching the domain namespace results in missing key warnings, fallback rendering failures, or hydration mismatches in production.
 
 ---
 
 ## 6. Key Features Implemented
 
 ### Admin Authentication & Session Management
+
 - **Same-Origin Reverse Proxy & First-Party Cookies:** Next.js proxies all `/api/v1/*` requests to `BACKEND_API_URL` via `next.config.ts` rewrites, ensuring all auth cookies are treated as first-party cookies (preventing iOS Safari ITP cross-site cookie blocking).
 - **Dual Authentication Layer:** The backend issues HTTP-only session cookies and returns JWT tokens for client-side bearer fallback (`Authorization: Bearer <token>`), guaranteeing robust session persistence across all browsers and webviews.
 - **Authoritative Session Verification:** The `RequireSession` component and admin layouts verify session validity against `GET /api/v1/auth/me` before rendering protected administrative interfaces.
@@ -238,18 +246,21 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
 - **Password Modification:** Self-service password updates with automatic session rotation (`PATCH /api/v1/auth/change-password`).
 
 ### Admin Projects CRUD & Workflow
+
 - **Overview Metrics:** Summary KPI cards displaying total projects, published count, and category breakdown.
 - **Responsive Table & Card Views:** Rich project listing with live client/server search, type filter (`government` vs `private`), status filter (`in_progress`, `completed`, `tender`, etc.), publication toggle, and server-side pagination.
 - **Conditional Project Forms:** Dynamic validation and field rendering based on project type:
-  - *Government Projects:* Ministry selection, tender number, contract number, project value, etc.
-  - *Private Projects:* Client name, consultant, location, budget details.
+  - _Government Projects:_ Ministry selection, tender number, contract number, project value, etc.
+  - _Private Projects:_ Client name, consultant, location, budget details.
 - **Contractors Field Array:** Dynamic sub-form allowing admins to associate multiple contractors with assigned roles.
 
 ### Multi-Step Image Upload Orchestration
+
 - **Cover Image Upload:** Dedicated upload and deletion flow connecting directly to Cloudinary media storage via backend multipart endpoints (`POST /api/v1/admin/projects/:id/cover-image`).
 - **Project Gallery Upload:** Multi-file drag-and-drop gallery upload with real-time preview, progress feedback, and per-image deletion using Cloudinary public IDs (`POST /api/v1/admin/projects/:id/gallery`).
 
 ### Public Corporate Showcase
+
 - **Home Page:**
   - High-impact architectural hero with animated KPI metrics.
   - Secondary architectural visual showcase.
@@ -280,6 +291,7 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
   - Official social media channels.
 
 ### Motion & Micro-Interactions
+
 - **Signature Custom Cursor:** Desktop fine-pointer spring cursor that expands into an interactive `"Explore" / "استكشف"` pill when hovering over interactive cards (`data-cursor="explore"`).
 - **Scroll-Driven Reveal System:** Reusable `Reveal` component supporting `fade-up`, `fade-scale`, and `stagger-children` variants.
 - **Accessibility:** Full compliance with `prefers-reduced-motion` across all animations and transitions.
@@ -291,14 +303,14 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
 > [!IMPORTANT]
 > The following static image assets and placeholder constants are temporary demo files and **must be replaced with official, high-resolution media before production launch**:
 
-| File / Resource | Location | Purpose | Status |
-|---|---|---|---|
-| `hero-secondary.jpg` | `/public/images/hero-secondary.jpg` | Secondary visual banner on landing page | Demo placeholder — replace with official site photo |
-| `about-1.jpg` | `/public/images/about-1.jpg` | About page leadership / operations visual | Demo placeholder — replace with official corporate photo |
-| `about-2.jpg` | `/public/images/about-2.jpg` | About page secondary showcase visual | Demo placeholder — replace with official project photo |
-| `about-preview.jpg` | `/public/images/about-preview.jpg` | Home page about teaser image | Demo placeholder — replace with official asset |
-| `contact-1.jpg` | `/public/images/contact-1.jpg` | Contact page headquarters visual | Demo placeholder — replace with official HQ building photo |
-| `partners.ts` | `/src/constants/partners.ts` | Strategic partners & government client logos | Verify official vectorized SVG/PNG logos for all ministries |
+| File / Resource       | Location                             | Purpose                                      | Status                                                      |
+| --------------------- | ------------------------------------ | -------------------------------------------- | ----------------------------------------------------------- |
+| `hero-secondary.webp` | `/public/images/hero-secondary.webp` | Secondary visual banner on landing page      | Demo placeholder — replace with official site photo         |
+| `about-1.webp`        | `/public/images/about-1.webp`        | About page leadership / operations visual    | Demo placeholder — replace with official corporate photo    |
+| `about-2.webp`        | `/public/images/about-2.webp`        | About page secondary showcase visual         | Demo placeholder — replace with official project photo      |
+| `about-preview.webp`  | `/public/images/about-preview.webp`  | Home page about teaser image                 | Demo placeholder — replace with official asset              |
+| `contact-1.webp`      | `/public/images/contact-1.webp`      | Contact page headquarters visual             | Demo placeholder — replace with official HQ building photo  |
+| `partners.ts`         | `/src/constants/partners.ts`         | Strategic partners & government client logos | Verify official vectorized SVG/PNG logos for all ministries |
 
 ---
 
@@ -328,16 +340,21 @@ npm run typecheck
 ## 9. Deployment & Production
 
 ### Hosting Target
+
 The frontend application is optimized for deployment on **Vercel** or any standard Node.js server container.
 
 ### Production Environment Variables
+
 Set the following environment variables in your deployment dashboard (e.g. Vercel Project Settings > Environment Variables):
+
 - `BACKEND_API_URL`: Production backend REST API base URL (e.g. `https://sdakw-website.onrender.com/api/v1` or `https://api.sdakw.com/api/v1`).
 - `NEXT_PUBLIC_API_URL`: Optional (defaults to `/api/v1`).
 - `NEXT_PUBLIC_APP_URL`: Production canonical domain (e.g. `https://sdakw.com`).
 
 ### Reverse Proxy & Cookie Architecture
+
 With Next.js API rewrites in `next.config.ts`, requests sent to `/api/v1/*` are proxied to `BACKEND_API_URL` at the network edge:
+
 1. **First-Party Cookies:** Cookies are set on the frontend domain itself, preventing cross-site cookie blocking on iOS/Safari.
 2. **CORS `CLIENT_URL`:** On the backend (Render), set `CLIENT_URL` to your frontend domain (`https://sdakw-website.vercel.app` or `https://sdakw.com`).
 3. **Cookie `SameSite` & `Secure`:** The backend sets `SameSite=None; Secure=true` in production with full dual cookie/bearer token support.

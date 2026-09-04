@@ -13,11 +13,15 @@
     "about": "About Us",
     "projects": "Projects",
     "contact": "Contact Us",
+    "products": "Products",
     "getInTouch": "Get in Touch",
     "menu": "Menu",
     "closeMenu": "Close Menu",
     "switchLocale": "العربية",
-    "switchLocaleAria": "Switch language to Arabic"
+    "switchLocaleAria": "Switch language to Arabic",
+    "phoneValue": "+96550979575",
+    "emailValue": "info@sdakw.com",
+    "addressValue": "Kuwait"
   },
   "hero": {
     "badge": "Leading Kuwaiti General Contracting Co. (Est. 1999)",
@@ -171,6 +175,93 @@
       "titleSuffix": "| SDAKW"
     }
   },
+  "productsPage": {
+    "badge": "Materials & Products",
+    "title": "Natural Stone, Marble & Quartz Collection",
+    "subtitle": "Explore our curated catalog of premium natural marble, granite, natural stone, and industrial quartz slabs supplied and crafted across Kuwait.",
+    "totalCount": "{count} Products Available",
+    "filters": {
+      "categoryLabel": "Material Category",
+      "allCategories": "All Categories",
+      "natural_granite": "Natural Granite",
+      "natural_stone": "Natural Stone",
+      "natural_marble": "Natural Marble",
+      "quartz_industrial": "Industrial Quartz",
+      "clearFilters": "Clear Filter",
+      "showingResults": "Showing {count} products"
+    },
+    "card": {
+      "viewDetails": "View Specifications"
+    },
+    "empty": {
+      "title": "No Products Found",
+      "description": "No material products match the selected category filter.",
+      "reset": "Reset Filter",
+      "globalTitle": "Materials Catalog Coming Soon",
+      "globalDescription": "We are currently cataloging our latest natural stone and marble shipments. Please contact us directly for sample requests.",
+      "contactUs": "Contact Us"
+    },
+    "error": {
+      "title": "Unable to Load Products",
+      "description": "An error occurred while retrieving the materials catalog. Please check your connection and try again.",
+      "retry": "Try Again"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {current} of {total}"
+    }
+  },
+  "productDetail": {
+    "breadcrumb": {
+      "products": "Products",
+      "currentProduct": "Product Specifications"
+    },
+    "sections": {
+      "specifications": "Material Specifications",
+      "specificationsKicker": "Specifications",
+      "description": "About This Material",
+      "overviewKicker": "Overview",
+      "gallery": "Product Gallery",
+      "galleryKicker": "Gallery"
+    },
+    "attributes": {
+      "category": "Category",
+      "material": "Material",
+      "color": "Color & Shades",
+      "origin": "Country of Origin",
+      "uses": "Applications & Uses",
+      "surface": "Surface Finishes"
+    },
+    "categories": {
+      "natural_granite": "Natural Granite",
+      "natural_stone": "Natural Stone",
+      "natural_marble": "Natural Marble",
+      "quartz_industrial": "Industrial Quartz"
+    },
+    "gallery": {
+      "imageAlt": "Product image {index} of {total}",
+      "lightbox": {
+        "close": "Close",
+        "previous": "Previous image",
+        "next": "Next image",
+        "counter": "{current} of {total}"
+      }
+    },
+    "error": {
+      "title": "Something went wrong",
+      "description": "We couldn't load this product. Please try again.",
+      "retry": "Try Again"
+    },
+    "notFound": {
+      "title": "Product Not Found",
+      "description": "The product you're looking for doesn't exist or has been removed from the catalog.",
+      "backToProducts": "Back to Products"
+    },
+    "seo": {
+      "titleSuffix": "| SDAKW"
+    }
+  },
   "aboutPage": {
     "badge": "Corporate Profile",
     "title": "Salem Dwaih Al Ajmi Company",
@@ -271,7 +362,7 @@
       "addressTitle": "Headquarters",
       "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Block 5 - Parcel 24 - Hamad Tower - Floor 19",
       "phoneTitle": "Official Phone",
-      "phoneValue": "+965 2200 0000",
+      "phoneValue": "+96550979575",
       "emailTitle": "Official Email",
       "emailValue": "info@sdakw.com",
       "hoursTitle": "Working Hours",
@@ -326,7 +417,7 @@
     "addressTitle": "Headquarters",
     "addressValue": "Kuwait - Sharq - Ahmed Al Jaber St - Hamad Tower - Floor 19",
     "phoneTitle": "Phone",
-    "phoneValue": "+965 2200 0000",
+    "phoneValue": "+96550979575",
     "emailTitle": "Email",
     "emailValue": "info@sdakw.com",
     "whatsappTitle": "WhatsApp",

@@ -1,9 +1,10 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { MapPin, Phone, Mail, MessageSquare, Clock, ShieldCheck, ArrowUpRight } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { Link } from '@/i18n/navigation';
-import Image from 'next/image';
+import MainLogo from '@/components/shared/mainLogo';
+import { WhatsappIcon } from '@/components/shared/social-icons';
 
 export function PublicFooter() {
   const t = useTranslations('public');
@@ -19,16 +20,7 @@ export function PublicFooter() {
             <Link
               href="/"
               className="inline-flex items-center gap-2.5 group focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring rounded-lg">
-              <div className="relative w-25 h-full">
-                <Image
-                  src="/images/sdakw_logo.png"
-                  alt="logo"
-                  width={100}
-                  height={100}
-                  className="object-contain w-auto h-auto"
-                  priority
-                />
-              </div>
+              <MainLogo />
               <span className="font-heading font-bold tracking-tight text-lg text-foreground group-hover:text-primary transition-colors">
                 {t('brand.shortName')}
               </span>
@@ -73,6 +65,13 @@ export function PublicFooter() {
               </li>
               <li>
                 <Link
+                  href="/products"
+                  className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5">
+                  <span>{t('nav.products')}</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/contact"
                   className="text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5">
                   <span>{t('nav.contact')}</span>
@@ -81,9 +80,11 @@ export function PublicFooter() {
               <li className="pt-1">
                 <Link
                   href="/admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-xs text-muted-foreground/80 hover:text-primary transition-colors inline-flex items-center gap-1">
                   <span>{t('footer.adminPortal')}</span>
-                  <ArrowUpRight className="h-3 w-3" />
+                  <ArrowUpRight className="h-3 w-3 rtl:-scale-x-100" />
                 </Link>
               </li>
             </ul>
@@ -101,7 +102,7 @@ export function PublicFooter() {
               </li>
               <li>
                 <a
-                  href="tel:+96522000000"
+                  href="tel:+96550979575"
                   className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors">
                   <Phone className="h-4 w-4 text-primary shrink-0" />
                   <span dir="ltr">{t('footer.phoneValue')}</span>
@@ -117,13 +118,13 @@ export function PublicFooter() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/96522000000"
+                  href="https://wa.me/96550979575"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2.5 text-muted-foreground hover:text-foreground transition-colors">
-                  <MessageSquare className="h-4 w-4 text-primary shrink-0" />
+                  <WhatsappIcon className="h-4 w-4 text-primary shrink-0" />
                   <span>{t('footer.whatsappTitle')}</span>
-                  <ArrowUpRight className="h-3 w-3" />
+                  <ArrowUpRight className="h-3 w-3 rtl:-scale-x-100" />
                 </a>
               </li>
             </ul>

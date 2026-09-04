@@ -14,7 +14,7 @@ export function IntroSection() {
   const t = useTranslations('public');
 
   return (
-    <section className="w-full bg-muted/20 overflow-hidden">
+    <section className="w-full overflow-hidden">
       <div className="main_section grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 xl:gap-16 items-center">
         {/* Left Column: Narrative & Values (Asymmetric Editorial Layout) */}
         <Reveal variant="fade-up" className="lg:col-span-6 xl:col-span-5 space-y-6 text-start">
@@ -57,7 +57,7 @@ export function IntroSection() {
           <div className="relative overflow-hidden border border-border bg-card shadow-xs">
             <div className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden">
               <Image
-                src="/images/about-preview.jpg"
+                src="/images/about-preview.webp"
                 alt={t('intro.imageAlt')}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 650px"
@@ -87,7 +87,10 @@ export function IntroSection() {
                 <span className="font-mono text-xs sm:text-sm font-bold text-foreground">
                   ISO 9001:2015
                 </span>
-                <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                <ShieldCheck
+                  className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors"
+                  aria-hidden="true"
+                />
               </div>
               <div className="text-[11px] text-muted-foreground leading-snug">
                 {t('intro.iso9001Subtitle')}
@@ -100,7 +103,10 @@ export function IntroSection() {
                 <span className="font-mono text-xs sm:text-sm font-bold text-foreground">
                   ISO 14001:2015
                 </span>
-                <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                <ShieldCheck
+                  className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors"
+                  aria-hidden="true"
+                />
               </div>
               <div className="text-[11px] text-muted-foreground leading-snug">
                 {t('intro.iso14001Subtitle')}
@@ -113,7 +119,10 @@ export function IntroSection() {
                 <span className="font-mono text-xs sm:text-sm font-bold text-foreground">
                   ISO 45001:2018
                 </span>
-                <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                <ShieldCheck
+                  className="h-3.5 w-3.5 text-muted-foreground group-hover:text-primary transition-colors"
+                  aria-hidden="true"
+                />
               </div>
               <div className="text-[11px] text-muted-foreground leading-snug">
                 {t('intro.iso45001Subtitle')}

@@ -16,7 +16,7 @@ export function LocationMapCard({ className }: LocationMapCardProps) {
   const t = useTranslations('public');
 
   // Google Maps Search URL for Hamad Tower, Sharq, Kuwait City
-  const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=شركة+سالم+دويح+العجمي';
+  const googleMapsUrl = 'https://maps.app.goo.gl/BEALDg5fUmUjRZVi7';
 
   return (
     <Reveal variant="fade-scale">
@@ -59,7 +59,7 @@ export function LocationMapCard({ className }: LocationMapCardProps) {
                 size="lg"
                 className="w-full sm:w-auto rounded-none px-6 h-12 gap-2.5 font-mono rtl:font-sans text-xs sm:text-sm uppercase tracking-wider rtl:tracking-normal font-semibold border-border hover:bg-muted text-foreground cursor-pointer active:scale-[0.98] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transform-none">
                 <span>{t('contactPage.map.getDirections')}</span>
-                <ArrowUpRight className="h-4 w-4 rtl:rotate-180 shrink-0" aria-hidden="true" />
+                <ArrowUpRight className="h-4 w-4 rtl:-scale-x-100 shrink-0" aria-hidden="true" />
               </Button>
             </a>
           </div>

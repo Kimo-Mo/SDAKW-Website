@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
+import Image from 'next/image';
+
 import { LoginForm } from './login-form';
 
 interface LoginPageProps {
@@ -17,7 +19,24 @@ export function LoginPage({ returnTo }: LoginPageProps) {
       <section
         aria-hidden="true"
         className="flex shrink-0 flex-col justify-between gap-8 bg-foreground p-6 text-background sm:p-10 lg:w-1/2 lg:p-12">
-        <p className="font-heading text-xl font-medium tracking-tight sm:text-2xl">SDAKW</p>
+        <div className="flex items-center gap-3.5">
+          <div className="rounded-xl bg-[#FAF8F5] p-2.5 shadow-sm inline-flex items-center justify-center border border-[#E5DFD6]">
+            <Image
+              src="/images/sdakw-logo.webp"
+              alt="SDAKW Logo"
+              width={100}
+              height={67}
+              className="h-10 sm:h-12 w-auto object-contain"
+              priority
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-heading text-xl font-bold tracking-tight text-background sm:text-2xl">
+              SDAKW
+            </span>
+            <span className="text-xs text-background/70 font-medium">Salem Duwaih Al Ajmi Co.</span>
+          </div>
+        </div>
         <p className="text-sm text-background/70 sm:text-base">{t('login.brandTagline')}</p>
       </section>
 

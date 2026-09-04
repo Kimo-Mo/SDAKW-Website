@@ -71,7 +71,7 @@ export function ServicesSection() {
                         <span className="font-mono text-sm font-bold text-foreground">
                           {service.index}.
                         </span>
-                        <Icon className="h-4 w-4 text-muted-foreground group-hover:text-foreground transition-colors" aria-hidden="true" />
+                        <Icon className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
                       </div>
 
                       {/* Service Title */}

@@ -13,11 +13,15 @@
     "about": "من نحن",
     "projects": "المشاريع",
     "contact": "اتصل بنا",
+    "products": "المنتجات",
     "getInTouch": "تواصل معنا",
     "menu": "القائمة",
     "closeMenu": "إغلاق القائمة",
     "switchLocale": "English",
-    "switchLocaleAria": "التبديل إلى اللغة الإنجليزية"
+    "switchLocaleAria": "التبديل إلى اللغة الإنجليزية",
+    "phoneValue": "+96550979575",
+    "emailValue": "info@sdakw.com",
+    "addressValue": "الكويت"
   },
   "hero": {
     "badge": "شركة مقاولات عامة كويتية رائدة (تأسست 1999)",
@@ -171,6 +175,93 @@
       "titleSuffix": "| سداكو"
     }
   },
+  "productsPage": {
+    "badge": "المواد والمنتجات",
+    "title": "مجموعة الرخام والجرانيت والأحجار الطبيعية والكوارتز",
+    "subtitle": "استكشف كتالوجنا المتميز من ألواح الرخام الطبيعي والجرانيت والحجر الطبيعي والكوارتز الصناعي الموردة والمنفذة بأعلى معايير الجودة في الكويت.",
+    "totalCount": "{count} منتج متوفر",
+    "filters": {
+      "categoryLabel": "تصنيف المادة",
+      "allCategories": "جميع التصنيفات",
+      "natural_granite": "جرانيت طبيعي",
+      "natural_stone": "حجر طبيعي",
+      "natural_marble": "رخام طبيعي",
+      "quartz_industrial": "كوارتز صناعي",
+      "clearFilters": "إلغاء التصفية",
+      "showingResults": "عرض {count} منتج"
+    },
+    "card": {
+      "viewDetails": "عرض المواصفات"
+    },
+    "empty": {
+      "title": "لا توجد منتجات مطابقة",
+      "description": "لم نعثر على أي منتجات تطابق تصنيف المادة المحدد حالياً.",
+      "reset": "إلغاء التصفية",
+      "globalTitle": "سيتم نشر كتالوج المواد قريباً",
+      "globalDescription": "نعمل حالياً على فهرسة وتوثيق أحدث شحنات الرخام والأحجار الطبيعية. يرجى التواصل معنا لطلب العينات.",
+      "contactUs": "تواصل معنا"
+    },
+    "error": {
+      "title": "تعذر تحميل المنتجات",
+      "description": "حدث خطأ أثناء جلب كتالوج المواد والمنتجات. يرجى التحقق من اتصالك والمحاولة مجدداً.",
+      "retry": "إعادة المحاولة"
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي",
+      "pageOf": "صفحة {current} من {total}"
+    }
+  },
+  "productDetail": {
+    "breadcrumb": {
+      "products": "المنتجات",
+      "currentProduct": "مواصفات المادة"
+    },
+    "sections": {
+      "specifications": "المواصفات والخصائص",
+      "specificationsKicker": "المواصفات",
+      "description": "عن هذه المادة",
+      "overviewKicker": "نظرة عامة",
+      "gallery": "معرض الصور",
+      "galleryKicker": "المعرض"
+    },
+    "attributes": {
+      "category": "التصنيف",
+      "material": "المادة",
+      "color": "الألوان والتدرجات",
+      "origin": "بلد المنشأ",
+      "uses": "الاستخدامات والتطبيقات",
+      "surface": "تشطيبات السطح"
+    },
+    "categories": {
+      "natural_granite": "جرانيت طبيعي",
+      "natural_stone": "حجر طبيعي",
+      "natural_marble": "رخام طبيعي",
+      "quartz_industrial": "كوارتز صناعي"
+    },
+    "gallery": {
+      "imageAlt": "صورة المنتج {index} من {total}",
+      "lightbox": {
+        "close": "إغلاق",
+        "previous": "الصورة السابقة",
+        "next": "الصورة التالية",
+        "counter": "{current} من {total}"
+      }
+    },
+    "error": {
+      "title": "حدث خطأ",
+      "description": "لم نتمكن من تحميل بيانات هذا المنتج. يرجى المحاولة مرة أخرى.",
+      "retry": "إعادة المحاولة"
+    },
+    "notFound": {
+      "title": "المنتج غير موجود",
+      "description": "المنتج الذي تبحث عنه غير موجود أو تمت إزالته من الكتالوج.",
+      "backToProjects": "العودة إلى المنتجات"
+    },
+    "seo": {
+      "titleSuffix": "| سداكو"
+    }
+  },
   "aboutPage": {
     "badge": "الملف التعريفي",
     "title": "شركة سالم دويح العجمي",
@@ -271,7 +362,7 @@
       "addressTitle": "المقر الرئيسي",
       "addressValue": "الكويت - الشرق - شارع أحمد الجابر - قطعة 5 - قسيمة 24 - برج حمد - الدور 19",
       "phoneTitle": "الهاتف الرسمي",
-      "phoneValue": "+965 2200 0000",
+      "phoneValue": "+96550979575",
       "emailTitle": "البريد الإلكتروني",
       "emailValue": "info@sdakw.com",
       "hoursTitle": "ساعات العمل الرسمية",
@@ -326,7 +417,7 @@
     "addressTitle": "المقر الرئيسي",
     "addressValue": "الكويت - الشرق - شارع أحمد الجابر - برج حمد - الدور 19",
     "phoneTitle": "الهاتف",
-    "phoneValue": "+965 2200 0000",
+    "phoneValue": "+96550979575",
     "emailTitle": "البريد الإلكتروني",
     "emailValue": "info@sdakw.com",
     "whatsappTitle": "واتساب",

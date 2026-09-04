@@ -1,14 +1,15 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { LayoutDashboard, FolderKanban, FolderPlus, Settings, Globe } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, FolderPlus, Boxes, PackagePlus, Settings, Globe, XIcon } from 'lucide-react';
 
 import { Link } from '@/i18n/navigation';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { LogoutButton } from '@/components/auth/logout-button';
 import { LanguageSwitcher } from '@/components/shared/language-switcher';
 import { ThemeToggle } from '@/components/shared/theme-toggle';
-import Image from 'next/image';
+import { Button } from '../ui/button';
+import MainLogo from '../shared/mainLogo';
 
 interface AdminMobileNavProps {
   isOpen: boolean;
@@ -43,6 +44,20 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
       exact: true,
     },
     {
+      id: 'products',
+      label: t('nav.products'),
+      href: '/admin/products',
+      icon: Boxes,
+      exact: false,
+    },
+    {
+      id: 'newProduct',
+      label: t('nav.newProduct'),
+      href: '/admin/products/new',
+      icon: PackagePlus,
+      exact: true,
+    },
+    {
       id: 'settings',
       label: t('nav.settings'),
       href: '/admin/settings',
@@ -68,22 +83,20 @@ export function AdminMobileNav({ isOpen, onClose, currentPath }: AdminMobileNavP
         side="start"
         closeLabel={t('header.closeMenu')}
         className="p-0 gap-0 w-full max-w-xs sm:max-w-xs flex flex-col"
-        aria-label={t('header.openMenu')}>
+        aria-label={t('header.openMenu')}
+        showCloseButton={false}>
         {/* Drawer Header */}
         <SheetHeader className="flex flex-row h-16 items-center justify-between px-5 space-y-0 border-b border-border">
-          <div className="flex items-center gap-2">
-            <div className="relative w-25 h-full">
-              <Image
-                src="/images/sdakw_logo.png"
-                alt="logo"
-                width={100}
-                height={100}
-                className="object-contain w-auto h-auto"
-                priority
-              />
-            </div>
+          <div className="flex items-center gap-2.5">
+            <MainLogo />
             <SheetTitle className="text-base tracking-tight font-heading">{t('brand')}</SheetTitle>
           </div>
+          <SheetClose
+            render={
+              <Button variant="ghost" className="h-8 w-8 p-0 rounded-lg" aria-label="close menu" />
+            }>
+            <XIcon className="h-4 w-4" />
+          </SheetClose>
         </SheetHeader>
 
         {/* Navigation Links */}

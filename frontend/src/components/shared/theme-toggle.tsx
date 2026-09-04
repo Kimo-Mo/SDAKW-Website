@@ -151,7 +151,7 @@ export function ThemeToggle({
       onClick={toggleTheme}
       aria-label={ariaLabel}
       className={cn(
-        'h-10 w-10 rounded-full border border-border/80 bg-background/80 shadow-xs backdrop-blur-xs hover:bg-accent text-foreground cursor-pointer transition-colors p-0',
+        'h-9 w-9 border border-border/80 bg-background/80 shadow-xs backdrop-blur-xs hover:bg-accent text-foreground cursor-pointer transition-colors p-0',
         className
       )}>
       {mounted ? (
@@ -166,7 +166,7 @@ export function ThemeToggle({
             {isDark ? (
               <Sun className="h-4 w-4 text-amber-400" />
             ) : (
-              <Moon className="h-4 w-4 text-muted-foreground" />
+              <Moon className="h-4 w-4 text-foreground" />
             )}
           </motion.span>
         </AnimatePresence>
