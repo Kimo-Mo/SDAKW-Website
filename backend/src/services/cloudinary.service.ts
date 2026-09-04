@@ -4,8 +4,10 @@ import { IImageMeta } from '../models/Project';
 
 // ── Folder helpers ────────────────────────────────────────────────────────────
 
-const coverFolder = (projectId: string): string => `projects/${projectId}/cover`;
-const galleryFolder = (projectId: string): string => `projects/${projectId}/gallery`;
+const coverFolder = (resourceType: string, resourceId: string): string =>
+  `${resourceType}/${resourceId}/cover`;
+const galleryFolder = (resourceType: string, resourceId: string): string =>
+  `${resourceType}/${resourceId}/gallery`;
 
 // ── Upload ────────────────────────────────────────────────────────────────────
 
@@ -37,25 +39,38 @@ const uploadBuffer = (buffer: Buffer, folder: string): Promise<UploadApiResponse
   });
 
 /**
- * Uploads an image buffer as a project cover image.
+ * Uploads an image buffer as a cover image for any resource (project, product, etc.).
  * Returns the stored { url, publicId } metadata.
+ *
+ * @param resourceType - Cloudinary folder prefix (e.g. 'projects', 'products')
+ * @param resourceId   - The document's MongoDB _id
+ * @param buffer       - Raw image binary
  */
-export const uploadCoverImage = async (projectId: string, buffer: Buffer): Promise<IImageMeta> => {
-  const result = await uploadBuffer(buffer, coverFolder(projectId));
+export const uploadCoverImage = async (
+  resourceType: string,
+  resourceId: string,
+  buffer: Buffer,
+): Promise<IImageMeta> => {
+  const result = await uploadBuffer(buffer, coverFolder(resourceType, resourceId));
   return { url: result.secure_url, publicId: result.public_id };
 };
 
 /**
- * Uploads multiple image buffers as project gallery images.
+ * Uploads multiple image buffers as gallery images for any resource.
  * All uploads run concurrently.
  * Returns metadata for each uploaded image.
+ *
+ * @param resourceType - Cloudinary folder prefix (e.g. 'projects', 'products')
+ * @param resourceId   - The document's MongoDB _id
+ * @param buffers      - Array of raw image binaries
  */
 export const uploadGalleryImages = async (
-  projectId: string,
+  resourceType: string,
+  resourceId: string,
   buffers: Buffer[],
 ): Promise<IImageMeta[]> => {
   const results = await Promise.all(
-    buffers.map((buf) => uploadBuffer(buf, galleryFolder(projectId))),
+    buffers.map((buf) => uploadBuffer(buf, galleryFolder(resourceType, resourceId))),
   );
   return results.map((r) => ({ url: r.secure_url, publicId: r.public_id }));
 };

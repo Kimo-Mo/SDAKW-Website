@@ -1,6 +1,6 @@
-# SDAKW Corporate Projects Website — Backend REST API
+# SDAKW Corporate Projects & Products Website — Backend REST API
 
-Production-ready Node.js / Express / TypeScript REST API for a bilingual (Arabic/English) corporate construction and real-estate company projects website and Admin Dashboard.
+Production-ready Node.js / Express / TypeScript REST API for a bilingual (Arabic/English) corporate construction projects and materials catalog (marble, granite, natural stone, quartz) website and Admin Dashboard.
 
 ---
 
@@ -20,16 +20,23 @@ Production-ready Node.js / Express / TypeScript REST API for a bilingual (Arabic
     - `status = "completed"` → `completionDate` is required (`YYYY-MM-DD`).
   - Unique English-based slug generation with collision handling.
   - Published and featured flags for granular visibility control.
+- **Product (Materials Catalog) Management**
+  - Full CRUD for material products (marble, granite, natural stone, quartz).
+  - Fixed 4-value `category` enum: `natural_granite`, `natural_stone`, `natural_marble`, `quartz_industrial`.
+  - Bilingual name and material fields (`ar`, `en`).
+  - Bilingual array fields for `color`, `origin`, `uses`, `surface` — with strict `ar`/`en` same-length validation.
+  - Unique English-based slug generation with collision handling.
+  - Published flag for visibility control.
 - **Filtering, Search & Pagination**
-  - Combinable admin filters: `status`, `published`, `featured`, `projectType`, and keyword `search` (across title and location).
-  - Public project list (strictly enforces `published = true`).
+  - Combinable admin filters: `status`, `published`, `featured`, `projectType`, `category`, and keyword `search`.
+  - Public project and product lists (strictly enforce `published = true`).
   - Reusable pagination metadata output across all list endpoints.
 - **Cloudinary Image Management**
   - Direct in-memory image uploads using Multer (`memoryStorage`).
   - Dedicated single cover image upload & replacement with safe atomic Cloudinary deletion.
   - Multiple gallery image upload (`up to 10 images`) and individual gallery image deletion.
-  - Automatic Cloudinary cleanup of all associated images upon project deletion.
-  - Organized Cloudinary folder structure (`projects/{projectId}/cover`, `projects/{projectId}/gallery`).
+  - Automatic Cloudinary cleanup of all associated images upon project/product deletion.
+  - Organized Cloudinary folder structure (`{resource}/{resourceId}/cover`, `{resource}/{resourceId}/gallery`).
   - Automatic image delivery optimization (`quality: auto`, `fetch_format: auto`).
 - **Centralized Error & Validation Handling**
   - Strict schema validation using Zod for request bodies, parameters, and query strings.
@@ -62,21 +69,27 @@ backend/
 │   │   └── env.ts            # Zod environment variable validation
 │   ├── controllers/
 │   │   ├── auth.controller.ts
-│   │   ├── image.controller.ts
-│   │   └── project.controller.ts
+│   │   ├── image.controller.ts          # Project image handlers
+│   │   ├── product.controller.ts        # Product CRUD handlers
+│   │   ├── product-image.controller.ts  # Product image handlers
+│   │   └── project.controller.ts        # Project CRUD handlers
 │   ├── middleware/
 │   │   ├── auth.middleware.ts  # JWT cookie verification middleware
 │   │   ├── errorHandler.ts     # Centralized error handler
 │   │   ├── notFound.ts         # 404 handler
 │   │   └── upload.middleware.ts# Multer memory storage & image filters
 │   ├── models/
+│   │   ├── Product.ts
 │   │   ├── Project.ts
 │   │   └── User.ts
 │   ├── routes/
 │   │   ├── admin/
 │   │   │   ├── images.routes.ts
+│   │   │   ├── product-images.routes.ts
+│   │   │   ├── products.routes.ts
 │   │   │   └── projects.routes.ts
 │   │   ├── public/
+│   │   │   ├── products.routes.ts
 │   │   │   └── projects.routes.ts
 │   │   ├── auth.routes.ts
 │   │   └── index.ts          # Central API v1 router
@@ -85,6 +98,7 @@ backend/
 │   ├── services/
 │   │   ├── auth.service.ts
 │   │   ├── cloudinary.service.ts
+│   │   ├── product.service.ts
 │   │   └── project.service.ts
 │   ├── utils/
 │   │   ├── ApiError.ts
@@ -94,6 +108,7 @@ backend/
 │   │   └── slug.ts           # Reusable unique slug generator
 │   ├── validators/
 │   │   ├── auth.validator.ts
+│   │   ├── product.validator.ts
 │   │   └── project.validator.ts
 │   ├── app.ts                # Express app factory
 │   └── server.ts             # Application entry point
@@ -354,7 +369,88 @@ All routes are prefixed with `/api/v1`.
 
 ---
 
-## 🗄 Project Data Model
+### 5. Admin Products (`/api/v1/admin/products`)
+
+| Method   | Endpoint                 | Auth      | Purpose                                                       |
+| -------- | ------------------------ | --------- | ------------------------------------------------------------- |
+| `GET`    | `/admin/products`        | Protected | List products with filters, search, and pagination            |
+| `GET`    | `/admin/products/:id`    | Protected | Get complete product details by ID                            |
+| `POST`   | `/admin/products`        | Protected | Create a new product                                          |
+| `PATCH`  | `/admin/products/:id`    | Protected | Update an existing product                                    |
+| `DELETE` | `/admin/products/:id`    | Protected | Delete a product & clean up Cloudinary images                 |
+
+#### Admin List Query Parameters:
+
+- `page` (default: `1`)
+- `limit` (default: `10`, max: `100`)
+- `search` (searches Arabic/English name)
+- `category` (`natural_granite` \| `natural_stone` \| `natural_marble` \| `quartz_industrial`)
+- `published` (`true` \| `false`)
+
+#### Example Request (`POST /admin/products`)
+
+```json
+{
+  "name": {
+    "ar": "رخام كريما مارفيل",
+    "en": "Crema Marfil Marble"
+  },
+  "category": "natural_marble",
+  "material": {
+    "ar": "رخام طبيعي",
+    "en": "Natural Marble"
+  },
+  "color": {
+    "ar": ["بيج", "كريمي"],
+    "en": ["Beige", "Cream"]
+  },
+  "origin": {
+    "ar": ["إسبانيا"],
+    "en": ["Spain"]
+  },
+  "uses": {
+    "ar": ["أرضيات", "جدران", "سلالم"],
+    "en": ["Flooring", "Walls", "Stairs"]
+  },
+  "surface": {
+    "ar": ["مصقول", "مطفي"],
+    "en": ["Polished", "Honed"]
+  },
+  "published": true
+}
+```
+
+---
+
+### 6. Public Products (`/api/v1/products`)
+
+| Method | Endpoint          | Auth   | Purpose                                              |
+| ------ | ----------------- | ------ | ---------------------------------------------------- |
+| `GET`  | `/products`       | Public | List published products with pagination and filters  |
+| `GET`  | `/products/:slug` | Public | Get a single published product by its unique slug    |
+
+#### Public List Query Parameters:
+
+- `page` (default: `1`)
+- `limit` (default: `9`, max: `50`)
+- `category` (`natural_granite` \| `natural_stone` \| `natural_marble` \| `quartz_industrial`)
+
+---
+
+### 7. Product Images (`/api/v1/admin/products/:id`)
+
+| Method   | Endpoint                                | Auth      | Body / Params                 | Purpose                              |
+| -------- | --------------------------------------- | --------- | ----------------------------- | ------------------------------------ |
+| `POST`   | `/admin/products/:id/cover-image`       | Protected | Multipart (`coverImage`)      | Upload / replace product cover image |
+| `DELETE` | `/admin/products/:id/cover-image`       | Protected | None                          | Remove product cover image           |
+| `POST`   | `/admin/products/:id/gallery`           | Protected | Multipart (`gallery`, max 10) | Append new gallery images            |
+| `DELETE` | `/admin/products/:id/gallery/:publicId` | Protected | `:publicId` in URL            | Remove a specific gallery image      |
+
+---
+
+## 🗄 Data Models
+
+### Project Data Model
 
 ```typescript
 {
@@ -403,14 +499,58 @@ All routes are prefixed with `/api/v1`.
 }
 ```
 
+### Product Data Model
+
+```typescript
+{
+  name: {
+    ar: string;
+    en: string;
+  };
+  category: "natural_granite" | "natural_stone" | "natural_marble" | "quartz_industrial";
+  material: {
+    ar: string;
+    en: string;
+  };
+  color: {           // Index position matters: ar[i] and en[i] = same real-world value
+    ar: string[];
+    en: string[];
+  };
+  origin: {
+    ar: string[];
+    en: string[];
+  };
+  uses: {
+    ar: string[];
+    en: string[];
+  };
+  surface: {
+    ar: string[];
+    en: string[];
+  };
+  slug: string;      // Unique, English-derived from name.en
+  coverImage: {
+    url: string;
+    publicId: string;
+  } | null;
+  gallery: Array<{
+    url: string;
+    publicId: string;
+  }>;                // max 10 images
+  published: boolean; // default: false
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
 ---
 
 ## 🖼 Image Management & Cloudinary Workflow
 
 1. **In-Memory Uploads:** Multer processes incoming multipart forms using `memoryStorage()`, keeping binary buffers strictly in RAM and passing them directly to Cloudinary's `upload_stream`. No temporary files are written to local disk.
-2. **Predictable Folder Structure:** Images are stored under `projects/{projectId}/cover` and `projects/{projectId}/gallery`.
+2. **Predictable Folder Structure:** Images are stored under `{resource}/{resourceId}/cover` and `{resource}/{resourceId}/gallery` (e.g. `projects/{projectId}/cover`, `products/{productId}/gallery`).
 3. **Atomic Replacement:** When uploading a new cover image, the new image is uploaded first, the database is updated, and only then is the old image destroyed on Cloudinary.
-4. **Cascading Project Cleanup:** Deleting a project triggers deletion of its cover image and all gallery images from Cloudinary before removing the MongoDB document.
+4. **Cascading Cleanup:** Deleting a project or product triggers deletion of its cover image and all gallery images from Cloudinary before removing the MongoDB document.
 
 ---
 

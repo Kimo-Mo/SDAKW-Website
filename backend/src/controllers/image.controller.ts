@@ -31,7 +31,7 @@ export const setCoverImage = async (
     const oldPublicId = project.coverImage?.publicId ?? null;
 
     // Upload new image first — do not touch DB or delete old until this succeeds
-    const newImage = await uploadCoverImage(String(project._id), req.file.buffer);
+    const newImage = await uploadCoverImage('projects', String(project._id), req.file.buffer);
 
     project.coverImage = newImage;
     await project.save();
@@ -94,6 +94,7 @@ export const addGalleryImages = async (
     let newImages;
     try {
       newImages = await uploadGalleryImages(
+        'projects',
         String(project._id),
         files.map((f) => f.buffer),
       );
