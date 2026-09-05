@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 
 import type { ProductFormSchemaType } from '@/lib/validations/product';
 import { BilingualTagInput } from '@/components/shared/bilingual-tag-input';
+import { DimensionsInput } from '@/components/shared/dimensions-input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -17,6 +18,21 @@ export function ProductAttributesFields() {
     control,
     formState: { errors },
   } = useFormContext<ProductFormSchemaType>();
+
+  const getDimensionsError = () => {
+    if (!errors.dimensions) return undefined;
+    if (typeof errors.dimensions.message === 'string') {
+      return t(`validation.${errors.dimensions.message}`);
+    }
+    if (Array.isArray(errors.dimensions)) {
+      for (const itemErr of errors.dimensions) {
+        if (itemErr?.length?.message) return t(`validation.${itemErr.length.message}`);
+        if (itemErr?.width?.message) return t(`validation.${itemErr.width.message}`);
+        if (itemErr?.thickness?.message) return t(`validation.${itemErr.thickness.message}`);
+      }
+    }
+    return undefined;
+  };
 
   return (
     <Card className="border-border bg-card shadow-xs">
@@ -110,6 +126,19 @@ export function ProductAttributesFields() {
                   ? t(`validation.${errors.surface.message}`)
                   : undefined
               }
+            />
+          )}
+        />
+
+        {/* Dimensions Variants Input */}
+        <Controller
+          name="dimensions"
+          control={control}
+          render={({ field }) => (
+            <DimensionsInput
+              value={field.value}
+              onChange={field.onChange}
+              error={getDimensionsError()}
             />
           )}
         />

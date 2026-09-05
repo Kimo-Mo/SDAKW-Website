@@ -222,6 +222,12 @@ export interface BilingualPair {
   en: string;
 }
 
+export interface ProductDimension {
+  length: number;
+  width: number;
+  thickness: number;
+}
+
 export interface BackendProduct {
   _id: string;
   name: BilingualText;
@@ -231,6 +237,7 @@ export interface BackendProduct {
   origin: BilingualArray;
   uses: BilingualArray;
   surface: BilingualArray;
+  dimensions?: ProductDimension[];
   slug?: string;
   coverImage?: BackendImage | null;
   gallery?: BackendImage[];
@@ -263,6 +270,7 @@ export interface ProductFormValues {
   origin: BilingualPair[];
   uses: BilingualPair[];
   surface: BilingualPair[];
+  dimensions: ProductDimension[];
   published: boolean;
 }
 
@@ -274,6 +282,7 @@ export interface CreateProductPayload {
   origin: BilingualArray;
   uses: BilingualArray;
   surface: BilingualArray;
+  dimensions?: ProductDimension[];
   published: boolean;
 }
 

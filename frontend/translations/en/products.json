@@ -118,6 +118,21 @@
           "pairRequired": "Both Arabic and English values are required to add an entry.",
           "atLeastOne": "At least one item is required."
         },
+        "dimensions": {
+          "title": "Dimensions",
+          "desc": "Available size variants in centimeters (length × width × thickness). Optional.",
+          "length": "Length",
+          "width": "Width",
+          "thickness": "Thickness",
+          "unit": "cm",
+          "add": "Add Dimension",
+          "remove": "Remove dimension",
+          "empty": "No dimension variants added. Click \"Add Dimension\" to specify available sizes.",
+          "validation": {
+            "positive": "Must be greater than 0",
+            "required": "All 3 values (length, width, thickness) are required for each entry"
+          }
+        },
         "media": {
           "coverTitle": "Cover Image",
           "coverDesc": "Primary featured photo of the material slab or installation.",
@@ -173,7 +188,8 @@
           "usesRequired": "At least one application/use is required.",
           "surfaceRequired": "At least one surface finish is required.",
           "itemArRequired": "Arabic value is required.",
-          "itemEnRequired": "English value is required."
+          "itemEnRequired": "English value is required.",
+          "dimensionPositive": "Length, width, and thickness must all be numbers greater than 0."
         }
       }
     }

@@ -44,12 +44,15 @@ export function ProductSpecifications({
       ? product.surface?.ar ?? []
       : product.surface?.en ?? [];
 
+  const dimensions = product.dimensions ?? [];
+
   const specificationRows: Array<{
     id: string;
     label: string;
-    type: 'text' | 'badges';
+    type: 'text' | 'badges' | 'dimensions';
     textValue?: string;
     badgeValues?: string[];
+    dimensionValues?: typeof dimensions;
   }> = [
     {
       id: 'category',
@@ -87,6 +90,12 @@ export function ProductSpecifications({
       type: 'badges',
       badgeValues: surfaces,
     },
+    {
+      id: 'dimensions',
+      label: t('attributes.dimensions'),
+      type: 'dimensions',
+      dimensionValues: dimensions,
+    },
   ];
 
   return (
@@ -103,6 +112,9 @@ export function ProductSpecifications({
       <div className="divide-y divide-border">
         {specificationRows.map((row) => {
           if (row.type === 'badges' && (!row.badgeValues || row.badgeValues.length === 0)) {
+            return null;
+          }
+          if (row.type === 'dimensions' && (!row.dimensionValues || row.dimensionValues.length === 0)) {
             return null;
           }
           if (row.type === 'text' && !row.textValue) {
@@ -124,6 +136,22 @@ export function ProductSpecifications({
                   <span className="text-sm font-semibold text-foreground">
                     {row.textValue}
                   </span>
+                ) : row.type === 'dimensions' ? (
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                    {row.dimensionValues!.map((dim, idx) => (
+                      <Badge
+                        key={`dim-${idx}-${dim.length}-${dim.width}-${dim.thickness}`}
+                        variant="secondary"
+                        className="rounded-none font-normal text-xs px-2.5 py-1 bg-muted/60 text-foreground border border-border/80">
+                        <span className="font-mono tracking-tight" dir="ltr">
+                          {`${dim.length} × ${dim.width} × ${dim.thickness}`}
+                        </span>
+                        <span className="ms-1.5 font-mono rtl:font-sans text-muted-foreground">
+                          {t('attributes.cm')}
+                        </span>
+                      </Badge>
+                    ))}
+                  </div>
                 ) : (
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {row.badgeValues!.map((badge, idx) => (

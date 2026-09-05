@@ -1,6 +1,6 @@
 # SDAKW Frontend
 
-Bilingual (Arabic / English) web application for Salem Duwaih Al Ajmi Company (SDAKW), encompassing the public corporate showcase website and the authenticated administration dashboard. Built with Next.js 16 App Router and integrated with the SDAKW backend REST API.
+Bilingual (Arabic / English) web application for Salem Duwaih Al Ajmi Company (SDAKW), encompassing the public corporate showcase website, civil contracting projects portfolio, natural stone & materials catalog, and the authenticated administration dashboard. Built with Next.js 16 App Router and integrated with the SDAKW backend REST API.
 
 ---
 
@@ -81,12 +81,14 @@ frontend/
 │   │   ├── auth.json               # Login, session, password management
 │   │   ├── common.json             # Shared UI, navigation, errors, empty states
 │   │   ├── dashboard.json          # Admin overview metrics, sidebar, quick actions
+│   │   ├── products.json           # Admin products CRUD, bilingual tag inputs, dimensions, toasts
 │   │   ├── projects.json           # Admin project CRUD, table, forms, image uploads
-│   │   └── public.json             # Public site (home, about, projects, contact)
+│   │   └── public.json             # Public site (home, about, projects, products, contact)
 │   └── en/                         # English messages (mirrors ar/ key hierarchy)
 │       ├── auth.json
 │       ├── common.json
 │       ├── dashboard.json
+│       ├── products.json
 │       ├── projects.json
 │       └── public.json
 ├── src/
@@ -94,6 +96,7 @@ frontend/
 │   │   ├── [locale]/
 │   │   │   ├── (admin)/
 │   │   │   │   └── admin/          # Authenticated admin dashboard routes
+│   │   │   │       ├── products/   # Products manager, creation (/new), edit (/[id]/edit)
 │   │   │   │       ├── projects/   # Projects manager, creation (/new), edit (/[id]/edit)
 │   │   │   │       ├── settings/   # Admin account & password settings
 │   │   │   │       ├── layout.tsx  # Admin shell wrapper with session protection
@@ -103,6 +106,8 @@ frontend/
 │   │   │   ├── (public)/
 │   │   │   │   ├── about/          # About Us page (mission, values, ISO certs, operations)
 │   │   │   │   ├── contact/        # Contact page (HQ info, Google Maps, WhatsApp, social)
+│   │   │   │   ├── products/       # Public materials & products catalog & category filter
+│   │   │   │   │   └── [slug]/     # Product detail, specifications, and full gallery lightbox
 │   │   │   │   ├── projects/       # Public projects catalogue & search/filter
 │   │   │   │   │   └── [slug]/     # Project details & full gallery lightbox
 │   │   │   │   ├── layout.tsx      # Public shell layout (Header, Mobile Nav, Footer)
@@ -114,6 +119,8 @@ frontend/
 │   │   └── favicon.ico
 │   ├── components/
 │   │   ├── admin/                  # Admin-specific feature components
+│   │   │   ├── products/           # Products table, card list, delete dialog, filters, pagination
+│   │   │   │   └── form/           # Product basic info, bilingual attributes, dimensions, image uploads
 │   │   │   ├── projects/           # Projects table, card list, delete dialog, filters
 │   │   │   │   └── form/           # Project form tabs, conditional fields, image uploads
 │   │   │   ├── settings/           # Password update form
@@ -134,19 +141,23 @@ frontend/
 │   │   │   ├── contact/            # Info cards, interactive map embed, WhatsApp CTA
 │   │   │   ├── home/               # Hero, stats, secondary visual, intro, services, partners
 │   │   │   ├── layouts/            # Public shell, header, footer, mobile navigation
+│   │   │   ├── product-detail/     # Hero, specifications, attributes, gallery, lightbox
+│   │   │   ├── products/           # Category filter tabs, product cards, grid, pagination
 │   │   │   ├── project-detail/     # Hero, metadata bar, contractor info, gallery lightbox
 │   │   │   └── projects/           # Filter controls, project cards, grid, pagination
 │   │   ├── shared/                 # Reusable cross-domain components
-│   │   │   ├── custom-cursor.tsx   # Architectural trailing spring cursor with explore pill
-│   │   │   ├── empty-state.tsx     # Standardized empty view placeholder
-│   │   │   ├── error-state.tsx     # Standardized API error / retry block
-│   │   │   ├── language-switcher.tsx # Locale switcher preserving current path & query
-│   │   │   ├── loading-state.tsx   # Skeleton / spinner loading placeholder
-│   │   │   ├── pagination.tsx      # Shared pagination controls
-│   │   │   ├── partner-logos-carousel.tsx # Continuous looping partner logos marquee
-│   │   │   ├── password-input.tsx  # Eye-toggle password field
-│   │   │   ├── reveal.tsx          # Scroll-driven motion reveal wrapper
-│   │   │   └── theme-toggle.tsx    # Light/Dark mode toggle with variants
+│   │   │   ├── bilingual-tag-input.tsx   # Arabic/English paired tag array manager
+│   │   │   ├── custom-cursor.tsx         # Architectural trailing spring cursor with explore pill
+│   │   │   ├── dimensions-input.tsx      # Dynamic dimensional variants manager (L x W x T)
+│   │   │   ├── empty-state.tsx           # Standardized empty view placeholder
+│   │   │   ├── error-state.tsx           # Standardized API error / retry block
+│   │   │   ├── language-switcher.tsx     # Locale switcher preserving current path & query
+│   │   │   ├── loading-state.tsx         # Skeleton / spinner loading placeholder
+│   │   │   ├── pagination.tsx            # Shared pagination controls
+│   │   │   ├── partner-logos-carousel.tsx# Continuous looping partner logos marquee
+│   │   │   ├── password-input.tsx        # Eye-toggle password field
+│   │   │   ├── reveal.tsx                # Scroll-driven motion reveal wrapper
+│   │   │   └── theme-toggle.tsx          # Light/Dark mode toggle with variants
 │   │   └── ui/                     # shadcn/ui & Base UI primitives (RTL-aware)
 │   ├── constants/
 │   │   └── partners.ts             # Partner and client organization list & logo paths
@@ -158,7 +169,9 @@ frontend/
 │   │   ├── api/
 │   │   │   ├── auth.ts             # Admin login, logout, me, password change API
 │   │   │   ├── client.ts           # Centralized Axios client with 401 interceptor
+│   │   │   ├── products.ts         # Admin product CRUD, image upload, and deletion endpoints
 │   │   │   ├── projects.ts         # Admin project CRUD, summary, and image upload endpoints
+│   │   │   ├── public-products.ts  # Public product listing and slug query endpoints
 │   │   │   └── public-projects.ts  # Public project listing and slug query endpoints
 │   │   ├── auth/
 │   │   │   └── navigation.ts       # Return path normalization and safe redirection
@@ -166,13 +179,14 @@ frontend/
 │   │   │   └── utils.ts            # Class name merger `cn()`
 │   │   └── validations/
 │   │       ├── change-password.ts  # Zod schema for password modification
+│   │       ├── product.ts          # Zod schema for product creation & edit forms
 │   │       └── project.ts          # Zod schema for project creation & edit forms
 │   ├── proxy.ts                    # `next-intl` middleware for path routing and negotiation
 │   ├── styles/
 │   │   └── globals.css             # Tailwind v4 theme variables, monochrome tokens, fonts
 │   └── types/
-│       ├── admin.ts                # TypeScript types for admin, project models, and API shapes
-│       └── public.ts               # TypeScript types for public UI, filters, and cards
+│       ├── admin.ts                # TypeScript types for admin, project/product models, and API shapes
+│       └── public.ts               # TypeScript types for public UI, filters, products, and cards
 ├── .env.example
 ├── components.json
 ├── eslint.config.mjs
@@ -222,7 +236,8 @@ Translations are split into domain files under `translations/[locale]/`:
 2. `auth.json` — Admin login form, validation errors, session prompts.
 3. `dashboard.json` — Admin metrics overview, sidebar navigation, quick actions.
 4. `projects.json` — Admin project management, table headers, form labels, image upload helpers.
-5. `public.json` — Public landing page, about us, public project catalog, project details, contact page.
+5. `products.json` — Admin product catalog management, table headers, form labels, bilingual attribute tags, dimensions, upload feedback, and validation errors.
+6. `public.json` — Public landing page, about us, public project catalog, public products & materials catalog (`productsPage`), product specifications (`productDetail`), and contact page.
 
 These files are merged in `src/i18n/request.ts` and provided to the client.
 
@@ -254,10 +269,23 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
   - _Private Projects:_ Client name, consultant, location, budget details.
 - **Contractors Field Array:** Dynamic sub-form allowing admins to associate multiple contractors with assigned roles.
 
+### Admin Products CRUD & Materials Management
+
+- **Materials Catalog Management (`/admin/products`):** Full control over raw stone, granite, marble, and quartz inventory with metrics, quick actions, and status badges.
+- **Search & Category Filtering:** Multi-criteria filtering engine supporting live text search across Arabic and English product names, category selection (`natural_granite`, `natural_stone`, `natural_marble`, `quartz_industrial`), and publication status filter (`published` vs `draft`).
+- **Responsive Dual-View Table & Card Modes:** High-density desktop data table with cover image thumbnail, category badge, material type, publication switch, and actions; collapses into touch-friendly cards on mobile and tablet screens.
+- **Bilingual Dynamic Form Orchestration (`/admin/products/new` & `/[id]/edit`):**
+  - _Bilingual Core Info:_ Coordinated Arabic & English inputs for product name and material classification with strict Zod schema validation.
+  - _Architectural Category Selector:_ Direct categorization into Granite, Stone, Marble, or Industrial Quartz.
+  - _Bilingual Attribute Tag Engine (`BilingualTagInput`):_ Interactive tag pair manager for colors, countries of origin, applications/uses, and surface finishes allowing dynamic entry, editing, and removal of paired Arabic/English tags.
+  - _Dynamic Dimensions Manager (`DimensionsInput`):_ Optional dimension variants allowing specification of multiple standard slab or tile dimensions (Length × Width × Thickness in centimeters) with dynamic row addition, validation, and removal.
+  - _Publication Control:_ Instant toggle between draft status and live public catalog visibility.
+- **Dedicated Deletion & Cloudinary Cleanup:** Confirmation modal with comprehensive error reporting that deletes product records while cleanly removing associated cover and gallery media from Cloudinary storage.
+
 ### Multi-Step Image Upload Orchestration
 
-- **Cover Image Upload:** Dedicated upload and deletion flow connecting directly to Cloudinary media storage via backend multipart endpoints (`POST /api/v1/admin/projects/:id/cover-image`).
-- **Project Gallery Upload:** Multi-file drag-and-drop gallery upload with real-time preview, progress feedback, and per-image deletion using Cloudinary public IDs (`POST /api/v1/admin/projects/:id/gallery`).
+- **Cover Image Upload:** Dedicated upload and deletion flow connecting directly to Cloudinary media storage via backend multipart endpoints for both projects (`POST /api/v1/admin/projects/:id/cover-image`) and products (`POST /api/v1/admin/products/:id/cover-image`).
+- **Gallery Upload:** Multi-file drag-and-drop gallery upload with real-time preview, progress feedback, upload limits (up to 10 images), and per-image deletion using Cloudinary public IDs for projects (`POST /api/v1/admin/projects/:id/gallery`) and products (`POST /api/v1/admin/products/:id/gallery`).
 
 ### Public Corporate Showcase
 
@@ -284,6 +312,24 @@ These files are merged in `src/i18n/request.ts` and provided to the client.
   - Monospace metadata bar (dates, location, tender number, client).
   - Contractor and subcontractor roles showcase.
   - Interactive project photo gallery with full-screen keyboard/touch accessible lightbox dialog.
+- **Products & Materials Catalog (`/products`):**
+  - Editorial header with material badge, localized heading, subtitle, and dynamic total available count.
+  - Responsive horizontal category filter buttons (`All`, `Natural Granite`, `Natural Stone`, `Natural Marble`, `Industrial Quartz`) enabling instant material filtering.
+  - Clean URL search params synchronization (`category`, `page`) for deep-linking, bookmarking, and seamless browser history.
+  - High-performance responsive grid (`ProductsGrid`) with architectural cards displaying cover image, category badge, material name, and origin chips with hover transitions and custom cursor triggers.
+  - Resilient empty states with quick filter reset action, loading skeleton grids, and retryable error states.
+- **Product Detail & Technical Specifications (`/products/[slug]`):**
+  - High-impact architectural hero section with cover image, breadcrumb navigation, and localized title.
+  - Comprehensive technical specifications panel:
+    - Material classification and category badge.
+    - Color swatches and shades chips (bilingual).
+    - Countries of origin tags.
+    - Surface finishes and texture options.
+    - Applications and architectural uses (flooring, facades, countertops, etc.).
+    - Dimensions specification section displaying available slab/tile sizes (Length × Width × Thickness in cm).
+  - High-resolution interactive photo gallery with responsive thumbnail previews.
+  - Full-screen lightbox dialog with touch/swipe gestures, keyboard navigation (Escape, Arrow keys), and image counters.
+  - Direct inquiry CTA connecting visitors to WhatsApp and sales representatives with pre-populated product inquiry context.
 - **Contact Page:**
   - Direct headquarters information cards.
   - Embedded interactive Google Map.

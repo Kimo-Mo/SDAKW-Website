@@ -6,6 +6,8 @@ import { ProjectsListingView } from '@/components/public/projects/projects-listi
 import { Skeleton } from '@/components/ui/skeleton';
 import { createAlternates, getOgLocale } from '@/lib/seo';
 
+export const dynamic = 'force-dynamic';
+
 interface ProjectsPageProps {
   params: Promise<{ locale: string }>;
 }

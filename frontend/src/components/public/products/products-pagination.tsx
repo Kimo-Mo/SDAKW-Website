@@ -113,7 +113,8 @@ export function ProductsPagination({
                   }}
                   className={cn(
                     'cursor-pointer h-9 w-9 rounded-none font-mono text-xs font-semibold',
-                    isActive && 'bg-foreground text-background hover:bg-foreground/90'
+                    isActive &&
+                      'bg-foreground dark:bg-primary text-background hover:text-background hover:bg-foreground/90 dark:hover:bg-primary/90'
                   )}>
                   {page}
                 </PaginationLink>

@@ -440,6 +440,12 @@ export type PublicProductCategory =
 
 export type ProductCategoryFilter = 'all' | PublicProductCategory;
 
+export interface ProductDimension {
+  length: number;
+  width: number;
+  thickness: number;
+}
+
 export interface PublicProduct {
   _id: string;
   slug: string;
@@ -468,6 +474,7 @@ export interface PublicProduct {
     ar: string[];
     en: string[];
   };
+  dimensions?: ProductDimension[];
   coverImage: {
     url: string;
     publicId: string;

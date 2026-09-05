@@ -19,6 +19,8 @@ import {
   buildProjectSchema,
 } from '@/lib/jsonld';
 
+export const dynamic = 'force-dynamic';
+
 interface ProjectDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }

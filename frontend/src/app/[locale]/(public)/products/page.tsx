@@ -6,6 +6,8 @@ import { ProductsListingView } from '@/components/public/products/products-listi
 import { Skeleton } from '@/components/ui/skeleton';
 import { createAlternates, getOgLocale } from '@/lib/seo';
 
+export const dynamic = 'force-dynamic';
+
 interface ProductsPageProps {
   params: Promise<{ locale: string }>;
 }

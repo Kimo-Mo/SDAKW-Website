@@ -40,6 +40,7 @@ function extractProductData(data: unknown): BackendProduct {
     origin: productObj.origin || { ar: [], en: [] },
     uses: productObj.uses || { ar: [], en: [] },
     surface: productObj.surface || { ar: [], en: [] },
+    dimensions: Array.isArray(productObj.dimensions) ? productObj.dimensions : [],
   } as BackendProduct;
 }
 

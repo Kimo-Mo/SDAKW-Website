@@ -37,6 +37,7 @@ const DEFAULT_FORM_VALUES: ProductFormSchemaType = {
   origin: [],
   uses: [],
   surface: [],
+  dimensions: [],
   published: true,
 };
 
@@ -84,6 +85,13 @@ function ProductFormInner({ productId, initialProduct }: ProductFormInnerProps) 
       origin: toBilingualPairs(initialProduct.origin),
       uses: toBilingualPairs(initialProduct.uses),
       surface: toBilingualPairs(initialProduct.surface),
+      dimensions: Array.isArray(initialProduct.dimensions)
+        ? initialProduct.dimensions.map((d) => ({
+            length: d.length,
+            width: d.width,
+            thickness: d.thickness,
+          }))
+        : [],
       published: initialProduct.published !== undefined ? initialProduct.published : true,
     };
   }, [initialProduct]);

@@ -6,6 +6,18 @@ export const bilingualPairSchema = z.object({
   en: z.string().trim().min(1, { message: 'itemEnRequired' }),
 });
 
+export const productDimensionSchema = z.object({
+  length: z
+    .number({ message: 'dimensionPositive' })
+    .positive({ message: 'dimensionPositive' }),
+  width: z
+    .number({ message: 'dimensionPositive' })
+    .positive({ message: 'dimensionPositive' }),
+  thickness: z
+    .number({ message: 'dimensionPositive' })
+    .positive({ message: 'dimensionPositive' }),
+});
+
 export const productFormSchema = z.object({
   name: z.object({
     ar: z.string().trim().min(2, { message: 'nameArRequired' }),
@@ -25,6 +37,7 @@ export const productFormSchema = z.object({
   origin: z.array(bilingualPairSchema).min(1, { message: 'originRequired' }),
   uses: z.array(bilingualPairSchema).min(1, { message: 'usesRequired' }),
   surface: z.array(bilingualPairSchema).min(1, { message: 'surfaceRequired' }),
+  dimensions: z.array(productDimensionSchema),
   published: z.boolean(),
 });
 
@@ -62,6 +75,11 @@ export function normalizeProductPayload(values: ProductFormValues): CreateProduc
       ar: values.surface.map((item) => item.ar.trim()),
       en: values.surface.map((item) => item.en.trim()),
     },
+    dimensions: (values.dimensions || []).map((item) => ({
+      length: Number(item.length),
+      width: Number(item.width),
+      thickness: Number(item.thickness),
+    })),
     published: Boolean(values.published),
   };
 

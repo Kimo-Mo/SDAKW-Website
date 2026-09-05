@@ -47,6 +47,29 @@ const bilingualArraySchema = (
       message: `${fieldName}: ar and en must have the same number of items`,
     });
 
+// ── Dimensions primitive ──────────────────────────────────────────────────────
+
+export const dimensionItemSchema = z.object({
+  length: z
+    .number({
+      required_error: 'Length is required',
+      invalid_type_error: 'Length must be a number',
+    })
+    .positive('Length must be greater than 0'),
+  width: z
+    .number({
+      required_error: 'Width is required',
+      invalid_type_error: 'Width must be a number',
+    })
+    .positive('Width must be greater than 0'),
+  thickness: z
+    .number({
+      required_error: 'Thickness is required',
+      invalid_type_error: 'Thickness must be a number',
+    })
+    .positive('Thickness must be greater than 0'),
+});
+
 // ── Create ────────────────────────────────────────────────────────────────────
 
 export const createProductSchema = z.object({
@@ -67,6 +90,7 @@ export const createProductSchema = z.object({
   origin: bilingualArraySchema('origin'),
   uses: bilingualArraySchema('uses'),
   surface: bilingualArraySchema('surface'),
+  dimensions: z.array(dimensionItemSchema).optional().default([]),
   published: z.boolean().optional().default(false),
 });
 
@@ -86,6 +110,7 @@ export const updateProductSchema = z.object({
   origin: bilingualArraySchema('origin').optional(),
   uses: bilingualArraySchema('uses').optional(),
   surface: bilingualArraySchema('surface').optional(),
+  dimensions: z.array(dimensionItemSchema).optional(),
   published: z.boolean().optional(),
 });
 

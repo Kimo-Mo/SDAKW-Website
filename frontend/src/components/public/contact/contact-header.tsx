@@ -42,7 +42,7 @@ export function ContactHeader({ className }: ContactHeaderProps) {
           {/* Right Column: Supporting Architectural Headquarters Image */}
           <RevealItem className="lg:col-span-6 xl:col-span-5">
             <div className="relative overflow-hidden border border-border bg-card shadow-xs">
-              <div className="relative aspect-4/3 sm:aspect-16/10 w-full overflow-hidden">
+              <div className="relative aspect-3/4 sm:aspect-17/18 w-full overflow-hidden">
                 <Image
                   src="/images/contact-1.webp"
                   alt={t('contactPage.title')}

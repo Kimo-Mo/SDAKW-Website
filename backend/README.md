@@ -528,6 +528,11 @@ All routes are prefixed with `/api/v1`.
     ar: string[];
     en: string[];
   };
+  dimensions: Array<{ // optional, defaults to [] (unit: cm)
+    length: number;
+    width: number;
+    thickness: number;
+  }>;
   slug: string;      // Unique, English-derived from name.en
   coverImage: {
     url: string;

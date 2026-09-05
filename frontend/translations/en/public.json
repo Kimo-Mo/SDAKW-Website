@@ -237,7 +237,9 @@
       "color": "Color & Shades",
       "origin": "Country of Origin",
       "uses": "Applications & Uses",
-      "surface": "Surface Finishes"
+      "surface": "Surface Finishes",
+      "dimensions": "Dimensions",
+      "cm": "cm"
     },
     "categories": {
       "natural_granite": "Natural Granite",

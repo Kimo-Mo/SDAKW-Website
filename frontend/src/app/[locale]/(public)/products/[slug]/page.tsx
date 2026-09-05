@@ -20,6 +20,8 @@ import {
   buildProductSchema,
 } from '@/lib/jsonld';
 
+export const dynamic = 'force-dynamic';
+
 interface ProductDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }

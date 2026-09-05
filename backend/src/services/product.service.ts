@@ -95,6 +95,7 @@ export const createProduct = async (input: CreateProductInput): Promise<IProduct
     origin: input.origin,
     uses: input.uses,
     surface: input.surface,
+    dimensions: input.dimensions,
     slug,
     published: input.published,
     coverImage: null,
@@ -129,6 +130,9 @@ export const updateProduct = async (id: string, input: UpdateProductInput): Prom
   if (input.origin !== undefined) product.origin = input.origin;
   if (input.uses !== undefined) product.uses = input.uses;
   if (input.surface !== undefined) product.surface = input.surface;
+
+  // Dimensions array — replace when provided
+  if (input.dimensions !== undefined) product.dimensions = input.dimensions;
 
   // Slug is intentionally preserved to keep existing public URLs stable
 

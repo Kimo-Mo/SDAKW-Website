@@ -9,6 +9,12 @@ export interface ILocalizedArray {
   en: string[];
 }
 
+export interface IDimension {
+  length: number;
+  width: number;
+  thickness: number;
+}
+
 export interface IProduct extends Document {
   name: ILocalizedText;
   category: ProductCategory;
@@ -17,6 +23,7 @@ export interface IProduct extends Document {
   origin: ILocalizedArray;
   uses: ILocalizedArray;
   surface: ILocalizedArray;
+  dimensions: IDimension[];
   slug: string;
   coverImage: IImageMeta | null;
   gallery: IImageMeta[];
@@ -24,6 +31,15 @@ export interface IProduct extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+const dimensionSchema = new Schema<IDimension>(
+  {
+    length: { type: Number, required: true },
+    width: { type: Number, required: true },
+    thickness: { type: Number, required: true },
+  },
+  { _id: false },
+);
 
 const imagemetaSchema = new Schema<IImageMeta>(
   {
@@ -67,6 +83,10 @@ const productSchema = new Schema<IProduct>(
     surface: {
       ar: { type: [String], default: [] },
       en: { type: [String], default: [] },
+    },
+    dimensions: {
+      type: [dimensionSchema],
+      default: [],
     },
     slug: {
       type: String,
